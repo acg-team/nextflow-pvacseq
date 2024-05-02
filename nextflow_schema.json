@@ -14,14 +14,17 @@
             "properties": {
                 "input": {
                     "type": "string",
-                    "format": "file-path",
+                    "format": "directory-path",
                     "exists": true,
-                    "schema": "assets/schema_input.json",
-                    "mimetype": "text/csv",
-                    "pattern": "^\\S+\\.csv$",
-                    "description": "Path to comma-separated file containing information about the samples in the experiment.",
-                    "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/pvacseq/usage#samplesheet-input).",
-                    "fa_icon": "fas fa-file-csv"
+                    "description": "Path to directory with maf files",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "hla_directory": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "exists": true,
+                    "description": "Path to files with HLA types for each sample from input directory",
+                    "fa_icon": "fas fa-folder-open"
                 },
                 "outdir": {
                     "type": "string",
@@ -35,11 +38,6 @@
                     "fa_icon": "fas fa-envelope",
                     "help_text": "Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (`~/.nextflow/config`) then you don't need to specify this on the command line for every run.",
                     "pattern": "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
-                },
-                "multiqc_title": {
-                    "type": "string",
-                    "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
-                    "fa_icon": "fas fa-file-signature"
                 }
             }
         },
@@ -51,12 +49,6 @@
             "properties": {
                 "genome": {
                     "type": "string",
-                    "description": "Name of iGenomes reference.",
-                    "fa_icon": "fas fa-book",
-                    "help_text": "If using a reference genome configured in the pipeline using iGenomes, use this parameter to give the ID for the reference. This is then used to build the full paths for all required reference genome files e.g. `--genome GRCh38`. \n\nSee the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for more details."
-                },
-                "fasta": {
-                    "type": "string",
                     "format": "file-path",
                     "exists": true,
                     "mimetype": "text/plain",
@@ -64,16 +56,73 @@
                     "description": "Path to FASTA genome file.",
                     "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
                     "fa_icon": "far fa-file-code"
-                },
-                "igenomes_ignore": {
-                    "type": "boolean",
-                    "description": "Do not load the iGenomes reference config.",
-                    "fa_icon": "fas fa-ban",
-                    "hidden": true,
-                    "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`."
                 }
             }
         },
+        "vep_options": {
+            "title": "Options for VEP annotation",
+            "type": "object",
+            "fa_icon": "fas fa-dna",
+            "description": "VEP annotation for pVACseq",
+            "properties": {
+                "vep_plugins": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "exists": true,
+                    "description": "Path to directory with installed plaging for VEP, including Wildtypes and Frameshift",
+                    "help_text": "Path to directory with installed plaging for VEP, including Wildtypes and Frameshift",
+                    "fa_icon": "far fa-folder-open"
+                },
+                "vep_cache": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "exists": true,
+                    "description": "Path to directory with installed cahce for VEP",
+                    "help_text": "Path to directory with installed cahce for VEP",
+                    "fa_icon": "far fa-folder-open"
+                },
+                "vep_cahce_vesrion": {
+                    "type": "string",
+                    "description": "Version of genomes in VEP cache",
+                    "help_text": "Version of genomes in VEP cache"
+                }
+            }
+        },
+
+        "pvacseq_options": {
+            "title": "Options for pVACseq pipeline",
+            "type": "object",
+            "fa_icon": "fas fa-dna",
+            "description": "pVACseq options to run pipeline",
+            "properties": {
+                "pvacseq_algorithm": {
+                    "type": "string",
+                    "description": "The epitope prediction algorithms to use. Multiple prediction algorithms can be specified, separated by spaces.",
+                    "help_text": "MHCflurry,MHCflurryEL,MHCnuggetsI,MHCnuggetsII,NNalign,NetMHC,NetMHCIIpan,NetMHCIIpanEL,NetMHCcons,NetMHCpan,NetMHCpanEL,PickPocket,SMM,SMMPMBEC,SMMalign,all,all_class_i,all_class_ii"
+                },
+                "pvacseq_peptide_length_i": {
+                    "type": "string",
+                    "description": "Length of MHC Class I subpeptides (neoepitopes) to predict. Multiple epitope lengths can be specified using a comma-separated list. Typical epitope lengths vary between 8-15.",
+                    "help_text": "Length of MHC Class I subpeptides (neoepitopes) to predict. Multiple epitope lengths can be specified using a comma-separated list. Typical epitope lengths vary between 8-15.",
+                    "pattern": "^{8, 9, 10, 11}$"
+                },
+                "pvacseq_peptide_length_ii": {
+                    "type": "string",
+                    "description": "Length of MHC Class II subpeptides (neoepitopes) to predict. Multiple epitope lengths can be specified using a comma-separated list. Typical epitope lengths vary between 11-30.",
+                    "help_text": "Length of MHC Class II subpeptides (neoepitopes) to predict. Multiple epitope lengths can be specified using a comma-separated list. Typical epitope lengths vary between 11-30.",
+                    "pattern": "{12, 13, 14, 15, 16, 17, 18}"
+                },
+                "pvacseq_iedb": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "exists": true,
+                    "description": "Directory that contains the local installation of IEDB MHC I and/or MHC II.",
+                    "help_text": "Directory that contains the local installation of IEDB MHC I and/or MHC II.",
+                    "fa_icon": "far fa-folder-open"
+                }
+            }
+        },
+
         "institutional_config_options": {
             "title": "Institutional config options",
             "type": "object",

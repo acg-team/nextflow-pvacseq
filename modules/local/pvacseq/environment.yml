@@ -1,0 +1,22 @@
+name: pvacseq # Dependencies hell
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - pip=23.0.1
+  - bioconda::blast
+  - pip:
+    - pyensembl==2.2.9
+    - varcode==1.1.0
+    - biopython==1.77
+    - tensorflow==2.1
+    - tqdm==4.66.1
+    - pvactools==4.0.7
+    - mhctools==1.8.1
+    - mhcflurry==2.0.6
+    - mhcnuggets==2.4.1
+    - git+https://github.com/griffithlab/bigmhc.git@cd6fd7bcfc1cdeb8290b0f2fc1ee1fb9ac1d1fa3
+    - git+https://github.com/griffithlab/deepimmuno.git@39c73484302890fdbc9e03e6b522937be0bb4d11
+    

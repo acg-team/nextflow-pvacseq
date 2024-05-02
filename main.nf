@@ -17,7 +17,7 @@ nextflow.enable.dsl = 2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { PVACSEQ  } from './workflows/pvacseq'
+include { PVACSEQ                 } from './workflows/pvacseq'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_pvacseq_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_pvacseq_pipeline'
 
@@ -32,7 +32,7 @@ include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_pvac
 // TODO nf-core: Remove this line if you don't need a FASTA file
 //   This is an example of how to use getGenomeAttribute() to fetch parameters
 //   from igenomes.config using `--genome`
-params.fasta = getGenomeAttribute('fasta')
+params.genome = getGenomeAttribute('genome')
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -46,7 +46,7 @@ params.fasta = getGenomeAttribute('fasta')
 workflow NFCORE_PVACSEQ {
 
     take:
-    samplesheet // channel: samplesheet read in from --input
+    maf_dir // channel: directory with maf files read in from --input
 
     main:
 
@@ -54,7 +54,8 @@ workflow NFCORE_PVACSEQ {
     // WORKFLOW: Run pipeline
     //
     PVACSEQ (
-        samplesheet
+        maf_dir,
+        params.genome
     )
 
     emit:
@@ -88,7 +89,9 @@ workflow {
     // WORKFLOW: Run main workflow
     //
     NFCORE_PVACSEQ (
-        PIPELINE_INITIALISATION.out.samplesheet
+        Channel
+            .fromPath(params.input + "/*.maf", checkIfExists: true)
+            .map{ it -> [ [id: it.baseName], it ] }
     )
 
     //

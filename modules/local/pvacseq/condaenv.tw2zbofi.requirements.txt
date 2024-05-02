@@ -1,0 +1,5 @@
+pvactools==4.0.7
+mhcflurry==2.0.6
+mhcnuggets==2.4.1
+git+https://github.com/griffithlab/bigmhc.git#egg=bigmhc
+git+https://github.com/griffithlab/deepimmuno.git#egg=deepimmuno
