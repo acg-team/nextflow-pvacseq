@@ -8,3 +8,4 @@ testing*
 *.pyc
 null/pipeline_info/execution_trace_2024-04-23_17-57-38.txt
 .sendmail_tmp.html
+nextflow.config
