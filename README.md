@@ -4,22 +4,12 @@
     <img alt="nf-core/pvacseq" src="docs/images/nf-core-pvacseq_logo_light.png">
   </picture>
 </h1>
-
-[![GitHub Actions CI Status](https://github.com/nf-core/pvacseq/actions/workflows/ci.yml/badge.svg)](https://github.com/nf-core/pvacseq/actions/workflows/ci.yml)
-[![GitHub Actions Linting Status](https://github.com/nf-core/pvacseq/actions/workflows/linting.yml/badge.svg)](https://github.com/nf-core/pvacseq/actions/workflows/linting.yml)[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/pvacseq/results)[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.XXXXXXX-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.XXXXXXX)
-[![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
-
 [![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A523.04.0-23aa62.svg)](https://www.nextflow.io/)
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
-[![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
-[![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
-[![Launch on Seqera Platform](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Seqera%20Platform-%234256e7)](https://tower.nf/launch?pipeline=https://github.com/nf-core/pvacseq)
-
-[![Get help on Slack](http://img.shields.io/badge/slack-nf--core%20%23pvacseq-4A154B?labelColor=000000&logo=slack)](https://nfcore.slack.com/channels/pvacseq)[![Follow on Twitter](http://img.shields.io/badge/twitter-%40nf__core-1DA1F2?labelColor=000000&logo=twitter)](https://twitter.com/nf_core)[![Follow on Mastodon](https://img.shields.io/badge/mastodon-nf__core-6364ff?labelColor=FFFFFF&logo=mastodon)](https://mstdn.science/@nf_core)[![Watch on YouTube](http://img.shields.io/badge/youtube-nf--core-FF0000?labelColor=000000&logo=youtube)](https://www.youtube.com/c/nf-core)
 
 ## Introduction
 
-**nf-core/pvacseq** is a bioinformatics pipeline that ...
+**nf-core/pvacseq** is a bioinformatics pipeline that transforms MAF files to VCF, annotates them with VEP, and analyzes them with pVACseq to facilitate the investigation of neoantigens.
 
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
@@ -31,8 +21,9 @@
      workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
 <!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
 
-1. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-2. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
+1. Maf to vcf. 
+2. Annotate vcf with VEP that pVACseq tool need.
+3. Use pVACseq tool to get potential neoantigens.
 
 ## Usage
 
@@ -54,15 +45,22 @@ CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
 Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
 
 -->
+First, you need to have 
+1. Directory with *.maf files
+2. Directory with HLA information. Now the format require to have directory with folders of tumour sample name and `hla_types.txt` file that contain information about HLA. 
+
+For example:
+`/path/to/hla/TCGA-AF-2687-01A-02D-1733-10/hla_types.txt`
 
 Now, you can run the pipeline using:
 
 <!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
 
 ```bash
-nextflow run nf-core/pvacseq \
-   -profile <docker/singularity/.../institute> \
-   --input samplesheet.csv \
+nextflow run main.nf \
+   -profile <conda> \
+   --input <MAF DIRECTORY> \
+   --hla_directory <HLA DIRECTORY> \
    --outdir <OUTDIR>
 ```
 
@@ -81,10 +79,6 @@ For more details about the output files and reports, please refer to the
 ## Credits
 
 nf-core/pvacseq was originally written by Olesia.
-
-We thank the following people for their extensive assistance in the development of this pipeline:
-
-<!-- TODO nf-core: If applicable, make list of people who have also contributed -->
 
 ## Contributions and Support
 

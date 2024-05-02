@@ -7,10 +7,14 @@ dependencies:
   - python=3.7
   - pip=23.0.1
   - bioconda::blast
+  - bioconda/label/cf201901::pysam==0.22.1
   - pip:
+    - numpy==1.18.5
+    - h5py==2.10.0
     - pyensembl==2.2.9
     - varcode==1.1.0
     - biopython==1.77
+    - protobuf==3.20
     - tensorflow==2.1
     - tqdm==4.66.1
     - pvactools==4.0.7
