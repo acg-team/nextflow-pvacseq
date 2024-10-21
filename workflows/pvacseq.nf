@@ -6,6 +6,7 @@
 
 include { MAF2VCF                } from '../modules/local/maf2vcf/main'
 include { VEP                    } from '../modules/local/vep/main'
+include { SETUP_VEP_ENVIRONMENT  } from '../modules/local/vep/vep_env'
 include { PVACSEQ_PIPELINE       } from '../modules/local/pvacseq/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 
@@ -20,6 +21,8 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_pvac
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+
+
 workflow PVACSEQ {
 
     take:
@@ -30,6 +33,17 @@ workflow PVACSEQ {
 
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
+
+
+    //
+    // PROCESS: Check and Install VEP Parameters
+    //
+    SETUP_VEP_ENVIRONMENT (
+        params.vep_cache,
+        params.vep_cahce_vesrion,
+        params.vep_plugins,
+        params.outdir
+    )
     
     //
     // MODULE: Run maf2vcf
@@ -40,7 +54,7 @@ workflow PVACSEQ {
     )
 
     ch_versions = ch_versions.mix(MAF2VCF.out.versions.first())
-
+    
     //
     // MODULE: Run VEP
     //
@@ -49,9 +63,9 @@ workflow PVACSEQ {
             return tuple[0..1]
         },
         fasta,
-        params.vep_cahce_vesrion,
-        params.vep_cache,
-        params.vep_plugins
+        SETUP_VEP_ENVIRONMENT.out.vep_cache_version,
+        SETUP_VEP_ENVIRONMENT.out.vep_cache,
+        SETUP_VEP_ENVIRONMENT.out.vep_plugins
     )
 
     ch_versions = ch_versions.mix(VEP.out.versions.first())
@@ -71,7 +85,7 @@ workflow PVACSEQ {
                 hla_content = file("${params.hla_directory}/${normal_sample}/hla_types.txt").text.replaceAll('\n', '')
             } else {
                 // Log a message if HLA file does not exist
-                println "Warning: HLA file not found with tumour sample ${tumor_sample}; normal sample ${normal_sample}"
+                println "Warning: HLA file not found with tumor sample ${tumor_sample}; normal sample ${normal_sample}"
             }
         }
         
