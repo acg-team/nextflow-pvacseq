@@ -25,6 +25,7 @@ process SETUP_VEP_ENVIRONMENT {
         throw new Exception("VEP cache provided but version not indicated. Please provide 'vep_cache_version'.")
     }
 
+
     vep_cache_version = vep_cache_version ?: '102'
     println "VEP cache version is $vep_cache_version"
 

@@ -28,6 +28,7 @@ workflow PVACSEQ {
     take:
     ch_maf_files // channel: directory with maf files read in from --input
     fasta        // path to reference genome
+    hla_csv      // preprocessed HLA CSV file path
 
     main:
 
@@ -39,9 +40,9 @@ workflow PVACSEQ {
     // PROCESS: Check and Install VEP Parameters
     //
     SETUP_VEP_ENVIRONMENT (
-        params.vep_cache,
-        params.vep_cahce_vesrion,
-        params.vep_plugins,
+        params.vep_cache ?: '',
+        params.vep_cache_version ?: '',
+        params.vep_plugins ?: '',
         params.outdir
     )
     
@@ -70,30 +71,56 @@ workflow PVACSEQ {
 
     ch_versions = ch_versions.mix(VEP.out.versions.first())
 
-    pvacseq_ch = VEP.out.vcf.join(MAF2VCF.out.vcf).map { tuple ->
-        // Extract tumor sample from pairs.tsv file
-        def tumor_sample = file(tuple[3]).text.split('\n')[1].split('\t')[0]
-        def normal_sample = file(tuple[3]).text.split('\n')[1].split('\t')[1]
-        // Construct path to the HLA file
-        def hla_file_path = "${params.hla_directory}/${tumor_sample}/hla_types.txt"
-        def hla_content = ""
+    // Load and Normalize HLA Data
+    hla_ch = Channel
+        .fromPath(hla_csv)
+        .splitCsv(header: true)
+        .map { row ->
+            // Extract sample ID and raw HLA string
+            def sample_id = row.Sample_ID
+            def hla_string = row.HLA_Types.replace(';', ',').trim()
 
-        if (file("${params.hla_directory}/${tumor_sample}/hla_types.txt").exists()) {
-            hla_content = file("${params.hla_directory}/${tumor_sample}/hla_types.txt").text.replaceAll('\n', '')
-        } else {
-            if (file("${params.hla_directory}/${normal_sample}/hla_types.txt").exists()) {
-                hla_content = file("${params.hla_directory}/${normal_sample}/hla_types.txt").text.replaceAll('\n', '')
-            } else {
-                // Log a message if HLA file does not exist
-                println "Warning: HLA file not found with tumor sample ${tumor_sample}; normal sample ${normal_sample}"
-            }
+            // Normalize HLA string to consistent format
+            def normalized_hla = hla_string.split(',')
+                .collect { hla -> 
+                    hla.trim().replaceAll(/HLA-([A-Z])([0-9]+:[0-9]+)/, 'HLA-$1*$2') 
+                }
+                .join(',')
+            return [sample_id, normalized_hla]
         }
-        
-        def hla = hla_content.replaceAll(/HLA-([A-Z])([0-9]*:[0-9]*)/, 'HLA-$1*$2').trim()
-        // Return tuple with the additional HLA file path
-        // Remove MAF2VCF vcf file
-        return [tuple[0], tuple[1], tuple[3]] + [hla, tumor_sample, normal_sample]
-    }
+
+
+    tumor_pvacseq_ch = VEP.out.vcf
+        .join(MAF2VCF.out.vcf)
+        .map { tuple ->
+            // Extract tumor and normal samples
+            def tumor_sample = file(tuple[3]).text.split('\n')[1].split('\t')[0]
+            def normal_sample = file(tuple[3]).text.split('\n')[1].split('\t')[1]
+            // Extract tumor and normal sample from files and add them
+            return [tumor_sample, normal_sample, tuple[0], tuple[1], tuple[3]]
+        }
+    
+    // Reorder just so that normal sample is a key now
+    normal_pvacseq_ch = tumor_pvacseq_ch
+        .map { tuple ->
+            return [tuple[1], tuple[0], tuple[2], tuple[3], tuple[4]]
+        }
+
+    // Merge HLA info in case we have tumor sample id
+    tumor_pvacseq_ch = tumor_pvacseq_ch
+        .join(hla_ch).map { tuple ->
+            // Reorder for PVACSEQ_PIPELINE process
+            return [tuple[2], tuple[3], tuple[4], tuple[5], tuple[0], tuple[1]]
+        }
+    
+    // Merge HLA info in case we have normal sample id
+    normal_pvacseq_ch = normal_pvacseq_ch
+        .join(hla_ch).map { tuple ->
+            // Reorder for PVACSEQ_PIPELINE process
+            return [tuple[2], tuple[3], tuple[4], tuple[5], tuple[1], tuple[0]]
+        }
+
+    pvacseq_ch = tumor_pvacseq_ch.mix(normal_pvacseq_ch)
 
     //
     // MODULE: Run pVAcseq tool
@@ -108,6 +135,8 @@ workflow PVACSEQ {
     )
 
     ch_multiqc_files = ch_multiqc_files.mix(PVACSEQ_PIPELINE.out.mhc_i_out.collect{it[1]})
+    ch_multiqc_files = ch_multiqc_files.mix(PVACSEQ_PIPELINE.out.mhc_ii_out.collect{it[1]})
+    ch_versions = ch_versions.mix(PVACSEQ_PIPELINE.out.versions.first())
 
 
     //
