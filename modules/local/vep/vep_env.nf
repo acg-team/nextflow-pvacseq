@@ -70,6 +70,11 @@ process SETUP_VEP_ENVIRONMENT {
     if [[ ! -d "$vep_plugins" ]]; then
         mkdir -p "${outdir}/VEP_plugins"
         git clone https://github.com/Ensembl/VEP_plugins.git "${outdir}/VEP_plugins"
+        wget "https://github.com/griffithlab/pVACtools/archive/refs/tags/v4.0.7.zip"
+        unzip v4.0.7.zip "pVACtools-4.0.7/pvactools/tools/pvacseq/VEP_plugins/*"
+        mv pVACtools-4.0.7/pvactools/tools/pvacseq/VEP_plugins/* "${outdir}/VEP_plugins/"
+        rm -rf pVACtools-4.0.7
+        rm v4.0.7.zip
         ln -s "${outdir}/VEP_plugins" vep_plugins
         
     else
