@@ -3,8 +3,7 @@
 //
 process CONFIGURE_PVACSEQ {
 
-    // conda "${moduleDir}/environment.yml"
-    conda "/home/pho/nf-core-pvacseq/pvacseq"
+    conda "${moduleDir}/environment.yml"
     container "docker.io/griffithlab/pvactools:4.0.7"
 
     input:
