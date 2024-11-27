@@ -1,14 +1,11 @@
-// TODO
-// 1. Validate hla string and add different types of hla string support
-// 2. Validate input
-
-// Works only for MHC_Class_I
 process PVACSEQ_PIPELINE {
     tag "$meta.id"
     label 'process_medium'
 
-    conda "${moduleDir}/environment.yml"
-
+    // conda "${moduleDir}/environment.yml"
+    conda "/home/pho/nf-core-pvacseq/pvacseq"
+    container "docker.io/griffithlab/pvactools:4.0.7"
+    
     input:
     tuple val(meta), path(vcf), path(pairs), val(hla), val(tumor_sample), val(normal_sample)
     path  fasta
@@ -16,28 +13,34 @@ process PVACSEQ_PIPELINE {
     val peptide_length_i 
     val peptide_length_ii 
     path iedb // path to iedb-install-directory 
+    path 'env_config_done.txt' // path to config 
 
     output:
-    // tuple val(meta), path("${tumor_sample}/MHC_Class_I/${tumor_sample}.filtered.tsv")     , emit: neoantigens
+    // Output tuple for MHC Class I 
     tuple val(meta), path("${tumor_sample}/MHC_Class_I/${tumor_sample}.filtered.tsv"), path("${tumor_sample}/MHC_Class_I/${tumor_sample}.all_epitopes.tsv"), optional: true, emit: mhc_i_out
+    // Output tuple for MHC Class II 
     tuple val(meta), path("${tumor_sample}/MHC_Class_II/${tumor_sample}.filtered.tsv"), path("${tumor_sample}/MHC_Class_II/${tumor_sample}.all_epitopes.tsv"), optional: true, emit: mhc_ii_out
     path "versions.yml"                                       , emit: versions
 
     when:
+    // Execute the task unless explicitly told not to
     task.ext.when == null || task.ext.when
 
     script:
     def e1 = peptide_length_i ?: "9" // If peptide_length_i is null, default to "9"
     def e2 = peptide_length_ii ?: "15" // If peptide_length_ii is null, default to "15"
 
+   
     assert hla && tumor_sample && normal_sample : "hla, tumor_sample, and normal_sample must not be empty"
-    // Validate HLA format
-    // assert hla.matches(/^(HLA-)?[A-Z]\*\d{2}:\d{2}$/) : "HLA format is not valid: ${hla}"
-
+    
+    
     // Validate each HLA string
     hla.split(',').each { hla_string ->
-        assert hla_string.matches(/^(HLA-)?[A-Z]\*\d{2}:\d{2}$/) : "HLA format is not valid: ${hla_string}"
+        if(!hla_string.matches(/^(HLA-)?[A-Z]\*\d{2}:\d{2}$/)) 
+            println "${meta.id} WARNING: HLA format is not valid: ${hla_string}"
     }
+
+    // Execute pvacseq command with provided parameters
     """
     pvacseq run \\
         $vcf \\
@@ -53,7 +56,7 @@ process PVACSEQ_PIPELINE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        pvactools: echo \$(pvactools -v 2>&1) 
+        PVACSEQ: echo \$(pvactools -v 2>&1) 
     END_VERSIONS
     """
 }

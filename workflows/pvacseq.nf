@@ -8,6 +8,7 @@ include { MAF2VCF                } from '../modules/local/maf2vcf/main'
 include { VEP                    } from '../modules/local/vep/main'
 include { SETUP_VEP_ENVIRONMENT  } from '../modules/local/vep/vep_env'
 include { PVACSEQ_PIPELINE       } from '../modules/local/pvacseq/main'
+include { CONFIGURE_PVACSEQ      } from '../modules/local/pvacseq/pvacseq_env'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 
 include { paramsSummaryMap       } from 'plugin/nf-validation'
@@ -127,6 +128,12 @@ workflow PVACSEQ {
         params.pvacseq_iedb ?: '',
         params.pvacseq_algorithm ?: ''
     )
+    
+    // Configure pvacseq before running it
+    CONFIGURE_PVACSEQ (
+        CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_i,
+        CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_ii,
+    )
 
     //
     // MODULE: Run pVAcseq tool
@@ -137,7 +144,8 @@ workflow PVACSEQ {
         params.pvacseq_algorithm,
         params.pvacseq_peptide_length_i,
         params.pvacseq_peptide_length_ii,
-        CONFIGURE_PVACSEQ_IEDB.out.iedb_dir
+        CONFIGURE_PVACSEQ_IEDB.out.iedb_dir,
+        CONFIGURE_PVACSEQ.out.config_file
     )
 
     ch_multiqc_files = ch_multiqc_files.mix(PVACSEQ_PIPELINE.out.mhc_i_out.collect{it[1]})

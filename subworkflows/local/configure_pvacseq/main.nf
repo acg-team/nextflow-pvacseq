@@ -85,55 +85,35 @@ workflow CONFIGURE_PVACSEQ_IEDB {
     }
     println "IEDB folder will be $iedb_dir"
 
-    // Initialize iedb_ch channel
-    iedb_ch = Channel.empty()
+    // Paths for MHC I and MHC II
+    def mhc_i_path = params.NO_FILE
+    def mhc_ii_path = params.NO_FILE
 
-    // Add existing paths to iedb_ch
-    if (file("$iedb_dir/mhc_i").exists()) {
-        println "MHC Class I directory exists at $iedb_dir/mhc_i"
-        iedb_ch = iedb_ch.mix(Channel.fromPath("$iedb_dir/mhc_i"))
+    // Add existing paths or download MHC I
+    if (requires_mhc_i) {
+        if (file("$iedb_dir/mhc_i").exists()) {
+            println "MHC Class I directory exists at $iedb_dir/mhc_i"
+            mhc_i_path = file("$iedb_dir/mhc_i")
+        } else {
+            println "MHC Class I is required but does not exist. Downloading..."
+            mhc_i_path = DOWNLOAD_MHC_I(iedb_dir).out.iedb_mhc_i
+        }
     }
 
-    if (file("$iedb_dir/mhc_ii").exists()) {
-        println "MHC Class II directory exists at $iedb_dir/mhc_ii"
-        iedb_ch = iedb_ch.mix(Channel.fromPath("$iedb_dir/mhc_ii"))
+    // Add existing paths or download MHC II
+    if (requires_mhc_ii) {
+        if (file("$iedb_dir/mhc_ii").exists()) {
+            println "MHC Class II directory exists at $iedb_dir/mhc_ii"
+            mhc_ii_path = file("$iedb_dir/mhc_ii")
+        } else {
+            println "MHC Class II is required but does not exist. Downloading..."
+            mhc_ii_path = DOWNLOAD_MHC_II(iedb_dir).out.iedb_mhc_ii
+        }
     }
 
-    // Download MHC I if required and not already present
-    if (requires_mhc_i && !file("$iedb_dir/mhc_i").exists()) {
-        println "MHC Class I is required but does not exist. Downloading..."
-        DOWNLOAD_MHC_I(iedb_dir)
-        iedb_ch = iedb_ch.mix(DOWNLOAD_MHC_I.out.iedb_mhc_i)
-    } else if (!requires_mhc_i) {
-        println "MHC Class I is not required."
-    }
-
-    // Download MHC II if required and not already present
-    if (requires_mhc_ii && !file("$iedb_dir/mhc_ii").exists()) {
-        println "MHC Class II is required but does not exist. Downloading..."
-        DOWNLOAD_MHC_II(iedb_dir)
-        iedb_ch = iedb_ch.mix(DOWNLOAD_MHC_II.out.iedb_mhc_ii)
-    } else if (!requires_mhc_ii) {
-        println "MHC Class II is not required."
-    }
-
-    // Reduction is done to synchronize processes and wait for downloads if needed. 
-    // We already know iedb path = iedb_dir
-    // We assume that iedb_ch have 1 or 2 paths.
-    common_iedb_path = iedb_ch.reduce { common_path, next_path ->
-        def common_file = file(common_path)
-        def next_file = file(next_path)
-
-        // We should have both files in the same folder
-        common_file = common_file.getParent()
-        assert next_path.startsWith(common_file.toString())
-
-        return common_file.toString()
-    }
-
-    assert iedb_dir == common_iedb_path
-
+    // Emit the paths
     emit:
-    iedb_ch = iedb_ch
-    iedb_dir = common_iedb_path
+    iedb_dir = iedb_dir
+    iedb_mhc_i = mhc_i_path
+    iedb_mhc_ii = mhc_ii_path
 }
