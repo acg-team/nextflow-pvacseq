@@ -14,6 +14,7 @@ include { paramsSummaryMap       } from 'plugin/nf-validation'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_pvacseq_pipeline'
+include { CONFIGURE_PVACSEQ_IEDB } from '../subworkflows/local/configure_pvacseq'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,9 +37,7 @@ workflow PVACSEQ {
     ch_multiqc_files = Channel.empty()
 
 
-    //
-    // PROCESS: Check and Install VEP Parameters
-    //
+    // Check and Install VEP Parameters
     SETUP_VEP_ENVIRONMENT (
         params.vep_cache ?: '',
         params.vep_cache_version ?: '',
@@ -122,6 +121,13 @@ workflow PVACSEQ {
 
     pvacseq_ch = tumor_pvacseq_ch.mix(normal_pvacseq_ch)
 
+
+    // Download mhc_i and mhc_ii iedb if required
+    CONFIGURE_PVACSEQ_IEDB (
+        params.pvacseq_iedb ?: '',
+        params.pvacseq_algorithm ?: ''
+    )
+
     //
     // MODULE: Run pVAcseq tool
     //
@@ -131,7 +137,7 @@ workflow PVACSEQ {
         params.pvacseq_algorithm,
         params.pvacseq_peptide_length_i,
         params.pvacseq_peptide_length_ii,
-        params.pvacseq_iedb
+        CONFIGURE_PVACSEQ_IEDB.out.iedb_dir
     )
 
     ch_multiqc_files = ch_multiqc_files.mix(PVACSEQ_PIPELINE.out.mhc_i_out.collect{it[1]})

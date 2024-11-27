@@ -19,11 +19,11 @@
                     "description": "Path to directory with maf files",
                     "fa_icon": "fas fa-folder-open"
                 },
-                "hla_directory": {
+                "hla_csv": {
                     "type": "string",
-                    "format": "directory-path",
+                    "format": "file-path",
                     "exists": true,
-                    "description": "Path to files with HLA types for each sample from input directory",
+                    "description": "Path to files with HLA types for each sample in csv format. It should have 2 columns Sample_ID and HLA_Types",
                     "fa_icon": "fas fa-folder-open"
                 },
                 "outdir": {
@@ -49,13 +49,34 @@
             "properties": {
                 "genome": {
                     "type": "string",
+                    "description": "Name of iGenomes reference.",
+                    "fa_icon": "fas fa-book",
+                    "help_text": "If using a reference genome configured in the pipeline using iGenomes (not recommended), use this parameter to give the ID for the reference. This is then used to build the full paths for all required reference genome files e.g. `--genome GRCh38`. \n\nSee the [nf-core website docs](https://nf-co.re/usage/reference_genomes) for more details."
+                },
+                "fasta": {
+                    "type": "string",
                     "format": "file-path",
                     "exists": true,
                     "mimetype": "text/plain",
                     "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
                     "description": "Path to FASTA genome file.",
-                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have a BWA index available this will be generated for you automatically. Combine with `--save_reference` to save BWA index for future runs.",
+                    "help_text": "This parameter is *mandatory* if `--genome` is not specified. If you don't have the appropriate alignment index available this will be generated for you automatically. Combine with `--save_reference` to save alignment index for future runs.",
                     "fa_icon": "far fa-file-code"
+                },
+                "igenomes_base": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "Directory / URL base for iGenomes references.",
+                    "default": "s3://ngi-igenomes/igenomes",
+                    "fa_icon": "fas fa-cloud-download-alt",
+                    "hidden": true
+                },
+                "igenomes_ignore": {
+                    "type": "boolean",
+                    "description": "Do not load the iGenomes reference config.",
+                    "fa_icon": "fas fa-ban",
+                    "hidden": true,
+                    "help_text": "Do not load `igenomes.config` when running the pipeline. You may choose this option if you observe clashes between custom parameters and those supplied in `igenomes.config`."
                 }
             }
         },
@@ -68,7 +89,7 @@
                 "vep_plugins": {
                     "type": "string",
                     "format": "directory-path",
-                    "exists": true,
+                    "exists": false,
                     "description": "Path to directory with installed plaging for VEP, including Wildtypes and Frameshift",
                     "help_text": "Path to directory with installed plaging for VEP, including Wildtypes and Frameshift",
                     "fa_icon": "far fa-folder-open"
@@ -76,12 +97,12 @@
                 "vep_cache": {
                     "type": "string",
                     "format": "directory-path",
-                    "exists": true,
+                    "exists": false,
                     "description": "Path to directory with installed cahce for VEP",
                     "help_text": "Path to directory with installed cahce for VEP",
                     "fa_icon": "far fa-folder-open"
                 },
-                "vep_cahce_vesrion": {
+                "vep_cache_version": {
                     "type": "string",
                     "description": "Version of genomes in VEP cache",
                     "help_text": "Version of genomes in VEP cache"
