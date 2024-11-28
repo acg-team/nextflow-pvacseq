@@ -4,14 +4,6 @@ nextflow.enable.dsl = 2
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    GENOME PARAMETER VALUES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-params.fasta            = WorkflowMain.getGenomeAttribute(params, 'fasta')
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     CONSTANT PARAMETER VALUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
@@ -40,15 +32,16 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_pvac
 workflow NFCORE_PVACSEQ {
 
     take:
-    maf_dir // channel: directory with maf files read in from --input
-
+    maf_files // channel: directory with maf files read in from --input
+    vcf_files // channel: directory with vcf files read in from --input
     main:
 
     //
     // WORKFLOW: Run pipeline
     //
     PVACSEQ (
-        maf_dir,
+        maf_files,
+        vcf_files,
         params.fasta,
         params.hla_csv
     )
@@ -80,13 +73,33 @@ workflow {
         params.input
     )
 
+
+    //
+    // Generate input channels dynamically for MAF and VCF files
+    //
+    ch_maf_files = Channel
+        .fromPath(params.input + "/*.maf", checkIfExists: true)
+        .map { file ->
+            [ [id: file.baseName], file ] // Create tuples with metadata (id) and file path
+        }
+
+    ch_vcf_files = Channel
+        .fromPath(params.input + "/*.vcf", checkIfExists: true)
+        .map { file ->
+            [ [id: file.baseName], file ] // Create tuples with metadata (id) and file path
+        }
+
+    //
+    // Combine MAF and VCF channels into one
+    //
+    ch_input_files = ch_maf_files.mix(ch_vcf_files)
+
     //
     // WORKFLOW: Run main workflow
     //
     NFCORE_PVACSEQ (
-        Channel
-            .fromPath(params.input + "/*.maf", checkIfExists: true)
-            .map{ it -> [ [id: it.baseName], it ] }
+        ch_maf_files,
+        ch_vcf_files
     )
 
     //

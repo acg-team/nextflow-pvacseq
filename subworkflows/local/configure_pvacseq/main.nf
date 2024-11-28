@@ -96,7 +96,8 @@ workflow CONFIGURE_PVACSEQ_IEDB {
             mhc_i_path = file("$iedb_dir/mhc_i")
         } else {
             println "MHC Class I is required but does not exist. Downloading..."
-            mhc_i_path = DOWNLOAD_MHC_I(iedb_dir).out.iedb_mhc_i
+            DOWNLOAD_MHC_I(iedb_dir)
+            mhc_i_path = DOWNLOAD_MHC_I.out.iedb_mhc_i
         }
     }
 
@@ -107,10 +108,10 @@ workflow CONFIGURE_PVACSEQ_IEDB {
             mhc_ii_path = file("$iedb_dir/mhc_ii")
         } else {
             println "MHC Class II is required but does not exist. Downloading..."
-            mhc_ii_path = DOWNLOAD_MHC_II(iedb_dir).out.iedb_mhc_ii
+            DOWNLOAD_MHC_II(iedb_dir)
+            mhc_ii_path = DOWNLOAD_MHC_II.out.iedb_mhc_ii
         }
     }
-
     // Emit the paths
     emit:
     iedb_dir = iedb_dir

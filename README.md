@@ -2,57 +2,84 @@
 
 **nf-core/pvacseq** is a bioinformatics pipeline that transforms MAF files to VCF, annotates them with VEP, and analyzes them with pVACseq to facilitate the investigation of neoantigens.
 
-<!-- TODO nf-core:
-   Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
-   major pipeline sections and the types of output it produces. You're giving an overview to someone new
-   to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction
--->
+## Introduction
 
-<!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
-     workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
+The `nf-core/pvacseq` pipeline is designed for the prediction of neoantigens from genomic data using [pVACseq](https://pvactools.readthedocs.io/en/latest/tools/pvacseq.html). It supports inputs in both MAF and VCF formats.
 
-1. Maf to vcf. 
-2. Annotate vcf with VEP that pVACseq tool need.
-3. Use pVACseq tool to get potential neoantigens.
+## Pipeline Summary
+
+The pipeline performs the following steps:
+
+1. **Input Preprocessing**:
+   - Accepts MAF or VCF files as input.
+   - Converts MAF to VCF (if required) using [maf2vcf](https://github.com/mskcc/vcf2maf/tree/main).
+
+2. **Variant Annotation**:
+   - Annotates variants using [VEP](https://www.ensembl.org/info/docs/tools/vep/index.html), configured to meet the requirements of pVACseq.
+
+3. **Loading HLA**:
+   - Reads and processes HLA typing information from a user-provided CSV file.
+
+4. **pVACseq Setup**:
+   - Configures and downloads MHC class I and II files required for pVACseq if not provided and configure pvacseq environment.
+
+5. **pVACseq Execution**:
+   - Predicts neoantigens using [pVACseq](https://pvactools.readthedocs.io/en/latest/tools/pvacseq.html).
+
+6. **MultiQC**:
+   - Aggregates pipeline results with [MultiQC](http://multiqc.info/).
 
 ## Usage
 
 > [!NOTE]
-> If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
+> If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow.
 
-<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
-     Explain what rows and columns represent. For instance (please edit as appropriate):
+### Required Inputs
 
-First, prepare a samplesheet with your input data that looks as follows:
+To run the pipeline, you need the following inputs:
 
-`samplesheet.csv`:
+1. **Input Files**:
+   - A directory containing `*.maf` or `*.vcf` files.
+2. **HLA Typing Information**:
+   - A CSV file (`--hla_csv`) with the following structure:
+     ```
+     Sample_ID,HLA_Types
+     TCGA-G4-6310-01A-11D-1719-10,HLA-C05:01;HLA-C06:02;HLA-B45:01;HLA-A29:02;HLA-B44:02;HLA-A02:01
+     ```
+3. **Reference Genome**:
+   - A FASTA file (`--fasta`).
 
-```csv
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-```
+4. **VEP Requirements** (Optional):
+   - The pipeline uses VEP for variant annotation. You can provide the following files if available:
+     - **VEP Cache** (`--vep_cache`): Directory containing pre-downloaded VEP cache files.
+     - **VEP Plugins** (`--vep_plugins`): Directory containing [required VEP plugins](https://pvactools.readthedocs.io/en/latest/pvacseq/input_file_prep/vep.html).
+   - If these files are not provided, the pipeline will download the required VEP cache and plugins automatically.
 
-Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
+5. **pVACseq Requirements** (Optional):
+   - The pipeline uses IEDB for neoantigen prediction. You can provide the following directory if available:
+     - **IEDB Installation Directory** (`--pvacseq_iedb`): Directory containing MHC class I and/or II files for IEDB.
+   - If this directory is not provided, the pipeline will download and configure IEDB automatically.
 
--->
-First, you need to have 
-1. Directory with *.maf files
-2. Directory with HLA information. Now the format require to have directory with folders of tumour sample name and `hla_types.txt` file that contain information about HLA. 
+### Running the Pipeline
 
-For example:
-`/path/to/hla/TCGA-AF-2687-01A-02D-1733-10/hla_types.txt`
-
-Now, you can run the pipeline using:
-
-<!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
+You can run the pipeline using the following command:
 
 ```bash
 nextflow run main.nf \
-   -profile <conda> \
-   --input <MAF DIRECTORY> \
-   --hla_directory <HLA DIRECTORY> \
-   --outdir <OUTDIR>
+   -profile <docker/conda> \
+   --input <INPUT DIRECTORY> \
+   --hla_csv <HLA CSV FILE> \
+   --fasta <REFERENCE FASTA> \
+   --outdir <OUTPUT DIRECTORY>
+```
+### Testing the Pipeline
+If you want to test the pipeline, you need to download the reference genome from [GDC Reference Files](https://gdc.cancer.gov/about-data/gdc-data-processing/gdc-reference-files). Once downloaded, you can run the test profile as follows:
+
+```bash
+nextflow run main.nf \
+   -profile test,<docker/conda> \
+   --outdir <OUTPUT DIRECTORY> \
+   --fasta <PATH TO FASTA>
 ```
 
 ## Citations

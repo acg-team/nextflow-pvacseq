@@ -13,6 +13,7 @@ process PVACSEQ_PIPELINE {
     val peptide_length_ii 
     path iedb // path to iedb-install-directory 
     path 'env_config_done.txt' // path to config 
+    val options // map of additional pVACseq options
 
     output:
     // Output tuple for MHC Class I 
@@ -39,6 +40,16 @@ process PVACSEQ_PIPELINE {
             println "${meta.id} WARNING: HLA format is not valid: ${hla_string}"
     }
 
+    // Build additional options dynamically
+    def additional_options = options.collect { key, value ->
+        if (value instanceof Boolean) {
+            value ? "--${key}" : "" // Add flag if true, otherwise omit
+        } else {
+            "--${key} ${value}" // Add key-value option
+        }
+    }.findAll { it }.join(' ') // Filter out empty strings and join options
+
+
     // Execute pvacseq command with provided parameters
     """
     pvacseq run \\
@@ -50,7 +61,8 @@ process PVACSEQ_PIPELINE {
         -e1 $e1 -e2 $e2 \\
         --normal-sample-name $normal_sample \\
         --iedb-install-directory $iedb \\
-        -t $task.cpus
+        -t $task.cpus \\
+        $additional_options
 
 
     cat <<-END_VERSIONS > versions.yml

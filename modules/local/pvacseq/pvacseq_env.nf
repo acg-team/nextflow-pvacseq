@@ -14,17 +14,18 @@ process CONFIGURE_PVACSEQ {
     path 'env_config_done.txt', emit: config_file
     
     script:
+    
     if (!iedb_mhc_i.isDirectory() && !iedb_mhc_ii.isDirectory() ) {
         throw new IllegalArgumentException("Error: No iedb_mhc_i or iedb_mhc_ii provided. At least one is required.")
     }
 
 
     // Check and log for MHC Class I
-    if (iedb_mhc_i.getPath() != params.NO_FILE) {
+    if (iedb_mhc_i != file(params.NO_FILE)) {
         if (!iedb_mhc_i.isDirectory()) {
-            println "Warning: Provided iedb_mhc_i as '${iedb_mhc_i.getPath()}' is not a directory."
+            println "Warning: Provided iedb_mhc_i as '${iedb_mhc_i}' is not a directory."
         } else {
-            println "MHC Class I will be configured with IEDB in '${iedb_mhc_i.getPath()}'"
+            println "MHC Class I will be configured with IEDB in '${iedb_mhc_i}'"
         }
     } else {
         println "MHC Class I configuration skipped."
@@ -32,11 +33,11 @@ process CONFIGURE_PVACSEQ {
 
 
     // Check and log for MHC Class II
-    if (iedb_mhc_ii.getPath() != params.NO_FILE) {
+    if (iedb_mhc_ii != file(params.NO_FILE)) {
         if (!iedb_mhc_ii.isDirectory()) {
-            println "Warning: Provided iedb_mhc_ii as '${iedb_mhc_ii.getPath()}' is not a directory."
+            println "Warning: Provided iedb_mhc_ii as '${iedb_mhc_ii}' is not a directory."
         } else {
-            println "MHC Class II will be configured with IEDB in '${iedb_mhc_ii.getPath()}'"
+            println "MHC Class II will be configured with IEDB in '${iedb_mhc_ii}'"
         }
     } else {
         println "MHC Class II configuration skipped."
@@ -53,7 +54,7 @@ process CONFIGURE_PVACSEQ {
 
     if [ -d "${iedb_mhc_ii}" ]; then
         cd "${iedb_mhc_ii}"
-        ./configure
+        ./configure.py
         cd -
     fi
 
