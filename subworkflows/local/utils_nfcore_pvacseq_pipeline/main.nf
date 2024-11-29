@@ -56,7 +56,7 @@ workflow PIPELINE_INITIALISATION {
     //
     pre_help_text = nfCoreLogo(monochrome_logs)
     post_help_text = '\n' + workflowCitation() + '\n' + dashedLine(monochrome_logs)
-    def String workflow_command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input /path/to/maf_directory --outdir <OUTDIR>"
+    def String workflow_command = "nextflow run ${workflow.manifest.name} -profile <docker/conda> --input /path/to/maf_directory --outdir <OUTDIR>"
     UTILS_NFVALIDATION_PLUGIN (
         help,
         workflow_command,
@@ -72,10 +72,6 @@ workflow PIPELINE_INITIALISATION {
     UTILS_NFCORE_PIPELINE (
         nextflow_cli_args
     )
-    //
-    // Custom validation for pipeline parameters
-    //
-    validateInputParameters()
 
 
    
@@ -125,39 +121,6 @@ workflow PIPELINE_COMPLETION {
     FUNCTIONS
 ========================================================================================
 */
-//
-// Check and validate pipeline parameters
-//
-def validateInputParameters() {
-    genomeExistsError()
-}
-
-
-//
-// Get attribute from genome config file e.g. fasta
-//
-def getGenomeAttribute(attribute) {
-    if (params.genomes && params.genome && params.genomes.containsKey(params.genome)) {
-        if (params.genomes[ params.genome ].containsKey(attribute)) {
-            return params.genomes[ params.genome ][ attribute ]
-        }
-    }
-    return null
-}
-
-//
-// Exit pipeline if incorrect --genome key provided
-//
-def genomeExistsError() {
-    if (params.genomes && params.genome && !params.genomes.containsKey(params.genome)) {
-        def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-            "  Genome '${params.genome}' not found in any config files provided to the pipeline.\n" +
-            "  Currently, the available genome keys are:\n" +
-            "  ${params.genomes.keySet().join(", ")}\n" +
-            "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        error(error_string)
-    }
-}
 
 //
 // Generate methods description for MultiQC

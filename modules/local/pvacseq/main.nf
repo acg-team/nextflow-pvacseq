@@ -42,12 +42,15 @@ process PVACSEQ_PIPELINE {
 
     // Build additional options dynamically
     def additional_options = options.collect { key, value ->
-        if (value instanceof Boolean) {
+        if (value == null) {
+            "" // Omit null values
+        } else if (value instanceof Boolean) {
             value ? "--${key}" : "" // Add flag if true, otherwise omit
         } else {
             "--${key} ${value}" // Add key-value option
         }
     }.findAll { it }.join(' ') // Filter out empty strings and join options
+
 
 
     // Execute pvacseq command with provided parameters

@@ -28,16 +28,30 @@ include { CONFIGURE_PVACSEQ_IEDB } from '../subworkflows/local/configure_pvacseq
 workflow PVACSEQ {
 
     take:
-    ch_maf_files // channel: directory with maf files read in from --input
-    fasta        // path to reference genome
-    hla_csv      // preprocessed HLA CSV file path
+    ch_maf_files   // Channel: directory with input files (MAF)
+    ch_vcf_files   // Channel: directory with input files (VCF)
+    fasta          // Path to reference genome
+    hla_csv        // Preprocessed HLA CSV file path
 
     main:
 
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
+    // Process MAF files (if provided)
 
+    //
+    // MODULE: Run MAF2VCF
+    //
+    MAF2VCF (
+        ch_maf_files,
+        fasta
+    )
+
+    ch_vcf_files = ch_vcf_files.mix(MAF2VCF.out.vcf)
+    ch_versions = ch_versions.mix(MAF2VCF.out.versions.first())
+    
+    
     // Check and Install VEP Parameters
     SETUP_VEP_ENVIRONMENT (
         params.vep_cache ?: '',
@@ -47,21 +61,11 @@ workflow PVACSEQ {
     )
     
     //
-    // MODULE: Run maf2vcf
-    //
-    MAF2VCF (
-        ch_maf_files,
-        fasta
-    )
-
-    ch_versions = ch_versions.mix(MAF2VCF.out.versions.first())
-    
-    //
     // MODULE: Run VEP
     //
     VEP (
-        MAF2VCF.out.vcf.map { tuple ->
-            return tuple[0..1]
+        ch_vcf_files.map { tuple ->
+            return tuple[0..1] // Pass only metadata and path to VCF
         },
         fasta,
         SETUP_VEP_ENVIRONMENT.out.vep_cache_version,
@@ -132,7 +136,7 @@ workflow PVACSEQ {
     // Configure pvacseq before running it
     CONFIGURE_PVACSEQ (
         CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_i,
-        CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_ii,
+        CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_ii
     )
 
     //
@@ -145,11 +149,12 @@ workflow PVACSEQ {
         params.pvacseq_peptide_length_i,
         params.pvacseq_peptide_length_ii,
         CONFIGURE_PVACSEQ_IEDB.out.iedb_dir,
-        CONFIGURE_PVACSEQ.out.config_file
+        CONFIGURE_PVACSEQ.out.config_file,
+        params.pvacseq_advanced_options
     )
 
-    ch_multiqc_files = ch_multiqc_files.mix(PVACSEQ_PIPELINE.out.mhc_i_out.collect{it[1]})
-    ch_multiqc_files = ch_multiqc_files.mix(PVACSEQ_PIPELINE.out.mhc_ii_out.collect{it[1]})
+    ch_multiqc_files = ch_multiqc_files.mix(PVACSEQ_PIPELINE.out.mhc_i_out.collect { it[1] })
+    ch_multiqc_files = ch_multiqc_files.mix(PVACSEQ_PIPELINE.out.mhc_ii_out.collect { it[1] })
     ch_versions = ch_versions.mix(PVACSEQ_PIPELINE.out.versions.first())
 
 
