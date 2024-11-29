@@ -1,43 +1,42 @@
-# nf-core/pvacseq: Output
+# pvacseq: Output
 
 ## Introduction
 
-This document describes the output produced by the pipeline. Most of the plots are taken from the MultiQC report, which summarises results at the end of the pipeline.
+This document describes the output produced by the pVACseq pipeline.
 
-The directories listed below will be created in the results directory after the pipeline has finished. All paths are relative to the top-level results directory.
+## Output overview
 
-<!-- TODO nf-core: Write this documentation describing your workflow's output -->
+The pVACseq pipeline output have several groups:
 
-## Pipeline overview
+- **pVACseq Analysis** - Neoantigen prediction for tumor samples.
+- **MultiQC** - Summary report aggregating the key results and QC metrics.
+- **Pipeline Information** - Metadata and logs generated during the pipeline run.
 
-The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
+---
 
-- [FastQC](#fastqc) - Raw read QC
-- [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
-- [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
-
-### FastQC
+### pVACseq Analysis
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `fastqc/`
-  - `*_fastqc.html`: FastQC report containing quality metrics.
-  - `*_fastqc.zip`: Zip archive containing the FastQC report, tab-delimited data file and plot images.
+- `MHC_I/`: Results for MHC class I predictions.
+  - `.all_epitopes.tsv`: Contains all predicted epitopes with detailed scoring information for each allele and peptide length.
+  - `.filtered.tsv`: A refined list of neoantigen candidates that pass the specified filtering criteria.
+- `MHC_II/`: Results for MHC class II predictions.
+  - `.all_epitopes.tsv`: Same structure as MHC class I output, but for MHC class II molecules.
+  - `.filtered.tsv`: Filtered list of neoantigen candidates for MHC class II molecules.
 
 </details>
 
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+The pVACseq pipeline generates outputs organized into `MHC_I` and `MHC_II` directories, reflecting the predictions for MHC class I and II molecules. Each directory contains results for neoantigen prediction.
 
-![MultiQC - FastQC sequence counts plot](images/mqc_fastqc_counts.png)
+#### Files Description
 
-![MultiQC - FastQC mean quality scores plot](images/mqc_fastqc_quality.png)
-
-![MultiQC - FastQC adapter content plot](images/mqc_fastqc_adapter.png)
-
-:::note
-The FastQC plots displayed in the MultiQC report shows _untrimmed_ reads. They may contain adapter sequence and potentially regions with low quality.
-:::
+- **`.all_epitopes.tsv`**:
+  - A comprehensive list of all predicted epitopes.
+  - Includes scores, binding affinities, and other metrics for every potential epitope.
+- **`.filtered.tsv`**:
+  - Contains only neoantigens that meet the filtering thresholds (e.g., binding affinity, expression thresholds).
 
 ### MultiQC
 

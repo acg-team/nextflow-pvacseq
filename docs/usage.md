@@ -1,224 +1,157 @@
-# nf-core/pvacseq: Usage
-
-## :warning: Please read this documentation on the nf-core website: [https://nf-co.re/pvacseq/usage](https://nf-co.re/pvacseq/usage)
-
-> _Documentation of pipeline parameters is generated automatically from the pipeline schema and can no longer be found in markdown files._
+# pvacseq: Usage
 
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+This pipeline is built using the **nf-core** template, providing a standardized structure. However, the pipeline is not yet published in the nf-core repository.
 
-## Samplesheet input
+The pipeline is designed to run the **pVACseq** tool on multiple tumor samples in different environments.
 
-You will need to create a samplesheet with information about the samples you would like to analyse before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row as shown in the examples below.
+## Input Directory with VCF/MAF Files
+
+The pVACseq pipeline requires a directory with VCF or MAF files for each sample. Both file types are supported, and MAF files will automatically be converted to VCF format during processing. Use this parameter to specify its location. 
+```
+--input '[path to directory]'
+```
+
+### Directory Structure
+
+- The input directory can contain both VCF and MAF files.
+- **VCF Files**: Must include sample genotype information (`GT` field) as described in the [pVACtools documentation](https://pvactools.readthedocs.io/en/latest/pvacseq/input_file_prep/gt.html).
+- **MAF Files**: Will be transformed to VCF format before processing.
+
+### Example Directory Structure
+
+```plaintext
+input_vcf_maf/
+├── sample1.vcf
+├── sample2.maf
+├── sample3.vcf
+```
+
+## HLA Input
+
+The pVACseq pipeline requires an input file specifying HLA alleles for each sample. This is essential for neoantigen prediction. Use this parameter to specify its location. 
+```
+--hla_csv '[path to file with hla information]'
+```
+
+### CSV Structure
+
+The HLA input file must be a comma-separated file (CSV) with the following columns:
+
+| Column      | Description                                                                                                            |
+|-------------|------------------------------------------------------------------------------------------------------------------------|
+| `Sample_ID` | Unique sample identifier. This must match the sample name inside the input VCF or MAF file, **not** the file name.     |
+| `HLA_Types` | Semicolon-separated list of HLA alleles in the format `HLA-[Gene][Allele group]:[Protein]`.                            |
+
+- **Header Row**: The first row must contain column names (`Sample_ID`, `HLA_Types`).
+- **Unique Samples**: Each row corresponds to one unique sample.
+
+### HLA Format
+
+HLA alleles must use the `HLA-[Gene][Allele group]:[Protein]` format. Examples:
+- `HLA-A02:01`
+- `HLA-B15:01`
+- `HLA-C07:02`
+
+Alleles in the `HLA_Types` column must be separated by semicolons `;`.
+
+### Example HLA Input File
+
+```csv title="hla_input.csv"
+Sample_ID,HLA_Types
+SAMPLE_1,HLA-C06:02;HLA-B45:01
+SAMPLE_2,HLA-A29:02;HLA-B44:02;HLA-A02:01
+SAMPLE_3,HLA-A11:01;HLA-B35:01;HLA-C04:01
+```
+
+## Reference FASTA File Input
+
+The pVACseq pipeline requires a reference genome in FASTA format to match the input VCF or MAF files. Use this parameter to specify its location. 
+```
+--fasta '[path to reference file]'
+```
+
+### Requirements
+
+- The FASTA file must be **unzipped**. Compressed versions (e.g., `.fa.gz`) are not currently supported.
+- Ensure the FASTA file corresponds to the correct reference genome version used for the input VCF/MAF files.
+
+## VEP Parameters
+
+The pVACseq pipeline uses VEP (Variant Effect Predictor) for annotating input variants. Below are the parameters required for the tool and their behavior in the pipeline:
+
+### Parameters
+
+1. **`vep_cache`**: Directory containing the VEP cache files.
+2. **`vep_cache_version`**: Version of the VEP cache to use. If not specified, the default version is `102`.
+3. **`vep_plugins`**: Directory containing VEP plugins.
+
+### Automatic download
+
+#### **`vep_plugins`**
+- If `vep_plugins` is not provided, the pipeline will download the required plugins automatically.
+- If you rerun the pipeline without specifying `vep_plugins`, it will detect the already downloaded plugins and fail due to conflicting directory states.
+- To avoid this issue, specify the downloaded plugin directory in subsequent runs using the `vep_plugins` parameter.
+
+#### **`vep_cache` and `vep_cache_version`**
+- **When `vep_cache_version` is provided but `vep_cache` is not**:
+  - The pipeline will attempt to download the specified cache version.
+  - The same logic as `vep_plugins` applies: specify the cache directory (`vep_cache`) on reruns to avoid download conflicts.
+- **When `vep_cache_version` is not provided but `vep_cache` is specified**:
+  - The pipeline will fail because it cannot infer the cache version from the directory.
+- **When neither `vep_cache_version` nor `vep_cache` is provided**:
+  - The pipeline will use the default cache version (`102`) and download it automatically.
+
+### Best Practices
+
+- Always specify the `vep_cache` and `vep_plugins` directories after the first run to avoid conflicts and unnecessary downloads.
+- Ensure the `vep_cache_version` matches the version of the `vep_cache` directory provided.
+
+
+## pVACseq Parameters
+
+The pVACseq pipeline provides a range of configurable options for neoantigen prediction. Below are the key parameters and their behavior:
+
+### Required Parameters
+
+1. **`pvacseq_algorithm`**: Specifies the algorithms to use for pVACseq predictions. This is required.
+2. **`pvacseq_peptide_length_i`**: List of peptide lengths for MHC class I predictions. Required if MHC class I algorithms are selected.
+3. **`pvacseq_peptide_length_ii`**: List of peptide lengths for MHC class II predictions. Required if MHC class II algorithms are selected.
+#### **`pvacseq_iedb`**
+- Path to the IEDB directory.
+- If not provided:
+  - The pipeline will automatically download the required IEDB tools for MHC class I and/or MHC class II based on the specified algorithms.
+  - Only the required components (`mhc_i`, `mhc_ii`, or both) will be downloaded.
+- **Rerun Behavior**:
+  - If IEDB is downloaded automatically, specify the downloaded path in the `pvacseq_iedb` parameter on reruns to avoid conflicts.
+
+### Optional Parameters
+#### **`pvacseq_advanced_options`**
+- Dictionary of advanced pVACseq options.
+- Example:
+  ```groovy
+  pvacseq_advanced_options = [
+      "binding-threshold": 500,
+      "minimum-fold-change": 1.0
+  ]
+  ```
+- Allows customization of parameters like `binding-threshold` and other algorithm-specific options.
+
+## Running the Pipeline
+
+To run the pVACseq pipeline, provide all required parameters in a configuration file and execute the pipeline using the following command:
 
 ```bash
---input '[path to samplesheet file]'
+nextflow run main.nf -profile <conda/docker>
 ```
 
-### Multiple runs of the same sample
+### Test Profile
 
-The `sample` identifiers have to be the same when you have re-sequenced the same sample more than once e.g. to increase sequencing depth. The pipeline will concatenate the raw reads before performing any downstream analysis. Below is an example for the same sample sequenced across 3 lanes:
+A `test` profile is available for running the pipeline with test data. The test dataset includes a MAF file derived from the TCGA dataset of a human tumor. Since pVACseq supports only human data, running the test profile requires large files such as the reference genome and associated databases.
 
-```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L003_R1_001.fastq.gz,AEG588A1_S1_L003_R2_001.fastq.gz
-CONTROL_REP1,AEG588A1_S1_L004_R1_001.fastq.gz,AEG588A1_S1_L004_R2_001.fastq.gz
-```
+### Resources Required for Testing
 
-### Full samplesheet
+- **Time**: The test run will take approximately **1 hour** to complete.
+- **Disk Space**: At least **50GB** of storage is needed to download and prepare all necessary databases and tools.
 
-The pipeline will auto-detect whether a sample is single- or paired-end using the information provided in the samplesheet. The samplesheet can have as many columns as you desire, however, there is a strict requirement for the first 3 columns to match those defined in the table below.
-
-A final samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 6 samples, where `TREATMENT_REP3` has been sequenced twice.
-
-```csv title="samplesheet.csv"
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-CONTROL_REP2,AEG588A2_S2_L002_R1_001.fastq.gz,AEG588A2_S2_L002_R2_001.fastq.gz
-CONTROL_REP3,AEG588A3_S3_L002_R1_001.fastq.gz,AEG588A3_S3_L002_R2_001.fastq.gz
-TREATMENT_REP1,AEG588A4_S4_L003_R1_001.fastq.gz,
-TREATMENT_REP2,AEG588A5_S5_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,
-TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,
-```
-
-| Column    | Description                                                                                                                                                                            |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`  | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`). |
-| `fastq_1` | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-| `fastq_2` | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                             |
-
-An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
-
-## Running the pipeline
-
-The typical command for running the pipeline is as follows:
-
-```bash
-nextflow run nf-core/pvacseq --input ./samplesheet.csv --outdir ./results --genome GRCh37 -profile docker
-```
-
-This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
-
-Note that the pipeline will create the following files in your working directory:
-
-```bash
-work                # Directory containing the nextflow working files
-<OUTDIR>            # Finished results in specified location (defined with --outdir)
-.nextflow_log       # Log file from Nextflow
-# Other nextflow hidden files, eg. history of pipeline runs and old logs.
-```
-
-If you wish to repeatedly use the same parameters for multiple runs, rather than specifying each flag in the command, you can specify these in a params file.
-
-Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
-
-:::warning
-Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).
-:::
-
-The above pipeline run specified with a params file in yaml format:
-
-```bash
-nextflow run nf-core/pvacseq -profile docker -params-file params.yaml
-```
-
-with `params.yaml` containing:
-
-```yaml
-input: './samplesheet.csv'
-outdir: './results/'
-genome: 'GRCh37'
-<...>
-```
-
-You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
-
-### Updating the pipeline
-
-When you run the above command, Nextflow automatically pulls the pipeline code from GitHub and stores it as a cached version. When running the pipeline after this, it will always use the cached version if available - even if the pipeline has been updated since. To make sure that you're running the latest version of the pipeline, make sure that you regularly update the cached version of the pipeline:
-
-```bash
-nextflow pull nf-core/pvacseq
-```
-
-### Reproducibility
-
-It is a good idea to specify a pipeline version when running the pipeline on your data. This ensures that a specific version of the pipeline code and software are used when you run your pipeline. If you keep using the same tag, you'll be running the same version of the pipeline, even if there have been changes to the code since.
-
-First, go to the [nf-core/pvacseq releases page](https://github.com/nf-core/pvacseq/releases) and find the latest pipeline version - numeric only (eg. `1.3.1`). Then specify this when running the pipeline with `-r` (one hyphen) - eg. `-r 1.3.1`. Of course, you can switch to another version by changing the number after the `-r` flag.
-
-This version number will be logged in reports when you run the pipeline, so that you'll know what you used when you look back in the future. For example, at the bottom of the MultiQC reports.
-
-To further assist in reproducbility, you can use share and re-use [parameter files](#running-the-pipeline) to repeat pipeline runs with the same settings without having to write out a command with every single parameter.
-
-:::tip
-If you wish to share such profile (such as upload as supplementary material for academic publications), make sure to NOT include cluster specific paths to files, nor institutional specific profiles.
-:::
-
-## Core Nextflow arguments
-
-:::note
-These options are part of Nextflow and use a _single_ hyphen (pipeline parameters use a double-hyphen).
-:::
-
-### `-profile`
-
-Use this parameter to choose a configuration profile. Profiles can give configuration presets for different compute environments.
-
-Several generic profiles are bundled with the pipeline which instruct the pipeline to use software packaged using different methods (Docker, Singularity, Podman, Shifter, Charliecloud, Apptainer, Conda) - see below.
-
-:::info
-We highly recommend the use of Docker or Singularity containers for full pipeline reproducibility, however when this is not possible, Conda is also supported.
-:::
-
-The pipeline also dynamically loads configurations from [https://github.com/nf-core/configs](https://github.com/nf-core/configs) when it runs, making multiple config profiles for various institutional clusters available at run time. For more information and to see if your system is available in these configs please see the [nf-core/configs documentation](https://github.com/nf-core/configs#documentation).
-
-Note that multiple profiles can be loaded, for example: `-profile test,docker` - the order of arguments is important!
-They are loaded in sequence, so later profiles can overwrite earlier profiles.
-
-If `-profile` is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. This is _not_ recommended, since it can lead to different results on different machines dependent on the computer enviroment.
-
-- `test`
-  - A profile with a complete configuration for automated testing
-  - Includes links to test data so needs no other parameters
-- `docker`
-  - A generic configuration profile to be used with [Docker](https://docker.com/)
-- `singularity`
-  - A generic configuration profile to be used with [Singularity](https://sylabs.io/docs/)
-- `podman`
-  - A generic configuration profile to be used with [Podman](https://podman.io/)
-- `shifter`
-  - A generic configuration profile to be used with [Shifter](https://nersc.gitlab.io/development/shifter/how-to-use/)
-- `charliecloud`
-  - A generic configuration profile to be used with [Charliecloud](https://hpc.github.io/charliecloud/)
-- `apptainer`
-  - A generic configuration profile to be used with [Apptainer](https://apptainer.org/)
-- `conda`
-  - A generic configuration profile to be used with [Conda](https://conda.io/docs/). Please only use Conda as a last resort i.e. when it's not possible to run the pipeline with Docker, Singularity, Podman, Shifter, Charliecloud, or Apptainer.
-
-### `-resume`
-
-Specify this when restarting a pipeline. Nextflow will use cached results from any pipeline steps where the inputs are the same, continuing from where it got to previously. For input to be considered the same, not only the names must be identical but the files' contents as well. For more info about this parameter, see [this blog post](https://www.nextflow.io/blog/2019/demystifying-nextflow-resume.html).
-
-You can also supply a run name to resume a specific run: `-resume [run-name]`. Use the `nextflow log` command to show previous run names.
-
-### `-c`
-
-Specify the path to a specific config file (this is a core Nextflow command). See the [nf-core website documentation](https://nf-co.re/usage/configuration) for more information.
-
-## Custom configuration
-
-### Resource requests
-
-Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the steps in the pipeline, if the job exits with any of the error codes specified [here](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L18) it will automatically be resubmitted with higher requests (2 x original, then 3 x original). If it still fails after the third attempt then the pipeline execution is stopped.
-
-To change the resource requests, please see the [max resources](https://nf-co.re/docs/usage/configuration#max-resources) and [tuning workflow resources](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources) section of the nf-core website.
-
-### Custom Containers
-
-In some cases you may wish to change which container or conda environment a step of the pipeline uses for a particular tool. By default nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However in some cases the pipeline specified version maybe out of date.
-
-To use a different container from the default container or conda environment specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/usage/configuration#updating-tool-versions) section of the nf-core website.
-
-### Custom Tool Arguments
-
-A pipeline might not always support every possible argument or option of a particular tool used in pipeline. Fortunately, nf-core pipelines provide some freedom to users to insert additional parameters that the pipeline does not include by default.
-
-To learn how to provide additional arguments to a particular tool of the pipeline, please see the [customising tool arguments](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) section of the nf-core website.
-
-### nf-core/configs
-
-In most cases, you will only need to create a custom config as a one-off but if you and others within your organisation are likely to be running nf-core pipelines regularly and need to use the same settings regularly it may be a good idea to request that your custom config file is uploaded to the `nf-core/configs` git repository. Before you do this please can you test that the config file works with your pipeline of choice using the `-c` parameter. You can then create a pull request to the `nf-core/configs` repository with the addition of your config file, associated documentation file (see examples in [`nf-core/configs/docs`](https://github.com/nf-core/configs/tree/master/docs)), and amending [`nfcore_custom.config`](https://github.com/nf-core/configs/blob/master/nfcore_custom.config) to include your custom profile.
-
-See the main [Nextflow documentation](https://www.nextflow.io/docs/latest/config.html) for more information about creating your own configuration files.
-
-If you have any questions or issues please send us a message on [Slack](https://nf-co.re/join/slack) on the [`#configs` channel](https://nfcore.slack.com/channels/configs).
-
-## Azure Resource Requests
-
-To be used with the `azurebatch` profile by specifying the `-profile azurebatch`.
-We recommend providing a compute `params.vm_type` of `Standard_D16_v3` VMs by default but these options can be changed if required.
-
-Note that the choice of VM size depends on your quota and the overall workload during the analysis.
-For a thorough list, please refer the [Azure Sizes for virtual machines in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes).
-
-## Running in the background
-
-Nextflow handles job submissions and supervises the running jobs. The Nextflow process must run until the pipeline is finished.
-
-The Nextflow `-bg` flag launches Nextflow in the background, detached from your terminal so that the workflow does not stop if you log out of your session. The logs are saved to a file.
-
-Alternatively, you can use `screen` / `tmux` or similar tool to create a detached session which you can log back into at a later time.
-Some HPC setups also allow you to run nextflow within a cluster job submitted your job scheduler (from where it submits more jobs).
-
-## Nextflow memory requirements
-
-In some cases, the Nextflow Java virtual machines can start to request a large amount of memory.
-We recommend adding the following line to your environment to limit this (typically in `~/.bashrc` or `~./bash_profile`):
-
-```bash
-NXF_OPTS='-Xms1g -Xmx4g'
-```
