@@ -78,7 +78,7 @@ workflow CONFIGURE_PVACSEQ_IEDB {
 
     // Create iedb directory if needed
     if (!(pvacseq_iedb_dir && file(pvacseq_iedb_dir).exists())) {
-        iedb_dir = file('iedb')
+        iedb_dir = file("$params.outdir/iedb")
         iedb_dir.mkdir()
     } else {
         iedb_dir = file("$pvacseq_iedb_dir")

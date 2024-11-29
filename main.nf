@@ -78,13 +78,13 @@ workflow {
     // Generate input channels dynamically for MAF and VCF files
     //
     ch_maf_files = Channel
-        .fromPath(params.input + "/*.maf", checkIfExists: true)
+        .fromPath(params.input + "/*.maf")
         .map { file ->
             [ [id: file.baseName], file ] // Create tuples with metadata (id) and file path
         }
 
     ch_vcf_files = Channel
-        .fromPath(params.input + "/*.vcf", checkIfExists: true)
+        .fromPath(params.input + "/*.vcf")
         .map { file ->
             [ [id: file.baseName], file ] // Create tuples with metadata (id) and file path
         }

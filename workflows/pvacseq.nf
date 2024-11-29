@@ -6,16 +6,16 @@
 
 include { MAF2VCF                } from '../modules/local/maf2vcf/main'
 include { VEP                    } from '../modules/local/vep/main'
-include { SETUP_VEP_ENVIRONMENT  } from '../modules/local/vep/vep_env'
 include { PVACSEQ_PIPELINE       } from '../modules/local/pvacseq/main'
-include { CONFIGURE_PVACSEQ      } from '../modules/local/pvacseq/pvacseq_env'
+include { CONFIGURE_PVACSEQ      } from '../modules/local/pvacseq/configure_pvacseq'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 
 include { paramsSummaryMap       } from 'plugin/nf-validation'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_pvacseq_pipeline'
-include { CONFIGURE_PVACSEQ_IEDB } from '../subworkflows/local/configure_pvacseq'
+include { CONFIGURE_PVACSEQ_IEDB } from '../subworkflows/local/configure_pvacseq_iedb'
+include { SETUP_VEP_ENVIRONMENT  } from '../subworkflows/local/setup_vep_env'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -57,7 +57,7 @@ workflow PVACSEQ {
         params.vep_cache ?: '',
         params.vep_cache_version ?: '',
         params.vep_plugins ?: '',
-        params.outdir
+        file(params.outdir)
     )
     
     //
@@ -95,33 +95,40 @@ workflow PVACSEQ {
 
 
     tumor_pvacseq_ch = VEP.out.vcf
-        .join(MAF2VCF.out.vcf)
         .map { tuple ->
             // Extract tumor and normal samples
-            def tumor_sample = file(tuple[3]).text.split('\n')[1].split('\t')[0]
-            def normal_sample = file(tuple[3]).text.split('\n')[1].split('\t')[1]
+            // Parse the VCF file to extract sample names
+            def vcfFile = file(tuple[1])
+            def headerLine = vcfFile.text.split('\n').find { it.startsWith('#CHROM') }
+            if (!headerLine) {
+                throw new IllegalArgumentException("VCF file '${vcfFile}' does not contain a #CHROM header line.")
+            }
+            def columns = headerLine.split('\t')
+            def tumor_sample = columns[-2] // Second-to-last column is typically the tumor sample
+            def normal_sample = columns[-1] // Last column is typically the normal sample
+
             // Extract tumor and normal sample from files and add them
-            return [tumor_sample, normal_sample, tuple[0], tuple[1], tuple[3]]
+            return [tumor_sample, normal_sample, tuple[0], tuple[1]]
         }
     
     // Reorder just so that normal sample is a key now
     normal_pvacseq_ch = tumor_pvacseq_ch
         .map { tuple ->
-            return [tuple[1], tuple[0], tuple[2], tuple[3], tuple[4]]
+            return [tuple[1], tuple[0], tuple[2], tuple[3]]
         }
 
     // Merge HLA info in case we have tumor sample id
     tumor_pvacseq_ch = tumor_pvacseq_ch
         .join(hla_ch).map { tuple ->
             // Reorder for PVACSEQ_PIPELINE process
-            return [tuple[2], tuple[3], tuple[4], tuple[5], tuple[0], tuple[1]]
+            return [tuple[2], tuple[3], tuple[4], tuple[0], tuple[1]]
         }
     
     // Merge HLA info in case we have normal sample id
     normal_pvacseq_ch = normal_pvacseq_ch
         .join(hla_ch).map { tuple ->
             // Reorder for PVACSEQ_PIPELINE process
-            return [tuple[2], tuple[3], tuple[4], tuple[5], tuple[1], tuple[0]]
+            return [tuple[2], tuple[3], tuple[4], tuple[1], tuple[0]]
         }
 
     pvacseq_ch = tumor_pvacseq_ch.mix(normal_pvacseq_ch)

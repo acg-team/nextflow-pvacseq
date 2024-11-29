@@ -6,7 +6,7 @@ process PVACSEQ_PIPELINE {
     container "docker.io/griffithlab/pvactools:4.0.7"
     
     input:
-    tuple val(meta), path(vcf), path(pairs), val(hla), val(tumor_sample), val(normal_sample)
+    tuple val(meta), path(vcf), val(hla), val(tumor_sample), val(normal_sample)
     path  fasta
     val algorithm
     val peptide_length_i 
