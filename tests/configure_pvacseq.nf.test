@@ -1,0 +1,123 @@
+nextflow_process {
+
+    name "Test Process CONFIGURE_PVACSEQ"
+    script "modules/local/pvacseq/configure_pvacseq.nf"
+    process "CONFIGURE_PVACSEQ"
+
+    test("Should configure with both MHC Class I and II directories provided") {
+
+        when {
+            params {
+                NO_FILE = "$projectDir/assets/NO_FILE"
+            }
+            process {
+                """
+                input[0] = file("$projectDir/tests/data/iedb/mhc_i")
+                input[1] = file("$projectDir/tests/data/iedb/mhc_ii")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+
+            with(process.out.config_file) {
+                assert size() == 1
+                def config_content = path(get(0)).readLines()
+            
+                // Check the number of lines in the file
+                assert config_content.size() == 3
+                
+                // Check for specific lines in the file
+                assert config_content.any { it.contains("- MHC Class I configured at:") } : "Missing configuration line for MHC Class I"
+                assert config_content.any { it.contains("- MHC Class II configured at:") } : "Missing configuration line for MHC Class II"
+            }
+        }
+
+    }
+
+    test("Should fail when no directories are provided") {
+
+        when {
+            params {
+                NO_FILE = "$projectDir/assets/NO_FILE"
+            }
+            process {
+                """
+                input[0] = file("${params.NO_FILE}")
+                input[1] = file("${params.NO_FILE}")
+                """
+            }
+        }
+
+        then {
+            assert process.failed
+            assert process.errorReport.contains("Error: No iedb_mhc_i or iedb_mhc_ii provided. At least one is required.")
+        }
+
+    }
+
+    test("Should configure with only MHC Class I directory provided") {
+
+        when {
+            params {
+                NO_FILE = "$projectDir/assets/NO_FILE"
+            }
+            process {
+                """
+                input[0] = file("$projectDir/tests/data/iedb/mhc_i")
+                input[1] = file("${params.NO_FILE}")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+
+            with(process.out.config_file) {
+                assert size() == 1
+                def config_content = path(get(0)).readLines()
+            
+                // Check the number of lines in the file
+                assert config_content.size() == 3
+                
+                // Check for specific lines in the file
+                assert config_content.any { it.contains("- MHC Class I configured at:") } : "Missing configuration line for MHC Class I"
+                assert config_content.any { it.contains("- MHC Class II: Not configured.") } : "Wrong configuration line for MHC Class II"
+            }
+        }
+
+    }
+
+    test("Should configure with only MHC Class II directory provided") {
+
+        when {
+            params {
+                NO_FILE = "$projectDir/assets/NO_FILE"
+            }
+            process {
+                """
+                input[0] = file("${params.NO_FILE}")
+                input[1] = file("$projectDir/tests/data/iedb/mhc_ii")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            with(process.out.config_file) {
+                assert size() == 1
+                def config_content = path(get(0)).readLines()
+            
+                // Check the number of lines in the file
+                assert config_content.size() == 3
+                
+                // Check for specific lines in the file
+                assert config_content.any { it.contains("- MHC Class I: Not configured.") } : "Wrong configuration line for MHC Class I"
+                assert config_content.any { it.contains("- MHC Class II configured at:") } : "Missing configuration line for MHC Class II"
+            }
+        }
+
+    }
+
+}

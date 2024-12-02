@@ -7,14 +7,14 @@ process CONFIGURE_PVACSEQ {
     container "docker.io/griffithlab/pvactools:4.0.7"
 
     input:
-    path iedb_mhc_i
-    path iedb_mhc_ii
+    path iedb_mhc_i, name: "mhc_i/*"
+    path iedb_mhc_ii, name: "mhc_ii/*"
 
     output:
     path 'env_config_done.txt', emit: config_file
     
     script:
-    
+
     if (!iedb_mhc_i.isDirectory() && !iedb_mhc_ii.isDirectory() ) {
         throw new IllegalArgumentException("Error: No iedb_mhc_i or iedb_mhc_ii provided. At least one is required.")
     }

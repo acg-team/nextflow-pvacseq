@@ -23,7 +23,7 @@ process DOWNLOAD_VEP_CACHE {
 //
 process DOWNLOAD_VEP_PLUGINS {
     input:
-    val outdir
+    path outdir
 
     output:
     path "${outdir}/VEP_plugins", emit: vep_plugins_out
@@ -56,7 +56,7 @@ workflow SETUP_VEP_ENVIRONMENT {
 
     vep_cache_version = vep_cache_version ?: '102'
     println "Using VEP cache version: $vep_cache_version"
-    
+
     // Check VEP cache directory
     if (!(vep_cache && file(vep_cache).exists())) {
         if (!file("${outdir}/vep_cache_${vep_cache_version}").exists()) {
