@@ -1,0 +1,48 @@
+nextflow_process {
+
+    name "Test Process PVACSEQ"
+    script "modules/local/pvacseq/main.nf"
+    process "PVACSEQ"
+
+    test("Minimal test for pVACseq") {
+        when {
+            params {
+                NO_FILE = "$projectDir/assets/NO_FILE"
+                outdir = "$projectDir/tests/outdir"
+            }
+            process {
+                """
+                input[0] = Channel.fromList([tuple(
+                    [id: "vep_annotated"], // meta
+                    file("$projectDir/tests/data/vep_annotated.vcf", checkIfExists: true),
+                    "HLA-B*08:01,HLA-C*07:01,HLA-B*58:01,HLA-A*23:01,HLA-C*07:01,HLA-A*24:14,DPA1*01:03-DPB1*105:01",
+                    "TCGA-D1-A0ZZ-01A-11D-A10M-09", // tumor sample
+                    "TCGA-D1-A0ZZ-10A-01D-A10M-09" // normal sample
+                )])
+                input[1] =  "all"
+                input[2] = file("$params.pvacseq_iedb")
+                input[3] = [
+                    "binding-threshold": 500,
+                    "e1": 9,
+                    "e2": 12
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+
+            // We expect MHC Class I output
+            assert process.out.mhc_i_filtered != null
+            assert process.out.mhc_i_all != null
+            assert process.out.mhc_i_dir != null
+
+            // We expect versions.yml
+            assert process.out.versions != null
+
+            assert snapshot(process.out).match()
+        }
+
+    }
+}
