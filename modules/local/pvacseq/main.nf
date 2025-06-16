@@ -1,34 +1,45 @@
 process PVACSEQ_PIPELINE {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container "docker.io/griffithlab/pvactools:4.0.7"
+    container "docker.io/griffithlab/pvactools:5.3.1"
     
     input:
     tuple val(meta), path(vcf), val(hla), val(tumor_sample), val(normal_sample)
-    path  fasta
-    val algorithm
-    val peptide_length_i 
-    val peptide_length_ii 
+    val algorithms
     path iedb // path to iedb-install-directory 
-    path 'env_config_done.txt' // path to config 
+    // path 'env_config_done.txt' // path to config 
     val options // map of additional pVACseq options
 
     output:
-    // Output tuple for MHC Class I 
-    tuple val(meta), path("${tumor_sample}/MHC_Class_I/${tumor_sample}.filtered.tsv"), path("${tumor_sample}/MHC_Class_I/${tumor_sample}.all_epitopes.tsv"), optional: true, emit: mhc_i_out
-    // Output tuple for MHC Class II 
-    tuple val(meta), path("${tumor_sample}/MHC_Class_II/${tumor_sample}.filtered.tsv"), path("${tumor_sample}/MHC_Class_II/${tumor_sample}.all_epitopes.tsv"), optional: true, emit: mhc_ii_out
-    path "versions.yml"                                       , emit: versions
+        // Emit all relevant pVACseq files from both MHC classes
+        // A list of filtered epitopes
+        path("${tumor_sample}/MHC_Class_I/${tumor_sample}.filtered.tsv") , emit: mhc_i_filtered   , optional: true
+        path("${tumor_sample}/MHC_Class_II/${tumor_sample}.filtered.tsv"), emit: mhc_ii_filtered  , optional: true
+        path("${tumor_sample}/combined/${tumor_sample}.filtered.tsv")    , emit: combined_filtered, optional: true
+
+        // A list of all predicted epitopes
+        path("${tumor_sample}/MHC_Class_I/${tumor_sample}.all_epitopes.tsv") , emit: mhc_i_all   , optional: true
+        path("${tumor_sample}/MHC_Class_II/${tumor_sample}.all_epitopes.tsv"), emit: mhc_ii_all  , optional: true
+        path("${tumor_sample}/combined/${tumor_sample}.all_epitopes.tsv")    , emit: combined_all, optional: true
+
+        // Folder with all outputs
+        path("${tumor_sample}/MHC_Class_I"), emit: mhc_i_dir, optional: true
+        path("${tumor_sample}/MHC_Class_II"), emit: mhc_ii_dir, optional: true
+        path("${tumor_sample}/combined"), emit: combined_dir, optional: true
+
+        // Emit version tracking
+        path "versions.yml", emit: versions
+
 
     when:
     // Execute the task unless explicitly told not to
     task.ext.when == null || task.ext.when
 
     script:
-    def e1 = peptide_length_i ?: "9" // If peptide_length_i is null, default to "9"
-    def e2 = peptide_length_ii ?: "15" // If peptide_length_ii is null, default to "15"
+    //def e1 = peptide_length_i ?: "9" // If peptide_length_i is null, default to "9"
+    //def e2 = peptide_length_ii ?: "15" // If peptide_length_ii is null, default to "15"
 
    
     assert hla && tumor_sample && normal_sample : "hla, tumor_sample, and normal_sample must not be empty"
@@ -40,16 +51,22 @@ process PVACSEQ_PIPELINE {
             println "${meta.id} WARNING: HLA format is not valid: ${hla_string}"
     }
 
+    // Define which keys should use a single dash
+    def singleDashOptions = ['r', 't', 'e1', 'e2', 'b', 'm', 'p', 'c', 'd', 's', 'a']
+
     // Build additional options dynamically
     def additional_options = options.collect { key, value ->
+        def prefix = singleDashOptions.contains(key) ? '-' : '--'
+
         if (value == null) {
-            "" // Omit null values
+            "" // Skip nulls
         } else if (value instanceof Boolean) {
-            value ? "--${key}" : "" // Add flag if true, otherwise omit
+            value ? "${prefix}${key}" : "" // Include flag only if true
         } else {
-            "--${key} ${value}" // Add key-value option
+            "${prefix}${key} ${value}" // Include option with value
         }
-    }.findAll { it }.join(' ') // Filter out empty strings and join options
+    }.findAll { it }.join(' ')
+
 
 
 
@@ -59,11 +76,10 @@ process PVACSEQ_PIPELINE {
         $vcf \\
         $tumor_sample \\
         $hla \\
-        $algorithm \\
+        $algorithms \\
         $tumor_sample/ \\
-        -e1 $e1 -e2 $e2 \\
-        --normal-sample-name $normal_sample \\
         --iedb-install-directory $iedb \\
+        --normal-sample-name $normal_sample \\
         -t $task.cpus \\
         $additional_options
 

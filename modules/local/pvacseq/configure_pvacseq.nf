@@ -4,7 +4,7 @@
 process CONFIGURE_PVACSEQ {
 
     conda "${moduleDir}/environment.yml"
-    container "docker.io/griffithlab/pvactools:4.0.7"
+    container "docker.io/griffithlab/pvactools:5.3.1"
 
     input:
     path iedb_mhc_i, name: "mhc_i/*"

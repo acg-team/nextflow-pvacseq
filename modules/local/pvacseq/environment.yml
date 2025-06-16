@@ -1,14 +1,15 @@
-name: pvacseq # Dependencies hell
+name: pvacseq_5.4.0 # Dependencies hell
 channels:
+  - conda-forge
+  - bioconda
   - defaults
 dependencies:
-  - python=3.8.0
-  - pip=23.0.1
-  - setuptools=58.0.2
+  - python=3.11.4=h955ad1f_0
+  - pip=23.1.2=py311h06a4308_0
+  - setuptools=65.5.1=pyhd8ed1ab_0
   - pip:
-    - protobuf==3.20.0
-    - tensorflow==2.2.2
-    - pvactools==4.0.7
+    - tensorflow==2.15.1
+    - pvactools==5.3.1
     - git+https://github.com/griffithlab/bigmhc.git#egg=bigmhc
     - git+https://github.com/griffithlab/deepimmuno.git#egg=deepimmuno
     - mhcflurry==2.0.6
@@ -16,5 +17,4 @@ dependencies:
     - mhcnames==0.4.8
     - mhcnuggets==2.4.1
     - mhctools==1.9.0
-    - vcfpy==0.13.8
     
