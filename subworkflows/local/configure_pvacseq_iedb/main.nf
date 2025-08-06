@@ -2,18 +2,24 @@
 // MODULE: Download MHC Class I data
 //
 process DOWNLOAD_MHC_I {
+    tag "download_mhc_i"
+    label 'process_single'
+
     input:
     path pvacseq_iedb_dir
 
     output:
     path "$pvacseq_iedb_dir/mhc_i", emit: iedb_mhc_i
 
+    when:
+    task.ext.when == null || task.ext.when
+
     script:
     """
-    wget https://downloads.iedb.org/tools/mhci/3.1.5/IEDB_MHC_I-3.1.5.tar.gz
-    tar -zxvf IEDB_MHC_I-3.1.5.tar.gz
+    wget https://downloads.iedb.org/tools/mhci/3.1.6/IEDB_MHC_I-3.1.6.tar.gz
+    tar -zxvf IEDB_MHC_I-3.1.6.tar.gz
     mv mhc_i $pvacseq_iedb_dir/mhc_i
-    rm -rf IEDB_MHC_I-3.1.5.tar.gz
+    rm -rf IEDB_MHC_I-3.1.6.tar.gz
     """
 }
 
@@ -21,18 +27,24 @@ process DOWNLOAD_MHC_I {
 // MODULE: Download MHC Class II data
 //
 process DOWNLOAD_MHC_II {
+    tag "download_mhc_ii"
+    label 'process_single'
+
     input:
     path pvacseq_iedb_dir
 
     output:
     path "$pvacseq_iedb_dir/mhc_ii", emit: iedb_mhc_ii
 
+    when:
+    task.ext.when == null || task.ext.when
+
     script:
     """
-    wget https://downloads.iedb.org/tools/mhcii/3.1.11/IEDB_MHC_II-3.1.11.tar.gz
-    tar -zxvf IEDB_MHC_II-3.1.11.tar.gz
+    wget https://downloads.iedb.org/tools/mhcii/3.1.12/IEDB_MHC_II-3.1.12.tar.gz
+    tar -zxvf IEDB_MHC_II-3.1.12.tar.gz
     mv mhc_ii $pvacseq_iedb_dir/mhc_ii
-    rm -rf IEDB_MHC_II-3.1.11.tar.gz
+    rm -rf IEDB_MHC_II-3.1.12.tar.gz
     """
 }
 
@@ -43,7 +55,7 @@ process DOWNLOAD_MHC_II {
 workflow CONFIGURE_PVACSEQ_IEDB {
     take:
     pvacseq_iedb_dir         // directory with IEDB for pVACseq
-    pvacseq_algorithm        // string: algorithms for pVACseq 
+    pvacseq_algorithm        // string: algorithms for pVACseq
 
     main:
 
@@ -86,8 +98,8 @@ workflow CONFIGURE_PVACSEQ_IEDB {
     println "IEDB folder will be $iedb_dir"
 
     // Paths for MHC I and MHC II
-    def mhc_i_path = params.NO_FILE
-    def mhc_ii_path = params.NO_FILE
+    def mhc_i_path = []
+    def mhc_ii_path = []
 
     // Add existing paths or download MHC I
     if (requires_mhc_i) {

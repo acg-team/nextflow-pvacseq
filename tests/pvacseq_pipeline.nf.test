@@ -1,0 +1,38 @@
+nextflow_pipeline {
+
+    name "Test pipeline"
+    script "../main.nf"
+    tag "pipeline"
+
+    test("Test auto downloading and setting up but VEP cache") {
+        when {
+            params {
+                outdir = "$projectDir/tests/pipeline_outdir"
+                fasta = "$projectDir/tests/data/chrY.fa"
+                hla_csv = "$projectDir/tests/data/small_hla.csv"
+                input = "$projectDir/tests/data/input/"
+                extra_vep_args = "--database" // Use online VEP annotation
+                vep_genome = "GRCh38"
+                vep_cache_version = "102"
+                vep_species = "homo_sapiens"
+            }
+        }
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            // stable_path: All files in ${params.outdir}/ with stable content
+            def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            assert workflow.success
+            assert snapshot(
+                // Number of successful tasks
+                workflow.trace.succeeded().size(),
+                // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
+                removeNextflowVersion("$params.outdir/pipeline_info/nf_core_pipeline_software_versions.yml"),
+                // All stable path name, with a relative path
+                stable_name,
+                // All files with stable contents
+                stable_path
+            ).match()
+        }
+    }
+}

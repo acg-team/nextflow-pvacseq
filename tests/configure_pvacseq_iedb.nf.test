@@ -1,0 +1,89 @@
+nextflow_workflow {
+
+    name "Test Subworkflow CONFIGURE_PVACSEQ_IEDB"
+    script "subworkflows/local/configure_pvacseq_iedb/main.nf"
+    workflow "CONFIGURE_PVACSEQ_IEDB"
+
+    test("Only MHC Class I is required") {
+
+        when {
+            params {
+                pvacseq_iedb_dir = "$projectDir/tests/tmp/iedb_i_only"
+                pvacseq_algorithm = "NetMHCpan"
+            }
+            workflow {
+                """
+                input[0] = "$params.pvacseq_iedb_dir"
+                input[1] = "$params.pvacseq_algorithm"
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(workflow.out).match()
+        }
+    }
+
+    test("Only MHC Class II is required") {
+
+        when {
+            params {
+                pvacseq_iedb_dir = "$projectDir/tests/tmp/iedb_ii_only"
+                pvacseq_algorithm = "NetMHCIIpan"
+            }
+            workflow {
+                """
+                input[0] = "$params.pvacseq_iedb_dir"
+                input[1] = "$params.pvacseq_algorithm"
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(workflow.out).match()
+        }
+    }
+
+    test("Both MHC Class I and II are required") {
+
+        when {
+            params {
+                pvacseq_iedb_dir = "$projectDir/tests/tmp/iedb_both"
+                pvacseq_algorithm = "NetMHCpan NetMHCIIpan"
+            }
+            workflow {
+                """
+                input[0] = "$params.pvacseq_iedb_dir"
+                input[1] = "$params.pvacseq_algorithm"
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(workflow.out).match()
+        }
+    }
+
+    test("Invalid algorithm should fail") {
+
+        when {
+            params {
+                pvacseq_iedb_dir = "$projectDir/tests/tmp/invalid"
+                pvacseq_algorithm = "InvalidAlgo"
+            }
+            workflow {
+                """
+                input[0] = "$params.pvacseq_iedb_dir"
+                input[1] = "$params.pvacseq_algorithm"
+                """
+            }
+        }
+
+        then {
+            assert workflow.failed
+        }
+    }
+}

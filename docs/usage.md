@@ -8,7 +8,7 @@ The pipeline is designed to run the **pVACseq** tool on multiple tumor samples i
 
 ## Input Directory with VCF/MAF Files
 
-The pVACseq pipeline requires a directory with VCF or MAF files for each sample. Both file types are supported, and MAF files will automatically be converted to VCF format during processing. Use this parameter to specify its location. 
+The pVACseq pipeline requires a directory with VCF or MAF files for each sample. Both file types are supported, and MAF files will automatically be converted to VCF format during processing. Use this parameter to specify its location.
 ```
 --input '[path to directory]'
 ```
@@ -30,7 +30,7 @@ input_vcf_maf/
 
 ## HLA Input
 
-The pVACseq pipeline requires an input file specifying HLA alleles for each sample. This is essential for neoantigen prediction. Use this parameter to specify its location. 
+The pVACseq pipeline requires an input file specifying HLA alleles for each sample. This is essential for neoantigen prediction. Use this parameter to specify its location.
 ```
 --hla_csv '[path to file with hla information]'
 ```
@@ -67,7 +67,7 @@ SAMPLE_3,HLA-A11:01;HLA-B35:01;HLA-C04:01
 
 ## Reference FASTA File Input
 
-The pVACseq pipeline requires a reference genome in FASTA format to match the input VCF or MAF files. Use this parameter to specify its location. 
+The pVACseq pipeline requires a reference genome in FASTA format to match the input VCF or MAF files. Use this parameter to specify its location.
 ```
 --fasta '[path to reference file]'
 ```
@@ -126,17 +126,6 @@ The pVACseq pipeline provides a range of configurable options for neoantigen pre
 - **Rerun Behavior**:
   - If IEDB is downloaded automatically, specify the downloaded path in the `pvacseq_iedb` parameter on reruns to avoid conflicts.
 
-### Optional Parameters
-#### **`pvacseq_advanced_options`**
-- Dictionary of advanced pVACseq options.
-- Example:
-  ```groovy
-  pvacseq_advanced_options = [
-      "binding-threshold": 500,
-      "minimum-fold-change": 1.0
-  ]
-  ```
-- Allows customization of parameters like `binding-threshold` and other algorithm-specific options.
 
 ## Running the Pipeline
 

@@ -2,12 +2,6 @@
 
 nextflow.enable.dsl = 2
 
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    CONSTANT PARAMETER VALUES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-params.NO_FILE = "$projectDir/assets/NO_FILE"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -15,7 +9,7 @@ params.NO_FILE = "$projectDir/assets/NO_FILE"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { PVACSEQ                 } from './workflows/pvacseq'
+include { PVACSEQ_PIPELINE        } from './workflows/pvacseq'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_pvacseq_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_pvacseq_pipeline'
 
@@ -39,7 +33,7 @@ workflow NFCORE_PVACSEQ {
     //
     // WORKFLOW: Run pipeline
     //
-    PVACSEQ (
+    PVACSEQ_PIPELINE (
         maf_files,
         vcf_files,
         params.fasta,
@@ -47,7 +41,7 @@ workflow NFCORE_PVACSEQ {
     )
 
     emit:
-    multiqc_report = PVACSEQ.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc_report = PVACSEQ_PIPELINE.out.multiqc_report // channel: /path/to/multiqc_report.html
 
 }
 /*

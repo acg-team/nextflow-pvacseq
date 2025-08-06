@@ -1,19 +1,29 @@
 nextflow_process {
 
     name "Test Process CONFIGURE_PVACSEQ"
-    script "modules/local/pvacseq/configure_pvacseq.nf"
+    script "modules/local/configure_pvacseq/main.nf"
     process "CONFIGURE_PVACSEQ"
+    setup {
+        run("CONFIGURE_PVACSEQ_IEDB") {
+            script "subworkflows/local/configure_pvacseq_iedb/main.nf"
 
+            workflow {
+                """
+                input[0] = []
+                input[1] = 'all'
+                """
+            }
+        }
+    }
     test("Should configure with both MHC Class I and II directories provided") {
 
         when {
             params {
-                NO_FILE = "$projectDir/assets/NO_FILE"
             }
             process {
                 """
-                input[0] = file("$projectDir/tests/data/iedb/mhc_i")
-                input[1] = file("$projectDir/tests/data/iedb/mhc_ii")
+                input[0] = CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_i
+                input[1] = CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_ii
                 """
             }
         }
@@ -24,10 +34,10 @@ nextflow_process {
             with(process.out.config_file) {
                 assert size() == 1
                 def config_content = path(get(0)).readLines()
-            
+
                 // Check the number of lines in the file
                 assert config_content.size() == 3
-                
+
                 // Check for specific lines in the file
                 assert config_content.any { it.contains("- MHC Class I configured at:") } : "Missing configuration line for MHC Class I"
                 assert config_content.any { it.contains("- MHC Class II configured at:") } : "Missing configuration line for MHC Class II"
@@ -39,13 +49,10 @@ nextflow_process {
     test("Should fail when no directories are provided") {
 
         when {
-            params {
-                NO_FILE = "$projectDir/assets/NO_FILE"
-            }
             process {
                 """
-                input[0] = file("${params.NO_FILE}")
-                input[1] = file("${params.NO_FILE}")
+                input[0] = []
+                input[1] = []
                 """
             }
         }
@@ -60,13 +67,10 @@ nextflow_process {
     test("Should configure with only MHC Class I directory provided") {
 
         when {
-            params {
-                NO_FILE = "$projectDir/assets/NO_FILE"
-            }
             process {
                 """
-                input[0] = file("$projectDir/tests/data/iedb/mhc_i")
-                input[1] = file("${params.NO_FILE}")
+                input[0] = CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_i
+                input[1] = []
                 """
             }
         }
@@ -77,10 +81,10 @@ nextflow_process {
             with(process.out.config_file) {
                 assert size() == 1
                 def config_content = path(get(0)).readLines()
-            
+
                 // Check the number of lines in the file
                 assert config_content.size() == 3
-                
+
                 // Check for specific lines in the file
                 assert config_content.any { it.contains("- MHC Class I configured at:") } : "Missing configuration line for MHC Class I"
                 assert config_content.any { it.contains("- MHC Class II: Not configured.") } : "Wrong configuration line for MHC Class II"
@@ -92,13 +96,10 @@ nextflow_process {
     test("Should configure with only MHC Class II directory provided") {
 
         when {
-            params {
-                NO_FILE = "$projectDir/assets/NO_FILE"
-            }
             process {
                 """
-                input[0] = file("${params.NO_FILE}")
-                input[1] = file("$projectDir/tests/data/iedb/mhc_ii")
+                input[0] = []
+                input[1] = CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_ii
                 """
             }
         }
@@ -108,10 +109,10 @@ nextflow_process {
             with(process.out.config_file) {
                 assert size() == 1
                 def config_content = path(get(0)).readLines()
-            
+
                 // Check the number of lines in the file
                 assert config_content.size() == 3
-                
+
                 // Check for specific lines in the file
                 assert config_content.any { it.contains("- MHC Class I: Not configured.") } : "Wrong configuration line for MHC Class I"
                 assert config_content.any { it.contains("- MHC Class II configured at:") } : "Missing configuration line for MHC Class II"
