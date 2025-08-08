@@ -89,11 +89,16 @@ workflow CONFIGURE_PVACSEQ_IEDB {
     }
 
     // Create iedb directory if needed
-    if (!(pvacseq_iedb_dir && file(pvacseq_iedb_dir).exists())) {
+    if (!(pvacseq_iedb_dir)) {
+        println "IEDB is not indicated"
         iedb_dir = file("$params.outdir/iedb")
-        iedb_dir.mkdir()
+        iedb_dir.mkdirs()
     } else {
         iedb_dir = file("$pvacseq_iedb_dir")
+        if (!iedb_dir.exists()) {
+            println "IEDB indicated, but does not exists"
+            iedb_dir.mkdirs()
+        }
     }
     println "IEDB folder will be $iedb_dir"
 

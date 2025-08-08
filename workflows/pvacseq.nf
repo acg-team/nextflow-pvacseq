@@ -204,7 +204,7 @@ workflow PVACSEQ_PIPELINE {
         params.blastp_path ?: [],
         params.genes_of_interest ?: [],
         params.peptide_fasta ?: [],
-        params.phased_proximal_variants_vcf ?: []
+        params.ph_proximal_variants_vcf ?: []
     )
 
     ch_multiqc_files = ch_multiqc_files.mix(PVACTOOLS_PVACSEQ.out.mhc_i_filtered.map { meta,file -> [file]})

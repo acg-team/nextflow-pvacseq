@@ -84,11 +84,6 @@ workflow {
         }
 
     //
-    // Combine MAF and VCF channels into one
-    //
-    ch_input_files = ch_maf_files.mix(ch_vcf_files)
-
-    //
     // WORKFLOW: Run main workflow
     //
     NFCORE_PVACSEQ (

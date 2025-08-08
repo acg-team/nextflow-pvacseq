@@ -20,7 +20,7 @@ nextflow_process {
         when {
             params {
                 outdir       = "$projectDir/tests/outdir"
-                pvacseq_iedb = ""
+                pvacseq_iedb = []
             }
             process {
                 """

@@ -8,7 +8,7 @@ nextflow_workflow {
 
         when {
             params {
-                pvacseq_iedb_dir = "$projectDir/tests/tmp/iedb_i_only"
+                pvacseq_iedb_dir = "$projectDir/tests/outdir/iedb_i_only"
                 pvacseq_algorithm = "NetMHCpan"
             }
             workflow {
@@ -21,7 +21,20 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(workflow.out).match()
+            def iedb_dir_count = 0
+            path(workflow.out.iedb_dir.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                iedb_dir_count++
+            }
+            def iedb_mhc_i_count = 0
+            path(workflow.out.iedb_mhc_i.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                iedb_mhc_i_count++
+            }
+            assert workflow.success
+            assert snapshot(
+                iedb_dir_count,
+                iedb_mhc_i_count,
+                workflow.out.iedb_mhc_ii
+            ).match()
         }
     }
 
@@ -29,7 +42,7 @@ nextflow_workflow {
 
         when {
             params {
-                pvacseq_iedb_dir = "$projectDir/tests/tmp/iedb_ii_only"
+                pvacseq_iedb_dir = "$projectDir/tests/outdir/iedb_ii_only"
                 pvacseq_algorithm = "NetMHCIIpan"
             }
             workflow {
@@ -42,7 +55,20 @@ nextflow_workflow {
 
         then {
             assert workflow.success
-            assert snapshot(workflow.out).match()
+            def iedb_dir_count = 0
+            path(workflow.out.iedb_dir.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                iedb_dir_count++
+            }
+            def iedb_mhc_ii_count = 0
+            path(workflow.out.iedb_mhc_ii.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                iedb_mhc_ii_count++
+            }
+            assert workflow.success
+            assert snapshot(
+                iedb_dir_count,
+                iedb_mhc_ii_count,
+                workflow.out.iedb_mhc_i
+            ).match()
         }
     }
 
@@ -50,7 +76,7 @@ nextflow_workflow {
 
         when {
             params {
-                pvacseq_iedb_dir = "$projectDir/tests/tmp/iedb_both"
+                pvacseq_iedb_dir = "$projectDir/tests/outdir/iedb"
                 pvacseq_algorithm = "NetMHCpan NetMHCIIpan"
             }
             workflow {
@@ -62,8 +88,25 @@ nextflow_workflow {
         }
 
         then {
+            def iedb_dir_count = 0
+            path(workflow.out.iedb_dir.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                iedb_dir_count++
+            }
+            def iedb_mhc_i_count = 0
+            path(workflow.out.iedb_mhc_i.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                iedb_mhc_i_count++
+            }
+            def iedb_mhc_ii_count = 0
+            path(workflow.out.iedb_mhc_ii.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                iedb_mhc_ii_count++
+            }
             assert workflow.success
-            assert snapshot(workflow.out).match()
+            // Entire snapshot is too big, so we are looking at number of files
+            assert snapshot(
+                iedb_dir_count,
+                iedb_mhc_i_count,
+                iedb_mhc_ii_count
+            ).match()
         }
     }
 
@@ -71,7 +114,7 @@ nextflow_workflow {
 
         when {
             params {
-                pvacseq_iedb_dir = "$projectDir/tests/tmp/invalid"
+                pvacseq_iedb_dir = "$projectDir/tests/data/invalid"
                 pvacseq_algorithm = "InvalidAlgo"
             }
             workflow {
