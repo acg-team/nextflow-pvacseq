@@ -90,6 +90,16 @@
                     "type": "string",
                     "description": "Version of genomes in VEP cache",
                     "help_text": "Version of genomes in VEP cache"
+                },
+                "vep_species": {
+                    "type": "string",
+                    "description": "Species used in VEP cache",
+                    "help_text": "Species used in VEP cache"
+                },
+                "extra_vep_args": {
+                    "type": "string",
+                    "description": "Extra arguments to pass to VEP command in addition to defaults defined by the pipeline.",
+                    "fa_icon": "fas fa-plus"
                 }
             }
         },
@@ -113,13 +123,39 @@
                     "help_text": "Directory that contains the local installation of IEDB MHC I and/or MHC II.",
                     "fa_icon": "far fa-folder-open"
                 },
-                "pvacseq_advanced_options": {
-                    "title": "Advanced Options for pVACseq",
-                    "type": "object",
-                    "fa_icon": "fas fa-dna",
-                    "description": "Advanced pVACseq options for neoantigen prediction."
+                "blastp_path": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Path to BLASTP binary (if using reference proteome similarity).",
+                    "help_text": "Path to BLASTP binary (if using reference proteome similarity).",
+                    "fa_icon": "far fa-file-code"
+                },
+                "genes_of_interest": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "File listing genes of interest (optional).",
+                    "help_text": "File listing genes of interest (optional). The file should be formatted to have each gene on a separate line without a header line. If no file is specified, the Cancer Gene Census list of high-confidence genes is used as the default.",
+                    "fa_icon": "far fa-file-code"
+                },
+                "peptide_fasta": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Custom peptide FASTA file for reference proteome similarity step to find matches instead of blastp (optional).",
+                    "help_text": "Custom peptide FASTA file for reference proteome similarity step to find matches instead of blastp (optional).",
+                    "fa_icon": "far fa-file-code"
+                },
+                "ph_proximal_variants_vcf": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "VCF with phased proximal variant information. Must be gzipped and tabix indexed (optional).",
+                    "help_text": "VCF with phased proximal variant information. Must be gzipped and tabix indexed (optional).",
+                    "fa_icon": "far fa-file-code"
+                },
+                "extra_pvacseq_args": {
+                    "type": "string",
+                    "description": "Extra arguments to pass to pvacseq command in addition to defaults defined by the pipeline.",
+                    "fa_icon": "fas fa-plus"
                 }
-
             }
         },
 
