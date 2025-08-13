@@ -259,7 +259,6 @@ def readVcfChromLine(Path path) {
             line = reader.lines()
                          .takeWhile { it.startsWith('#') }
                          .findAll { it.startsWith('#CHROM') }
-                         .first()
             if (!line) {
                 throw new IllegalArgumentException("VCF file (${path}) does not contain a #CHROM header line.")
             }
