@@ -91,6 +91,11 @@
                     "description": "Version of genomes in VEP cache",
                     "help_text": "Version of genomes in VEP cache"
                 },
+                "vep_genome": {
+                    "type": "string",
+                    "description": "Genome used in VEP cache",
+                    "help_text": "Genome used in VEP cache"
+                },
                 "vep_species": {
                     "type": "string",
                     "description": "Species used in VEP cache",
