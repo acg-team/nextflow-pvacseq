@@ -91,13 +91,11 @@ The pVACseq pipeline uses VEP (Variant Effect Predictor) for annotating input va
 
 #### **`vep_plugins`**
 - If `vep_plugins` is not provided, the pipeline will download the required plugins automatically.
-- If you rerun the pipeline without specifying `vep_plugins`, it will detect the already downloaded plugins and fail due to conflicting directory states.
-- To avoid this issue, specify the downloaded plugin directory in subsequent runs using the `vep_plugins` parameter.
+- Specify the downloaded plugin directory in subsequent runs using the `vep_plugins` parameter.
 
 #### **`vep_cache` and `vep_cache_version`**
 - **When `vep_cache_version` is provided but `vep_cache` is not**:
   - The pipeline will attempt to download the specified cache version.
-  - The same logic as `vep_plugins` applies: specify the cache directory (`vep_cache`) on reruns to avoid download conflicts.
 - **When `vep_cache_version` is not provided but `vep_cache` is specified**:
   - The pipeline will fail because it cannot infer the cache version from the directory.
 - **When neither `vep_cache_version` nor `vep_cache` is provided**:
@@ -105,7 +103,7 @@ The pVACseq pipeline uses VEP (Variant Effect Predictor) for annotating input va
 
 ### Best Practices
 
-- Always specify the `vep_cache` and `vep_plugins` directories after the first run to avoid conflicts and unnecessary downloads.
+- Always specify the `vep_cache` and `vep_plugins` directories after the first run to avoid unnecessary downloads.
 - Ensure the `vep_cache_version` matches the version of the `vep_cache` directory provided.
 
 
@@ -116,8 +114,6 @@ The pVACseq pipeline provides a range of configurable options for neoantigen pre
 ### Required Parameters
 
 1. **`pvacseq_algorithm`**: Specifies the algorithms to use for pVACseq predictions. This is required.
-2. **`pvacseq_peptide_length_i`**: List of peptide lengths for MHC class I predictions. Required if MHC class I algorithms are selected.
-3. **`pvacseq_peptide_length_ii`**: List of peptide lengths for MHC class II predictions. Required if MHC class II algorithms are selected.
 #### **`pvacseq_iedb`**
 - Path to the IEDB directory.
 - If not provided:
@@ -137,10 +133,5 @@ nextflow run main.nf -profile <conda/docker>
 
 ### Test Profile
 
-A `test` profile is available for running the pipeline with test data. The test dataset includes a MAF file derived from the TCGA dataset of a human tumor. Since pVACseq supports only human data, running the test profile requires large files such as the reference genome and associated databases.
-
-### Resources Required for Testing
-
-- **Time**: The test run will take approximately **1 hour** to complete.
-- **Disk Space**: At least **50GB** of storage is needed to download and prepare all necessary databases and tools.
+A `test` profile is available for running the pipeline with test data. The test dataset includes a MAF file derived from the TCGA dataset of a human tumor.
 

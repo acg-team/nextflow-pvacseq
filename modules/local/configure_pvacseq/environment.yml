@@ -1,12 +1,11 @@
-name: pvacseq_5.3.1 # Dependencies hell
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/environment-schema.json
 channels:
   - conda-forge
-  - bioconda
-  - defaults
 dependencies:
-  - python=3.11.4=h955ad1f_0
-  - pip=23.1.2=py311h06a4308_0
-  - setuptools=65.5.1=pyhd8ed1ab_0
+  - conda-forge::python=3.11.4
+  - conda-forge::pip=23.1.2
+  - conda-forge::setuptools=65.5.1
   - pip:
     - tensorflow==2.15.1
     - pvactools==5.3.1
@@ -17,4 +16,3 @@ dependencies:
     - mhcnames==0.4.8
     - mhcnuggets==2.4.1
     - mhctools==1.9.0
-    

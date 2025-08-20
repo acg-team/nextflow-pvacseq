@@ -23,7 +23,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_pvac
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
-workflow NFCORE_PVACSEQ {
+workflow NF_PVACSEQ {
 
     take:
     maf_files // channel: directory with maf files read in from --input
@@ -59,12 +59,9 @@ workflow {
     //
     PIPELINE_INITIALISATION (
         params.version,
-        params.help,
         params.validate_params,
-        params.monochrome_logs,
         args,
-        params.outdir,
-        params.input
+        params.outdir
     )
 
 
@@ -86,7 +83,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_PVACSEQ (
+    NF_PVACSEQ (
         ch_maf_files,
         ch_vcf_files
     )
@@ -95,13 +92,7 @@ workflow {
     // SUBWORKFLOW: Run completion tasks
     //
     PIPELINE_COMPLETION (
-        params.email,
-        params.email_on_fail,
-        params.plaintext_email,
-        params.outdir,
-        params.monochrome_logs,
-        params.hook_url,
-        NFCORE_PVACSEQ.out.multiqc_report
+        params.monochrome_logs
     )
 }
 
