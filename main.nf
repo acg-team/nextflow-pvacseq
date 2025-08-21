@@ -42,7 +42,8 @@ workflow NF_PVACSEQ {
 
     emit:
     multiqc_report = PVACSEQ_PIPELINE.out.multiqc_report // channel: /path/to/multiqc_report.html
-
+    iedb_dir = PVACSEQ_PIPELINE.out.iedb_dir
+    mode = PVACSEQ_PIPELINE.out.mode
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,7 +93,9 @@ workflow {
     // SUBWORKFLOW: Run completion tasks
     //
     PIPELINE_COMPLETION (
-        params.monochrome_logs
+        params.monochrome_logs,
+        NF_PVACSEQ.out.iedb_dir,
+        NF_PVACSEQ.out.mode
     )
 }
 

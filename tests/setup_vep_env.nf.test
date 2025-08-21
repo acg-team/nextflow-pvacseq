@@ -13,6 +13,7 @@ nextflow_workflow {
                 vep_cache_version = "102"
                 vep_genome = "GRCh38"
                 vep_species = "homo_sapiens"
+                outdir = "$projectDir/tests/outdir"
             }
             workflow {
                 """
@@ -42,6 +43,7 @@ nextflow_workflow {
                 vep_cache_version = "113"
                 vep_genome = "WBcel235"
                 vep_species = "caenorhabditis_elegans"
+                outdir = "$projectDir/tests/outdir"
             }
             workflow {
                 """

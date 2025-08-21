@@ -49,6 +49,28 @@ process DOWNLOAD_MHC_II {
 }
 
 
+process SMART_LINK_IEDB {
+    tag "smart_link_iedb"
+    label 'process_single'
+
+    input:
+    path iedb_source
+
+    output:
+    stdout emit: iedb_stdout
+
+    when:
+    task.ext.when == null || task.ext.when
+
+    script:
+    """
+    smart_link_iedb.py --src "${iedb_source}"
+    """
+}
+
+
+
+
 //
 // Workflow: Configure pVACseq tools
 //
@@ -129,9 +151,20 @@ workflow CONFIGURE_PVACSEQ_IEDB {
             mhc_ii_path = DOWNLOAD_MHC_II.out.iedb_mhc_ii
         }
     }
-    // Emit the paths
+
+    // run the process
+    SMART_LINK_IEDB( iedb_dir )
+
+    // get its stdout
+    def stdout_ch      = SMART_LINK_IEDB.out.iedb_stdout
+
+    // split into two separate value channels
+    def iedb_dir_short = stdout_ch.map { it.trim().split('\\R')[0] }
+    def link_mode      = stdout_ch.map { it.trim().split('\\R')[1] }
+
     emit:
-    iedb_dir = iedb_dir
+    iedb_dir = iedb_dir_short
     iedb_mhc_i = mhc_i_path
     iedb_mhc_ii = mhc_ii_path
+    mode = link_mode
 }

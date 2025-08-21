@@ -1,0 +1,30 @@
+{
+    "Both MHC Class I and II are required": {
+        "content": [
+            207372,
+            83505,
+            123867
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.4"
+        },
+        "timestamp": "2025-08-21T15:56:16.996455933"
+    },
+    "Only MHC Class I is required": {
+        "content": [
+            0,
+            83505,
+            [
+                [
+                    
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.4"
+        },
+        "timestamp": "2025-08-21T16:13:13.987621727"
+    }
+}

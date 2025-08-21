@@ -8,7 +8,9 @@ nextflow_process {
         setup {
             run("DOWNLOAD_VEP_PLUGINS") {
                 script "subworkflows/local/setup_vep_env/main.nf"
-
+                params {
+                    outdir = "$projectDir/tests/outdir"
+                }
                 workflow {
                     """
                     input[0] = ["id": "VEP_plugins"]

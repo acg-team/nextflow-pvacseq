@@ -6,7 +6,9 @@ nextflow_process {
     setup {
         run("CONFIGURE_PVACSEQ_IEDB") {
             script "subworkflows/local/configure_pvacseq_iedb/main.nf"
-
+            params {
+                outdir = "$projectDir/tests/outdir"
+            }
             workflow {
                 """
                 input[0] = []
@@ -19,6 +21,7 @@ nextflow_process {
 
         when {
             params {
+                outdir = "$projectDir/tests/outdir"
             }
             process {
                 """
@@ -49,6 +52,9 @@ nextflow_process {
     test("Should fail when no directories are provided") {
 
         when {
+            params {
+                outdir = "$projectDir/tests/outdir"
+            }
             process {
                 """
                 input[0] = []
@@ -67,6 +73,9 @@ nextflow_process {
     test("Should configure with only MHC Class I directory provided") {
 
         when {
+            params {
+                outdir = "$projectDir/tests/outdir"
+            }
             process {
                 """
                 input[0] = CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_i
@@ -96,6 +105,9 @@ nextflow_process {
     test("Should configure with only MHC Class II directory provided") {
 
         when {
+            params {
+                outdir = "$projectDir/tests/outdir"
+            }
             process {
                 """
                 input[0] = []

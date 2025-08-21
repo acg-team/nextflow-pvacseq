@@ -8,8 +8,9 @@ nextflow_workflow {
 
         when {
             params {
-                pvacseq_iedb_dir = "$projectDir/tests/outdir/iedb_i_only"
+                pvacseq_iedb_dir = "$projectDir/tests/outdir/veeeeeeeeeeeeeeery_long/iedb_i_only"
                 pvacseq_algorithm = "NetMHCpan"
+                outdir = "$projectDir/tests/outdir"
             }
             workflow {
                 """
@@ -44,6 +45,7 @@ nextflow_workflow {
             params {
                 pvacseq_iedb_dir = "$projectDir/tests/outdir/iedb_ii_only"
                 pvacseq_algorithm = "NetMHCIIpan"
+                outdir = "$projectDir/tests/outdir"
             }
             workflow {
                 """
@@ -78,6 +80,7 @@ nextflow_workflow {
             params {
                 pvacseq_iedb_dir = "$projectDir/tests/outdir/iedb"
                 pvacseq_algorithm = "NetMHCpan NetMHCIIpan"
+                outdir = "$projectDir/tests/outdir"
             }
             workflow {
                 """
@@ -116,6 +119,7 @@ nextflow_workflow {
             params {
                 pvacseq_iedb_dir = "$projectDir/tests/data/invalid"
                 pvacseq_algorithm = "InvalidAlgo"
+                outdir = "$projectDir/tests/outdir"
             }
             workflow {
                 """

@@ -245,6 +245,8 @@ workflow PVACSEQ_PIPELINE {
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    iedb_dir       = CONFIGURE_PVACSEQ_IEDB.out.iedb_dir
+    mode           = CONFIGURE_PVACSEQ_IEDB.out.mode
 }
 
 // Get the #CHROM header line from a gzipped VCF file in Nextflow DSL2
@@ -260,7 +262,7 @@ def readVcfChromLine(Path path) {
                          .takeWhile { it.startsWith('#') }
                          .findAll { it.startsWith('#CHROM') }
                          .first()
-                         
+
             if (!line) {
                 throw new IllegalArgumentException("VCF file (${path}) does not contain a #CHROM header line.")
             }

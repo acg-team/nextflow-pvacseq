@@ -72,14 +72,19 @@ workflow PIPELINE_INITIALISATION {
 ========================================================================================
 */
 
+
 workflow PIPELINE_COMPLETION {
 
     take:
     monochrome_logs // boolean: Disable ANSI colour codes in log output
+    iedb_dir        // String absolute path
+    mode            // "original" | "hardlink" | "copy"
 
     main:
     workflow.onComplete {
         completionSummary(monochrome_logs)
+        def status = unlinkIedb(iedb_dir as String, mode as String)
+        log.info "Unlink iedb ${status} (dir=${iedb_dir}, mode=${mode})"
     }
 }
 
@@ -189,3 +194,52 @@ doi: <a href="https://doi.org/10.1038/s41587-020-0439-x">10.1038/s41587-020-0439
 
     return description_html.toString()
 }
+
+def unlinkIedb(String chosenDir, String mode) {
+    try {
+        if (!chosenDir || chosenDir.trim().isEmpty())
+            return 'no_path'
+        if (mode == null || mode == 'original')
+            return 'no_cleanup'
+
+        def p = java.nio.file.Paths.get(chosenDir.trim())
+
+        // If it doesn't exist, nothing to do
+        if (!java.nio.file.Files.exists(p, java.nio.file.LinkOption.NOFOLLOW_LINKS))
+            return 'already_missing'
+
+        try {
+            p = p.toRealPath(java.nio.file.LinkOption.NOFOLLOW_LINKS)
+        }
+        catch (java.nio.file.NoSuchFileException ignored) {
+            return 'already_missing'
+        }
+
+        // Safety checks
+        if (!java.nio.file.Files.isDirectory(p, java.nio.file.LinkOption.NOFOLLOW_LINKS))
+            return "error: refusing to remove non-directory: ${p}"
+        if (p.getParent() == null) // root like "/"
+            return "error: refusing to remove root: ${p}"
+
+        // Optional extra guard
+        def name = p.getFileName()?.toString() ?: ""
+        if (name in ['tmp','temp','scratch','mnt','local','fsx','lustre','gpfs'])
+            return "error: refusing to remove generic directory name: ${p}"
+
+        // Recursive delete (depth-first)
+        def stream = java.nio.file.Files.walk(p)
+        def paths = stream.sorted(java.util.Comparator.reverseOrder()).toList()
+        stream.close()
+
+        for (q in paths) {
+            java.nio.file.Files.deleteIfExists(q)
+        }
+
+        return 'removed'
+    }
+    catch (Exception e) {
+        return "error: ${e.class.simpleName}: ${e.message}"
+    }
+}
+
+
