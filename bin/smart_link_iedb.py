@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 import argparse
+import errno
 import os
+import shutil
 import sys
 import tempfile
 from pathlib import Path
 from typing import List, Tuple
 
-MAX_LEN = 57  # path length limit
+MAX_LEN = 52  # path length limit
 
 COMMON_ROOTS = [
     "/scratch", "/localscratch", "/local", "/var/tmp",
     "/mnt", "/mnt1", "/mnt2", "/nvme", "/ephemeral",
     "/efs", "/fsx", "/lustre", "/gpfs",
 ]
-
 ENV_VARS = ["SLURM_TMPDIR", "TMPDIR", "LOCAL_SCRATCH", "LSCRATCH", "SCRATCH"]
 
 def real_len(p: Path) -> int:
@@ -32,7 +33,7 @@ def same_filesystem(a: Path, b: Path) -> bool:
         return False
 
 def candidate_roots() -> List[Path]:
-    roots = []
+    roots: List[Path] = []
     for ev in ENV_VARS:
         v = os.environ.get(ev)
         if v:
@@ -41,11 +42,24 @@ def candidate_roots() -> List[Path]:
     roots.append(Path.cwd())
     return [r for r in roots if r.exists() and os.access(r, os.W_OK)]
 
+def ancestor_roots(src: Path) -> List[Path]:
+    roots: List[Path] = []
+    seen = set()
+    cur = src.resolve().parent  # start at parent
+    while True:
+        if cur is None:
+            break
+        sp = cur.as_posix()
+        if sp not in seen and cur.exists() and os.access(cur, os.W_OK):
+            roots.append(cur)
+            seen.add(sp)
+        if cur.parent == cur:  # reached root
+            break
+        cur = cur.parent
+    return roots
+
 def make_very_short(root: Path) -> Path | None:
-    """
-    Create a brand-new, very short, unique directory under `root`.
-    Never touches existing content. Ensures total path < MAX_LEN.
-    """
+    """Create a new, short, unique directory under `root` (< MAX_LEN)."""
     for prefix in ("i.", "x.", ".i.", ".x."):
         try:
             d = Path(tempfile.mkdtemp(prefix=prefix, dir=root))
@@ -57,18 +71,22 @@ def make_very_short(root: Path) -> Path | None:
             except Exception:
                 pass
         except Exception:
-            # cannot create here; try next
             pass
     return None
 
-def hardlink_tree(src: Path, dst: Path) -> None:
+def link_or_copy_tree(src: Path, dst: Path) -> str:
     """
-    Hardlink src/* into dst/. Fails if not possible (e.g., different FS).
-    Does not remove or reuse existing dirs; dst is assumed empty/new.
+    Attempt to hardlink src/* into dst/.
+    Falls back to copy per file on EPERM/EACCES/EXDEV.
+    Returns "hardlink" if everything linked, otherwise "copy".
     """
     ensure_dir(dst)
+    all_linked = True
+
+    # If obviously not same FS, we’ll copy everything (fast path)
     if not same_filesystem(src, dst):
-        raise RuntimeError("hardlink across filesystems is not possible")
+        shutil.copytree(src, dst, dirs_exist_ok=True)
+        return "copy"
 
     for root, dirs, files in os.walk(src):
         rel = Path(root).relative_to(src)
@@ -79,38 +97,47 @@ def hardlink_tree(src: Path, dst: Path) -> None:
         for f in files:
             s = Path(root) / f
             t = target_dir / f
-            # link only regular files
-            if s.is_file():
+            if not s.is_file():
+                continue
+            try:
                 os.link(s, t)
+            except OSError as e:
+                if e.errno in (errno.EPERM, errno.EACCES, errno.EXDEV):
+                    shutil.copy2(s, t)
+                    all_linked = False
+                else:
+                    raise
+    return "hardlink" if all_linked else "copy"
 
 def pick_target(src: Path) -> Tuple[Path, str]:
     """
-    Decide target and mode.
+    Decide target and initial mode.
     - If src path already short: return (src, "original")
-    - Else: create a fresh short dir under good roots and return (target, "hardlink")
+    - Else: try ancestors first (same FS), then env/common roots.
+    For non-original, we’ll materialize and then report "hardlink" or "copy".
     """
     src_real = src.resolve()
     if real_len(src_real) < MAX_LEN:
         return src_real, "original"
 
-    # Prefer roots that allow us to hardlink (same filesystem) — best effort:
-    roots = candidate_roots()
-    # try to find same-FS first
-    for r in roots:
-        d = make_very_short(r)
-        if d and same_filesystem(src_real, d):
-            return d, "hardlink"
-
-    # otherwise still make a short dir (will fail on hardlink step with clear error)
-    for r in roots:
+    # 1) Try ancestors (same FS most likely)
+    for r in ancestor_roots(src_real):
         d = make_very_short(r)
         if d:
-            return d, "hardlink"
+            return d, "materialize"
+
+    # 2) Try env/common roots
+    for r in candidate_roots():
+        d = make_very_short(r)
+        if d:
+            return d, "materialize"
 
     raise RuntimeError("No short writable directory (<57 chars) could be created")
 
 def main():
-    ap = argparse.ArgumentParser(description="Ensure IEDB install path is short, using hardlinks only.")
+    ap = argparse.ArgumentParser(
+        description="Ensure IEDB path is short; hardlink when possible, else copy."
+    )
     ap.add_argument("--src", required=True, help="Path to existing IEDB directory")
     args = ap.parse_args()
 
@@ -122,24 +149,23 @@ def main():
     target, mode = pick_target(src)
 
     if mode == "original":
-        # Just print results; no changes on disk
         print(target.as_posix())
         print("original")
         return
 
-    # Hardlink-only materialization
+    # Materialize (link or copy)
     try:
-        hardlink_tree(src, target)
+        final_mode = link_or_copy_tree(src, target)
     except Exception as e:
         print(
-            "SMART_LINK_IEDB: hardlinking failed: "
-            f"{e}. Provide a scratch path on the same filesystem or bind-mount a short path.",
+            "SMART_LINK_IEDB: materialization failed: "
+            f"{e}. Provide a writable short path or bind-mount a short path.",
             file=sys.stderr,
         )
         sys.exit(2)
 
     print(target.as_posix())
-    print("hardlink")
+    print(final_mode)  # "hardlink" or "copy"
 
 if __name__ == "__main__":
     main()

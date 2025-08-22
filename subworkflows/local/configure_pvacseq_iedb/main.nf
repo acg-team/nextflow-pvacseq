@@ -161,7 +161,10 @@ workflow CONFIGURE_PVACSEQ_IEDB {
     // split into two separate value channels
     def iedb_dir_short = stdout_ch.map { it.trim().split('\\R')[0] }
     def link_mode      = stdout_ch.map { it.trim().split('\\R')[1] }
-
+    if (link_mode != "original") {
+        def action = (link_mode == "copy") ? "copied" : "linked"
+        println "IEDB path was too long and has been ${action} to ${iedb_dir_short}"
+    }
     emit:
     iedb_dir = iedb_dir_short
     iedb_mhc_i = mhc_i_path

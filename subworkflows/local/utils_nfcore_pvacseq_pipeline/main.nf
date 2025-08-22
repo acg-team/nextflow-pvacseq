@@ -197,38 +197,40 @@ doi: <a href="https://doi.org/10.1038/s41587-020-0439-x">10.1038/s41587-020-0439
 
 def unlinkIedb(String chosenDir, String mode) {
     try {
+        // basic arg checks
         if (!chosenDir || chosenDir.trim().isEmpty())
             return 'no_path'
-        if (mode == null || mode == 'original')
-            return 'no_cleanup'
+        if (!mode || mode == 'original')
+            return 'no_cleanup'   // only remove temp dirs created by hardlink/copy
 
+        // resolve path (don’t follow symlinks for existence check)
         def p = java.nio.file.Paths.get(chosenDir.trim())
-
-        // If it doesn't exist, nothing to do
         if (!java.nio.file.Files.exists(p, java.nio.file.LinkOption.NOFOLLOW_LINKS))
             return 'already_missing'
 
         try {
+            // canonical without following symlinks
             p = p.toRealPath(java.nio.file.LinkOption.NOFOLLOW_LINKS)
         }
         catch (java.nio.file.NoSuchFileException ignored) {
             return 'already_missing'
         }
 
-        // Safety checks
+        // safety rails
         if (!java.nio.file.Files.isDirectory(p, java.nio.file.LinkOption.NOFOLLOW_LINKS))
             return "error: refusing to remove non-directory: ${p}"
         if (p.getParent() == null) // root like "/"
             return "error: refusing to remove root: ${p}"
 
-        // Optional extra guard
+        // optional extra guard against nuking generic mount points
         def name = p.getFileName()?.toString() ?: ""
         if (name in ['tmp','temp','scratch','mnt','local','fsx','lustre','gpfs'])
             return "error: refusing to remove generic directory name: ${p}"
 
-        // Recursive delete (depth-first)
+        // walk depth-first and delete
         def stream = java.nio.file.Files.walk(p)
-        def paths = stream.sorted(java.util.Comparator.reverseOrder()).toList()
+        def paths  = stream.sorted(java.util.Comparator.reverseOrder())
+                           .collect(java.util.stream.Collectors.toList())
         stream.close()
 
         for (q in paths) {
@@ -241,5 +243,3 @@ def unlinkIedb(String chosenDir, String mode) {
         return "error: ${e.class.simpleName}: ${e.message}"
     }
 }
-
-
