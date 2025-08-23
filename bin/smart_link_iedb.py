@@ -97,7 +97,8 @@ def link_or_copy_tree(src: Path, dst: Path) -> str:
         for f in files:
             s = Path(root) / f
             t = target_dir / f
-            if not s.is_file():
+            if s.is_symlink():
+                os.symlink(os.readlink(s), t)
                 continue
             try:
                 os.link(s, t)

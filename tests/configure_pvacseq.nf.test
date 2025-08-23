@@ -22,6 +22,8 @@ nextflow_process {
         when {
             params {
                 outdir = "$projectDir/tests/outdir"
+                pvacseq_iedb = "$projectDir/tests/outdir/veeeeeeeeeeeeeeery_long/iedb_i_only"
+
             }
             process {
                 """

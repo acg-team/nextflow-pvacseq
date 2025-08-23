@@ -1,3 +1,5 @@
+include { SMART_LINK_IEDB        } from '../../../modules/local/smart_link/main'
+
 //
 // MODULE: Download MHC Class I data
 //
@@ -47,29 +49,6 @@ process DOWNLOAD_MHC_II {
     rm -rf IEDB_MHC_II-3.1.12.tar.gz
     """
 }
-
-
-process SMART_LINK_IEDB {
-    tag "smart_link_iedb"
-    label 'process_single'
-
-    input:
-    path iedb_source
-
-    output:
-    stdout emit: iedb_stdout
-
-    when:
-    task.ext.when == null || task.ext.when
-
-    script:
-    """
-    smart_link_iedb.py --src "${iedb_source}"
-    """
-}
-
-
-
 
 //
 // Workflow: Configure pVACseq tools
@@ -152,22 +131,20 @@ workflow CONFIGURE_PVACSEQ_IEDB {
         }
     }
 
-    // run the process
-    SMART_LINK_IEDB( iedb_dir )
+    SMART_LINK_IEDB(iedb_dir)
 
-    // get its stdout
-    def stdout_ch      = SMART_LINK_IEDB.out.iedb_stdout
+    // Parse stdout to two channels
+    lines_ch       = SMART_LINK_IEDB.out.iedb_stdout.map { s -> s.readLines().findAll { it?.trim() } }
+    iedb_dir_short = lines_ch.map { ls -> file(ls[0].trim()) }                    // Path channel
+    link_mode      = lines_ch.map { ls -> ls.size() > 1 ? ls[1].trim() : 'original' }
 
-    // split into two separate value channels
-    def iedb_dir_short = stdout_ch.map { it.trim().split('\\R')[0] }
-    def link_mode      = stdout_ch.map { it.trim().split('\\R')[1] }
-    if (link_mode != "original") {
-        def action = (link_mode == "copy") ? "copied" : "linked"
-        println "IEDB path was too long and has been ${action} to ${iedb_dir_short}"
-    }
+    // Derive mhc_i/mhc_ii paths as channels
+    mhc_i_path  = iedb_dir_short.map { p -> p.resolve('mhc_i') }
+    mhc_ii_path = iedb_dir_short.map { p -> p.resolve('mhc_ii') }
+
     emit:
     iedb_dir = iedb_dir_short
     iedb_mhc_i = mhc_i_path
     iedb_mhc_ii = mhc_ii_path
-    mode = link_mode
+    link_mode = link_mode
 }
