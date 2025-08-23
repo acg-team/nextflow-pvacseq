@@ -5,6 +5,8 @@
 **nextflow_pvacseq** is a custom [Nextflow](https://www.nextflow.io/) pipeline that transforms MAF files into VCF, annotates them with [VEP](https://www.ensembl.org/info/docs/tools/vep/index.html), and analyzes them with [pVACseq](https://pvactools.readthedocs.io/en/latest/tools/pvacseq.html) to facilitate the investigation of tumor neoantigens.
 It supports inputs in both MAF and VCF formats.
 
+![Pipeline scheme](img/nf_diagram2.png)
+
 ## Pipeline Summary
 
 The pipeline performs the following steps:
@@ -84,15 +86,14 @@ nextflow run main.nf \
 
 ### Testing the Pipeline
 
-For testing, download a reference genome (e.g. from [GDC Reference Files](https://gdc.cancer.gov/about-data/gdc-data-processing/gdc-reference-files)) and run:
+A minimal test dataset is included with the pipeline to verify that installation and execution work correctly.
+The test profile uses **online VEP annotation**, so no local VEP cache is required.
+
+⚠️ This mode is intended **only for testing**. It is **not recommended** for real analyses, as online VEP annotation is slower and less reproducible.
 
 ```bash
-nextflow run main.nf \
-   -profile test,<docker|conda> \
-   --outdir <OUTPUT DIRECTORY> \
-   --fasta <PATH TO FASTA>
+nextflow run main.nf -profile test,<docker|conda>
 ```
-
 
 ## Citations
 
