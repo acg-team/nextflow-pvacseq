@@ -1,9 +1,9 @@
 {
     "Both MHC Class I and II are required": {
         "content": [
-            96724,
-            83525,
-            13199
+            207372,
+            83505,
+            123867
         ],
         "meta": {
             "nf-test": "0.9.2",
@@ -25,9 +25,9 @@
     },
     "Only MHC Class II is required": {
         "content": [
-            13199,
+            123867,
             0,
-            13199
+            123867
         ],
         "meta": {
             "nf-test": "0.9.2",
