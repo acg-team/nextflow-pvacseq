@@ -6,8 +6,8 @@
 It supports inputs in both MAF and VCF formats.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="img/nf_diagram3_dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="img/nf_diagram3.png">
+  <source media="(prefers-color-scheme: dark)" srcset="img/nf_diagram3_dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="img/nf_diagram3.svg">
   <img alt="Project diagram" src="img/nf_diagram3_dark.png">
 </picture>
 
