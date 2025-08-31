@@ -99,11 +99,11 @@ def _replace_with_symlink(link_target: str, link_path: Path):
             raise RuntimeError(f"Refusing to replace non-empty directory: {link_path}") from e
     os.symlink(link_target, link_path)
 
-def hardcopy(src, dst, fallback_copy=False):
+def hardcopy(src, dst, fallback_copy=True):
     src = Path(src).resolve()
     dst = Path(dst).resolve()
     dst.mkdir(parents=True, exist_ok=True)
-
+    copy_type = "hardlink"
     for root, dirnames, filenames in os.walk(src, topdown=True, followlinks=False):
         root = Path(root)
         rel = root.relative_to(src)
@@ -137,6 +137,8 @@ def hardcopy(src, dst, fallback_copy=False):
                 except OSError:
                     if fallback_copy:
                         shutil.copy2(s, d)
+                        copy_type = "copy"
+    return copy_type
 
 def link_or_copy_tree(src: Path, dst: Path) -> str:
     """
@@ -148,8 +150,7 @@ def link_or_copy_tree(src: Path, dst: Path) -> str:
         shutil.copytree(src, dst, dirs_exist_ok=True)
         return "copy"
     else:
-        hardcopy(src, dst)
-        return "hardlink"
+        return hardcopy(src, dst)
 
 
 def pick_target(src: Path) -> Tuple[Path, str]:

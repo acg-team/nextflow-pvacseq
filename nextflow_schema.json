@@ -113,7 +113,6 @@
                 "pvacseq_iedb": {
                     "type": "string",
                     "format": "directory-path",
-                    "exists": true,
                     "description": "Directory that contains the local installation of IEDB MHC I and/or MHC II.",
                     "help_text": "Directory that contains the local installation of IEDB MHC I and/or MHC II.",
                     "fa_icon": "far fa-folder-open"
