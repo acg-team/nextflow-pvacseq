@@ -14,10 +14,10 @@
                     "pvactools": "5.3.1"
                 },
                 "Workflow": {
-                    "nf-core/pvacseq": "v1.0dev"
+                    "nextflow_pvacseq/pvacseq": "v1.0dev"
                 }
             },
-            207427,
+            96724,
             237
         ],
         "meta": {

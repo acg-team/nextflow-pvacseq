@@ -59,7 +59,7 @@ process CONFIGURE_PVACSEQ {
     if [ -d "${iedb_mhc_ii}" ]; then
         cd "${iedb_mhc_ii}"
         # Non existing pattern of tests to skip all of them
-        ./configure.py -k "1"
+        # ./configure.py
         cd -
     fi
 
