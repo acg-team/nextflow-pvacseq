@@ -5,7 +5,11 @@
 **nextflow_pvacseq** is a custom [Nextflow](https://www.nextflow.io/) pipeline that transforms MAF files into VCF, annotates them with [VEP](https://www.ensembl.org/info/docs/tools/vep/index.html), and analyzes them with [pVACseq](https://pvactools.readthedocs.io/en/latest/tools/pvacseq.html) to facilitate the investigation of tumor neoantigens.
 It supports inputs in both MAF and VCF formats.
 
-![Pipeline scheme](img/nf_diagram2.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="img/nf_diagram3_dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="img/nf_diagram3.png">
+  <img alt="Project diagram" src="img/nf_diagram3_dark.png">
+</picture>
 
 ## Pipeline Summary
 
