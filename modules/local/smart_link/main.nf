@@ -4,6 +4,8 @@ process SMART_LINK_IEDB {
 
     input:
     path iedb_source
+    path iedb_mhc_i
+    path iedb_mhc_ii
 
     output:
     stdout emit: iedb_stdout
@@ -12,6 +14,9 @@ process SMART_LINK_IEDB {
     task.ext.when == null || task.ext.when
 
     script:
+    if (!(iedb_mhc_i || iedb_mhc_ii)) {
+        throw new IllegalArgumentException("Error: No iedb_mhc_i or iedb_mhc_ii provided. At least one is required.")
+    }
     """
     smart_link_iedb.py --src "${iedb_source}"
     """
