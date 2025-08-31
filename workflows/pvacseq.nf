@@ -178,8 +178,8 @@ workflow PVACSEQ_PIPELINE {
 
     // Configure pvacseq before running it
     CONFIGURE_PVACSEQ (
-        mhc_i_path,
-        mhc_ii_path
+        CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_i,
+        CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_ii
     )
 
     config_done_ch = CONFIGURE_PVACSEQ.out.config_file
