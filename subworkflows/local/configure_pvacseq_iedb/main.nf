@@ -6,6 +6,7 @@ include { SMART_LINK_IEDB        } from '../../../modules/local/smart_link/main'
 process DOWNLOAD_MHC_I {
     tag "download_mhc_i"
     label 'process_single'
+    publishDir "${params.outdir}/download", mode: 'symlink'
 
     input:
     path pvacseq_iedb_dir
@@ -31,6 +32,7 @@ process DOWNLOAD_MHC_I {
 process DOWNLOAD_MHC_II {
     tag "download_mhc_ii"
     label 'process_single'
+    publishDir "${params.outdir}/download", mode: 'symlink'
 
     input:
     path pvacseq_iedb_dir
@@ -146,5 +148,5 @@ workflow CONFIGURE_PVACSEQ_IEDB {
     iedb_dir = iedb_dir_short
     iedb_mhc_i = mhc_i_path
     iedb_mhc_ii = mhc_ii_path
-    link_mode = link_mode
+    mode = link_mode
 }

@@ -8,13 +8,13 @@ nextflow_workflow {
 
         when {
             params {
-                pvacseq_iedb_dir = "$projectDir/tests/outdir/veeeeeeeeeeeeeeery_long/iedb_i_only"
+                pvacseq_iedb = "$projectDir/tests/outdir/veeeeeeeeeeeeeeery_long/iedb_i_only"
                 pvacseq_algorithm = "NetMHCpan"
                 outdir = "$projectDir/tests/outdir"
             }
             workflow {
                 """
-                input[0] = "$params.pvacseq_iedb_dir"
+                input[0] = "$params.pvacseq_iedb"
                 input[1] = "$params.pvacseq_algorithm"
                 """
             }
@@ -23,18 +23,27 @@ nextflow_workflow {
         then {
             assert workflow.success
             def iedb_dir_count = 0
-            path(workflow.out.iedb_dir.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
-                iedb_dir_count++
+            if (path(workflow.out.iedb_dir.get(0)).exists()) {
+                path(workflow.out.iedb_dir.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                    iedb_dir_count++
+                }
             }
             def iedb_mhc_i_count = 0
-            path(workflow.out.iedb_mhc_i.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
-                iedb_mhc_i_count++
+            if (path(workflow.out.iedb_mhc_i.get(0)).exists()) {
+                path(workflow.out.iedb_mhc_i.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                    iedb_mhc_i_count++
+                }
             }
-            assert workflow.success
+            def iedb_mhc_ii_count = 0
+            if (path(workflow.out.iedb_mhc_ii.get(0)).exists()) {
+                path(workflow.out.iedb_mhc_ii.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                    iedb_mhc_ii_count++
+                }
+            }
             assert snapshot(
                 iedb_dir_count,
                 iedb_mhc_i_count,
-                workflow.out.iedb_mhc_ii
+                iedb_mhc_ii_count
             ).match()
         }
     }
@@ -43,13 +52,13 @@ nextflow_workflow {
 
         when {
             params {
-                pvacseq_iedb_dir = "$projectDir/tests/outdir/iedb_ii_only"
+                pvacseq_iedb = "$projectDir/tests/outdir/iedb_ii_only"
                 pvacseq_algorithm = "NetMHCIIpan"
                 outdir = "$projectDir/tests/outdir"
             }
             workflow {
                 """
-                input[0] = "$params.pvacseq_iedb_dir"
+                input[0] = "$params.pvacseq_iedb"
                 input[1] = "$params.pvacseq_algorithm"
                 """
             }
@@ -58,18 +67,27 @@ nextflow_workflow {
         then {
             assert workflow.success
             def iedb_dir_count = 0
-            path(workflow.out.iedb_dir.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
-                iedb_dir_count++
+            if (path(workflow.out.iedb_dir.get(0)).exists()) {
+                path(workflow.out.iedb_dir.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                    iedb_dir_count++
+                }
+            }
+            def iedb_mhc_i_count = 0
+            if (path(workflow.out.iedb_mhc_i.get(0)).exists()) {
+                path(workflow.out.iedb_mhc_i.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                    iedb_mhc_i_count++
+                }
             }
             def iedb_mhc_ii_count = 0
-            path(workflow.out.iedb_mhc_ii.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
-                iedb_mhc_ii_count++
+            if (path(workflow.out.iedb_mhc_ii.get(0)).exists()) {
+                path(workflow.out.iedb_mhc_ii.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                    iedb_mhc_ii_count++
+                }
             }
-            assert workflow.success
             assert snapshot(
                 iedb_dir_count,
-                iedb_mhc_ii_count,
-                workflow.out.iedb_mhc_i
+                iedb_mhc_i_count,
+                iedb_mhc_ii_count
             ).match()
         }
     }
@@ -78,33 +96,38 @@ nextflow_workflow {
 
         when {
             params {
-                pvacseq_iedb_dir = "$projectDir/tests/outdir/iedb"
+                pvacseq_iedb = "$projectDir/tests/outdir/iedb"
                 pvacseq_algorithm = "NetMHCpan NetMHCIIpan"
                 outdir = "$projectDir/tests/outdir"
             }
             workflow {
                 """
-                input[0] = "$params.pvacseq_iedb_dir"
+                input[0] = "$params.pvacseq_iedb"
                 input[1] = "$params.pvacseq_algorithm"
                 """
             }
         }
 
         then {
+            assert workflow.success
             def iedb_dir_count = 0
-            path(workflow.out.iedb_dir.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
-                iedb_dir_count++
+            if (path(workflow.out.iedb_dir.get(0)).exists()) {
+                path(workflow.out.iedb_dir.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                    iedb_dir_count++
+                }
             }
             def iedb_mhc_i_count = 0
-            path(workflow.out.iedb_mhc_i.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
-                iedb_mhc_i_count++
+            if (path(workflow.out.iedb_mhc_i.get(0)).exists()) {
+                path(workflow.out.iedb_mhc_i.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                    iedb_mhc_i_count++
+                }
             }
             def iedb_mhc_ii_count = 0
-            path(workflow.out.iedb_mhc_ii.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
-                iedb_mhc_ii_count++
+            if (path(workflow.out.iedb_mhc_ii.get(0)).exists()) {
+                path(workflow.out.iedb_mhc_ii.get(0)).eachFileRecurse(groovy.io.FileType.FILES) {
+                    iedb_mhc_ii_count++
+                }
             }
-            assert workflow.success
-            // Entire snapshot is too big, so we are looking at number of files
             assert snapshot(
                 iedb_dir_count,
                 iedb_mhc_i_count,
@@ -117,13 +140,13 @@ nextflow_workflow {
 
         when {
             params {
-                pvacseq_iedb_dir = "$projectDir/tests/data/invalid"
+                pvacseq_iedb = "$projectDir/tests/data/invalid"
                 pvacseq_algorithm = "InvalidAlgo"
                 outdir = "$projectDir/tests/outdir"
             }
             workflow {
                 """
-                input[0] = "$params.pvacseq_iedb_dir"
+                input[0] = "$params.pvacseq_iedb"
                 input[1] = "$params.pvacseq_algorithm"
                 """
             }

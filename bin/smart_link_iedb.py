@@ -4,18 +4,14 @@ import errno
 import os
 import shutil
 import sys
-import tempfile
+import secrets
+
 from pathlib import Path
 from typing import List, Tuple
 
-MAX_LEN = 52  # path length limit
+MAX_LEN = 51  # path length limit
 
-COMMON_ROOTS = [
-    "/scratch", "/localscratch", "/local", "/var/tmp",
-    "/mnt", "/mnt1", "/mnt2", "/nvme", "/ephemeral",
-    "/efs", "/fsx", "/lustre", "/gpfs",
-]
-ENV_VARS = ["SLURM_TMPDIR", "TMPDIR", "LOCAL_SCRATCH", "LSCRATCH", "SCRATCH"]
+ENV_VARS = ["TMPDIR"]
 
 def real_len(p: Path) -> int:
     try:
@@ -38,12 +34,11 @@ def candidate_roots() -> List[Path]:
         v = os.environ.get(ev)
         if v:
             roots.append(Path(v))
-    roots.extend(Path(r) for r in COMMON_ROOTS)
     roots.append(Path.cwd())
     return [r for r in roots if r.exists() and os.access(r, os.W_OK)]
 
 def ancestor_roots(src: Path) -> List[Path]:
-    roots: List[Path] = []
+    roots = []
     seen = set()
     cur = src.resolve().parent  # start at parent
     while True:
@@ -58,57 +53,104 @@ def ancestor_roots(src: Path) -> List[Path]:
         cur = cur.parent
     return roots
 
-def make_very_short(root: Path) -> Path | None:
-    """Create a new, short, unique directory under `root` (< MAX_LEN)."""
-    for prefix in ("i.", "x.", ".i.", ".x."):
-        try:
-            d = Path(tempfile.mkdtemp(prefix=prefix, dir=root))
-            if real_len(d) < MAX_LEN:
-                return d.resolve()
-            # too long -> remove empty dir and try next prefix
-            try:
-                d.rmdir()
-            except Exception:
-                pass
-        except Exception:
-            pass
+
+def make_very_short(root: Path, upper: int = 5) -> Path | None:
+    root_abs = root.resolve()
+    root_len = len(root_abs.as_posix())
+    prefixes = ("i.", "x.", ".i.", ".x.")
+
+    for pref in prefixes:
+        # remaining length for the random suffix
+        budget = MAX_LEN - root_len - 1 - len(pref)
+        if budget < 1:
+            continue
+        n = min(upper, budget)
+
+        suffix = secrets.token_hex((n + 1) // 2)[:n]
+        cand = root_abs / (pref + suffix)
+
+        if len(cand.as_posix()) <= MAX_LEN and not cand.exists():
+            return cand
+
     return None
+
+
+def _mapped_symlink_target(src_link: Path, src_root: Path, dst_root: Path, dst_path: Path) -> str:
+    raw = os.readlink(src_link)
+    target_abs = Path(raw) if os.path.isabs(raw) else (src_link.parent / raw).resolve(strict=False)
+    try:
+        rel = target_abs.relative_to(src_root)
+        mapped_abs = dst_root / rel
+        return os.path.relpath(mapped_abs, start=dst_path.parent)
+    except ValueError:
+        return raw
+
+def _replace_with_symlink(link_target: str, link_path: Path):
+    try:
+        link_path.unlink()
+    except FileNotFoundError:
+        pass
+    except IsADirectoryError:
+        try:
+            link_path.rmdir()
+        except OSError as e:
+            if e.errno != errno.ENOTEMPTY:
+                raise
+            raise RuntimeError(f"Refusing to replace non-empty directory: {link_path}") from e
+    os.symlink(link_target, link_path)
+
+def hardcopy(src, dst, fallback_copy=False):
+    src = Path(src).resolve()
+    dst = Path(dst).resolve()
+    dst.mkdir(parents=True, exist_ok=True)
+
+    for root, dirnames, filenames in os.walk(src, topdown=True, followlinks=False):
+        root = Path(root)
+        rel = root.relative_to(src)
+        dest_root = dst / rel
+        dest_root.mkdir(parents=True, exist_ok=True)
+
+        # Create entries for directories at this level
+        for name in dirnames:
+            s = root / name
+            d = dest_root / name
+            if s.is_symlink():
+                target = _mapped_symlink_target(s, src, dst, d)
+                _replace_with_symlink(target, d)
+            else:
+                d.mkdir(exist_ok=True)
+
+        # Files (regular + symlinks-to-files)
+        for name in filenames:
+            s = root / name
+            d = dest_root / name
+            if s.is_symlink():
+                target = _mapped_symlink_target(s, src, dst, d)
+                _replace_with_symlink(target, d)
+            else:
+                try:
+                    try:
+                        d.unlink()
+                    except FileNotFoundError:
+                        pass
+                    os.link(s, d)
+                except OSError:
+                    if fallback_copy:
+                        shutil.copy2(s, d)
 
 def link_or_copy_tree(src: Path, dst: Path) -> str:
     """
     Attempt to hardlink src/* into dst/.
-    Falls back to copy per file on EPERM/EACCES/EXDEV.
-    Returns "hardlink" if everything linked, otherwise "copy".
+    Returns "hardlink" if linked, otherwise "copy".
     """
-    ensure_dir(dst)
-    all_linked = True
-
-    # If obviously not same FS, we’ll copy everything (fast path)
-    if not same_filesystem(src, dst):
+    # If not same FS, we’ll copy everything
+    if not same_filesystem(src, dst.resolve().parent):
         shutil.copytree(src, dst, dirs_exist_ok=True)
         return "copy"
+    else:
+        hardcopy(src, dst)
+        return "hardlink"
 
-    for root, dirs, files in os.walk(src):
-        rel = Path(root).relative_to(src)
-        target_dir = dst / rel
-        ensure_dir(target_dir)
-        for d in dirs:
-            ensure_dir(target_dir / d)
-        for f in files:
-            s = Path(root) / f
-            t = target_dir / f
-            if s.is_symlink():
-                os.symlink(os.readlink(s), t)
-                continue
-            try:
-                os.link(s, t)
-            except OSError as e:
-                if e.errno in (errno.EPERM, errno.EACCES, errno.EXDEV):
-                    shutil.copy2(s, t)
-                    all_linked = False
-                else:
-                    raise
-    return "hardlink" if all_linked else "copy"
 
 def pick_target(src: Path) -> Tuple[Path, str]:
     """
@@ -117,6 +159,7 @@ def pick_target(src: Path) -> Tuple[Path, str]:
     - Else: try ancestors first (same FS), then env/common roots.
     For non-original, we’ll materialize and then report "hardlink" or "copy".
     """
+
     src_real = src.resolve()
     if real_len(src_real) < MAX_LEN:
         return src_real, "original"
@@ -141,10 +184,9 @@ def main():
     )
     ap.add_argument("--src", required=True, help="Path to existing IEDB directory")
     args = ap.parse_args()
-
     src = Path(args.src)
     if not src.is_dir():
-        print(f"SMART_LINK_IEDB: source not a directory: {src}", file=sys.stderr)
+        print(f"smart_link_iedb.py: source not a directory: {src}", file=sys.stderr)
         sys.exit(1)
 
     target, mode = pick_target(src)
@@ -159,7 +201,7 @@ def main():
         final_mode = link_or_copy_tree(src, target)
     except Exception as e:
         print(
-            "SMART_LINK_IEDB: materialization failed: "
+            "smart_link_iedb.py: materialization failed: "
             f"{e}. Provide a writable short path or bind-mount a short path.",
             file=sys.stderr,
         )
