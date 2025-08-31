@@ -13,22 +13,22 @@ MAX_LEN = 51  # path length limit
 
 ENV_VARS = ["TMPDIR"]
 
-def real_len(p: Path) -> int:
+def real_len(p):
     try:
         return len(p.resolve(strict=True).as_posix())
     except FileNotFoundError:
         return len(p.as_posix())
 
-def ensure_dir(p: Path) -> None:
+def ensure_dir(p):
     p.mkdir(parents=True, exist_ok=True)
 
-def same_filesystem(a: Path, b: Path) -> bool:
+def same_filesystem(a, b):
     try:
         return os.stat(a).st_dev == os.stat(b).st_dev
     except FileNotFoundError:
         return False
 
-def candidate_roots() -> List[Path]:
+def candidate_roots():
     roots: List[Path] = []
     for ev in ENV_VARS:
         v = os.environ.get(ev)
@@ -37,7 +37,7 @@ def candidate_roots() -> List[Path]:
     roots.append(Path.cwd())
     return [r for r in roots if r.exists() and os.access(r, os.W_OK)]
 
-def ancestor_roots(src: Path) -> List[Path]:
+def ancestor_roots(src):
     roots = []
     seen = set()
     cur = src.resolve().parent  # start at parent
@@ -54,7 +54,7 @@ def ancestor_roots(src: Path) -> List[Path]:
     return roots
 
 
-def make_very_short(root: Path, upper: int = 5) -> Path | None:
+def make_very_short(root, upper = 5):
     root_abs = root.resolve()
     root_len = len(root_abs.as_posix())
     prefixes = ("i.", "x.", ".i.", ".x.")
@@ -75,7 +75,7 @@ def make_very_short(root: Path, upper: int = 5) -> Path | None:
     return None
 
 
-def _mapped_symlink_target(src_link: Path, src_root: Path, dst_root: Path, dst_path: Path) -> str:
+def _mapped_symlink_target(src_link, src_root, dst_root, dst_path):
     raw = os.readlink(src_link)
     target_abs = Path(raw) if os.path.isabs(raw) else (src_link.parent / raw).resolve(strict=False)
     try:
@@ -85,7 +85,7 @@ def _mapped_symlink_target(src_link: Path, src_root: Path, dst_root: Path, dst_p
     except ValueError:
         return raw
 
-def _replace_with_symlink(link_target: str, link_path: Path):
+def _replace_with_symlink(link_target, link_path):
     try:
         link_path.unlink()
     except FileNotFoundError:
@@ -140,7 +140,7 @@ def hardcopy(src, dst, fallback_copy=True):
                         copy_type = "copy"
     return copy_type
 
-def link_or_copy_tree(src: Path, dst: Path) -> str:
+def link_or_copy_tree(src, dst):
     """
     Attempt to hardlink src/* into dst/.
     Returns "hardlink" if linked, otherwise "copy".
@@ -153,7 +153,7 @@ def link_or_copy_tree(src: Path, dst: Path) -> str:
         return hardcopy(src, dst)
 
 
-def pick_target(src: Path) -> Tuple[Path, str]:
+def pick_target(src):
     """
     Decide target and initial mode.
     - If src path already short: return (src, "original")
