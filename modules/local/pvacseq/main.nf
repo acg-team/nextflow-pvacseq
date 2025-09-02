@@ -1,6 +1,6 @@
 process PVACTOOLS_PVACSEQ {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_low'
 
     container "docker.io/griffithlab/pvactools:5.3.1"
     conda "${moduleDir}/environment.yml"

@@ -7,7 +7,7 @@ import sys
 import secrets
 
 from pathlib import Path
-from typing import List, Tuple
+from typing import List
 
 MAX_LEN = 51  # path length limit
 

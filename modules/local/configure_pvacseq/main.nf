@@ -51,15 +51,16 @@ process CONFIGURE_PVACSEQ {
 
     if [ -d "${iedb_mhc_i}" ]; then
         cd "${iedb_mhc_i}"
-        # Non existing pattern of tests to skip all of them
         ./configure -k "1"
         cd -
     fi
 
     if [ -d "${iedb_mhc_ii}" ]; then
         cd "${iedb_mhc_ii}"
-        # Non existing pattern of tests to skip all of them
-        # ./configure.py
+        # Run configure.py but ignore failure
+        if ! ./configure.py; then
+            echo "Warning: configure.py failed"
+        fi
         cd -
     fi
 
