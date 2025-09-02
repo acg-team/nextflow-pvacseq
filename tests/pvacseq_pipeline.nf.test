@@ -11,7 +11,7 @@ nextflow_pipeline {
                 fasta = "$projectDir/tests/data/chrY.fa"
                 hla_csv = "$projectDir/tests/data/small_hla.csv"
                 input = "$projectDir/tests/data/input/"
-                pvacseq_iedb = "$projectDir/iedb" // download iedb to this folder
+                pvacseq_iedb = "$projectDir/tests/iedb" // download iedb to this folder
                 extra_vep_args = "--database" // Use online VEP annotation
                 vep_genome = "GRCh38"
                 vep_cache_version = "102"

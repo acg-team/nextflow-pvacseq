@@ -13,16 +13,29 @@ nextflow_process {
                 }
                 workflow {
                     """
-                    input[0] = params.pvacseq_iedb
-                    input[1] = 'all'
+                    input[0] = "$projectDir/iedb"
+                    input[1] = "all"
+                    """
+                }
+            }
+            run("CONFIGURE_PVACSEQ") {
+                script "modules/local/configure_pvacseq/main.nf"
+                params {
+                    outdir = "$projectDir/tests/outdir"
+                }
+                process {
+                    """
+                    input[0] = CONFIGURE_PVACSEQ_IEDB.out.iedb_dir
+                    input[1] = CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_i
+                    input[2] = CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_ii
                     """
                 }
             }
         }
         when {
             params {
-                outdir       = "$projectDir/tests/outdir"
-                pvacseq_iedb = []
+                outdir = "$projectDir/tests/outdir"
+                pvacseq_iedb = "$projectDir/iedb"
             }
             process {
                 """
@@ -33,7 +46,7 @@ nextflow_process {
                     file("$projectDir/tests/data/vep_annotated.vcf", checkIfExists: true),
                 )])
                 input[1] =  "all"
-                input[2] = CONFIGURE_PVACSEQ_IEDB.out.iedb_dir
+                input[2] = CONFIGURE_PVACSEQ.out.iedb_dir
                 input[3] = []
                 input[4] = []
                 input[5] = []

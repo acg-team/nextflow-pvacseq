@@ -9,10 +9,12 @@ process CONFIGURE_PVACSEQ {
     container "docker.io/griffithlab/pvactools:5.3.1"
 
     input:
+    path iedb_dir
     path iedb_mhc_i
     path iedb_mhc_ii
 
     output:
+    path iedb_dir, emit: iedb_dir
     path 'env_config_done.txt', emit: config_file
 
     when:
