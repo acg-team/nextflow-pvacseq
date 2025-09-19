@@ -178,6 +178,7 @@ workflow PVACSEQ_PIPELINE {
 
     // Configure pvacseq before running it
     CONFIGURE_PVACSEQ (
+        CONFIGURE_PVACSEQ_IEDB.out.iedb_dir,
         CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_i,
         CONFIGURE_PVACSEQ_IEDB.out.iedb_mhc_ii
     )
@@ -200,7 +201,7 @@ workflow PVACSEQ_PIPELINE {
     PVACTOOLS_PVACSEQ (
         pvacseq_ready_ch,
         params.pvacseq_algorithm,
-        CONFIGURE_PVACSEQ_IEDB.out.iedb_dir,
+        CONFIGURE_PVACSEQ.out.iedb_dir,
         params.blastp_path ?: [],
         params.genes_of_interest ?: [],
         params.peptide_fasta ?: [],
