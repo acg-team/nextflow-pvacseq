@@ -2,16 +2,19 @@
 
 ## Introduction
 
-This pipeline is built using the **nf-core** template, providing a standardized structure. However, the pipeline is not yet published in the nf-core repository.
+This pipeline is built using the **nf-core** template, providing a standardized structure. However, the pipeline is not published in the nf-core repository.
 
-The pipeline is designed to run the **pVACseq** tool on multiple tumor samples in different environments.
+The pipeline is designed to run the **pVAC-seq** tool on multiple tumor samples in different environments.
 
-## Input Directory with VCF/MAF Files
+## Input / Output Options
 
-The pVACseq pipeline requires a directory with VCF or MAF files for each sample. Both file types are supported, and MAF files will automatically be converted to VCF format during processing. Use this parameter to specify its location. 
-```
---input '[path to directory]'
-```
+|Parameter|Description|Required|
+|---|---|---|
+|`--input`|Path to directory with VCF/MAF files. Both formats are supported; MAF will be converted.|yes|
+|`--hla_csv`|CSV file with HLA types per sample (`Sample_ID`, `HLA_Types`).|yes|
+|`--outdir`|Directory for pipeline results. |yes|
+
+
 
 ### Directory Structure
 
@@ -28,14 +31,7 @@ input_vcf_maf/
 ├── sample3.vcf
 ```
 
-## HLA Input
-
-The pVACseq pipeline requires an input file specifying HLA alleles for each sample. This is essential for neoantigen prediction. Use this parameter to specify its location. 
-```
---hla_csv '[path to file with hla information]'
-```
-
-### CSV Structure
+### HLA Input
 
 The HLA input file must be a comma-separated file (CSV) with the following columns:
 
@@ -65,82 +61,85 @@ SAMPLE_2,HLA-A29:02;HLA-B44:02;HLA-A02:01
 SAMPLE_3,HLA-A11:01;HLA-B35:01;HLA-C04:01
 ```
 
-## Reference FASTA File Input
+## Reference Genome Options
 
-The pVACseq pipeline requires a reference genome in FASTA format to match the input VCF or MAF files. Use this parameter to specify its location. 
-```
---fasta '[path to reference file]'
-```
+|Parameter|Description|Required|
+|---|---|---|
+|`--fasta`|Path to reference genome FASTA file. Must be uncompressed and match the input variant coordinates.|yes|
+
 
 ### Requirements
 
 - The FASTA file must be **unzipped**. Compressed versions (e.g., `.fa.gz`) are not currently supported.
 - Ensure the FASTA file corresponds to the correct reference genome version used for the input VCF/MAF files.
 
-## VEP Parameters
+## VEP Annotation
 
 The pVACseq pipeline uses VEP (Variant Effect Predictor) for annotating input variants. Below are the parameters required for the tool and their behavior in the pipeline:
 
-### Parameters
+### VEP Options
 
-1. **`vep_cache`**: Directory containing the VEP cache files.
-2. **`vep_cache_version`**: Version of the VEP cache to use. If not specified, the default version is `102`.
-3. **`vep_plugins`**: Directory containing VEP plugins.
+|Parameter|Description|Notes|
+|---|---|---|
+|`--vep_plugins`|Path to installed VEP plugins (e.g. Wildtypes, Frameshift).|If not set, plugins are downloaded automatically.|
+|`--vep_cache`|Path to local VEP cache directory.|If not set, cache can be auto-downloaded.|
+|`--vep_cache_version`|Version of VEP cache.|Must match cache used. Default: `102`.|
+|`--vep_genome`|Genome identifier used by VEP (e.g. `GRCh38`).|Must match cache used. Default: `GRCh38`.|
+|`--vep_species`|Species name used by VEP (e.g. `homo_sapiens`).|Must match cache used. Default: `homo_sapiens`.|
+|`--extra_vep_args`|Extra arguments to pass to VEP.|Optional.|
 
 ### Automatic download
 
 #### **`vep_plugins`**
 - If `vep_plugins` is not provided, the pipeline will download the required plugins automatically.
-- If you rerun the pipeline without specifying `vep_plugins`, it will detect the already downloaded plugins and fail due to conflicting directory states.
-- To avoid this issue, specify the downloaded plugin directory in subsequent runs using the `vep_plugins` parameter.
+- Specify the downloaded plugin directory in subsequent runs using the `vep_plugins` parameter.
 
-#### **`vep_cache` and `vep_cache_version`**
-- **When `vep_cache_version` is provided but `vep_cache` is not**:
-  - The pipeline will attempt to download the specified cache version.
-  - The same logic as `vep_plugins` applies: specify the cache directory (`vep_cache`) on reruns to avoid download conflicts.
-- **When `vep_cache_version` is not provided but `vep_cache` is specified**:
-  - The pipeline will fail because it cannot infer the cache version from the directory.
-- **When neither `vep_cache_version` nor `vep_cache` is provided**:
-  - The pipeline will use the default cache version (`102`) and download it automatically.
+#### Notes
 
-### Best Practices
-
-- Always specify the `vep_cache` and `vep_plugins` directories after the first run to avoid conflicts and unnecessary downloads.
-- Ensure the `vep_cache_version` matches the version of the `vep_cache` directory provided.
+> - Always specify the `vep_cache` and `vep_plugins` directories after the first run to avoid unnecessary downloads.
+> - Ensure the `vep_cache_version`, `vep_genome`, `vep_species` matche the version of the `vep_cache` directory provided.
 
 
 ## pVACseq Parameters
 
 The pVACseq pipeline provides a range of configurable options for neoantigen prediction. Below are the key parameters and their behavior:
 
-### Required Parameters
+## pVACseq Options
 
-1. **`pvacseq_algorithm`**: Specifies the algorithms to use for pVACseq predictions. This is required.
-2. **`pvacseq_peptide_length_i`**: List of peptide lengths for MHC class I predictions. Required if MHC class I algorithms are selected.
-3. **`pvacseq_peptide_length_ii`**: List of peptide lengths for MHC class II predictions. Required if MHC class II algorithms are selected.
+|Parameter|Description|Required|
+|---|---|---|
+|`--pvacseq_algorithm`|Epitope prediction algorithms to use (e.g. `NetMHCpan`, `MHCflurry`, etc.). Multiple indicated with "," delimiter.|yes|
+|`--pvacseq_iedb`|Path to local IEDB installation. If not set, required parts are downloaded automatically.|no|
+|`--blastp_path`|Path to BLASTP binary, if reference proteome similarity is used.|no|
+|`--genes_of_interest`|File listing genes of interest (one per line)|no|
+|`--peptide_fasta`|Custom peptide FASTA for similarity searches instead of BLASTP.|no|
+|`--ph_proximal_variants_vcf`|VCF with phased proximal variants (gzipped + tabix indexed).|no|
+|`--extra_pvacseq_args`|Extra arguments to pass to `pvacseq`.|no|
+
 #### **`pvacseq_iedb`**
-- Path to the IEDB directory.
-- If not provided:
-  - The pipeline will automatically download the required IEDB tools for MHC class I and/or MHC class II based on the specified algorithms.
-  - Only the required components (`mhc_i`, `mhc_ii`, or both) will be downloaded.
-- **Rerun Behavior**:
-  - If IEDB is downloaded automatically, specify the downloaded path in the `pvacseq_iedb` parameter on reruns to avoid conflicts.
 
-### Optional Parameters
-#### **`pvacseq_advanced_options`**
-- Dictionary of advanced pVACseq options.
-- Example:
-  ```groovy
-  pvacseq_advanced_options = [
-      "binding-threshold": 500,
-      "minimum-fold-change": 1.0
-  ]
-  ```
-- Allows customization of parameters like `binding-threshold` and other algorithm-specific options.
+- Path to the IEDB installation directory.
+
+- Behavior depends on what you provide:
+
+    - **If not provided or folder is empty**:
+        The pipeline will automatically download the required IEDB components (`mhc_i`, `mhc_ii`, or both) based on the algorithms selected.
+
+    - **If provided and the folder contains files**:
+        The pipeline will assume it already contains a valid IEDB installation with `mhc_i` and/or `mhc_ii` subdirectories.
+
+⚠️ **Important limitation**:
+The full path to the IEDB directory **must be shorter than 57 characters**.
+
+- If the path exceeds this limit, the pipeline will try to create a hard link in a shorter temporary path.
+
+- If hard linking is not possible, the files will be copied instead.
+
+- After pipeline execution, the temporary IEDB directory is automatically removed.
 
 ## Running the Pipeline
 
-To run the pVACseq pipeline, provide all required parameters in a configuration file and execute the pipeline using the following command:
+To run the pipeline, provide all required parameters in a configuration file and execute the pipeline using the following command:
 
 ```bash
 nextflow run main.nf -profile <conda/docker>
@@ -148,10 +147,8 @@ nextflow run main.nf -profile <conda/docker>
 
 ### Test Profile
 
-A `test` profile is available for running the pipeline with test data. The test dataset includes a MAF file derived from the TCGA dataset of a human tumor. Since pVACseq supports only human data, running the test profile requires large files such as the reference genome and associated databases.
+A `test` profile is available for running the pipeline with test data. The test dataset includes a MAF file derived from the TCGA dataset of a human tumor.
 
-### Resources Required for Testing
-
-- **Time**: The test run will take approximately **1 hour** to complete.
-- **Disk Space**: At least **50GB** of storage is needed to download and prepare all necessary databases and tools.
-
+```bash
+nextflow run main.nf -profile test,<conda/docker>
+```

@@ -1,8 +1,4 @@
-# nf-core/pvacseq: Citations
-
-## [nf-core](https://pubmed.ncbi.nlm.nih.gov/32055031/)
-
-> Ewels PA, Peltzer A, Fillinger S, Patel H, Alneberg J, Wilm A, Garcia MU, Di Tommaso P, Nahnsen S. The nf-core framework for community-curated bioinformatics pipelines. Nat Biotechnol. 2020 Mar;38(3):276-278. doi: 10.1038/s41587-020-0439-x. PubMed PMID: 32055031.
+# nexflow_pvacseq: Citations
 
 ## [Nextflow](https://pubmed.ncbi.nlm.nih.gov/28398311/)
 
@@ -21,6 +17,8 @@
   > Jasreet Hundal, Susanna Kiwala, Yang-Yang Feng, Connor J. Liu, Ramaswamy Govindan, William C. Chapman, Ravindra Uppaluri, S. Joshua Swamidass, Obi L. Griffith, Elaine R. Mardis, and Malachi Griffith. Accounting for proximal variants improves neoantigen prediction. Nature Genetics. 2018, DOI: 10.1038/s41588-018-0283-9. PMID: 30510237.
 
   > Jasreet Hundal, Beatriz M. Carreno, Allegra A. Petti, Gerald P. Linette, Obi L. Griffith, Elaine R. Mardis, and Malachi Griffith. pVACseq: A genome-guided in silico approach to identifying tumor neoantigens. Genome Medicine. 2016, 8:11, DOI: 10.1186/s13073-016-0264-5. PMID: 26825632.
+
+  > Huiming Xia, My H. Hoang, Evelyn Schmidt, Susanna Kiwala, Joshua McMichael, Zachary L. Skidmore, Bryan Fisk, Jonathan J. Song, Jasreet Hundal, Thomas Mooney, Jason R. Walker, S. Peter Goedegebuure, Christopher A. Miller, William E. Gillanders, Obi L. Griffith, Malachi Griffith. pVACview: an interactive visualization tool for efficient neoantigen prioritization and selection. Genome Medicine. 2024, 16:132, DOI: 10.1186/s13073-024-01384-7. PMID: 39538339.
 
 - [VEP](https://www.ensembl.org/info/docs/tools/vep/index.html)
 
@@ -51,3 +49,10 @@
 - [Singularity](https://pubmed.ncbi.nlm.nih.gov/28494014/)
 
   > Kurtzer GM, Sochat V, Bauer MW. Singularity: Scientific containers for mobility of compute. PLoS One. 2017 May 11;12(5):e0177459. doi: 10.1371/journal.pone.0177459. eCollection 2017. PubMed PMID: 28494014; PubMed Central PMCID: PMC5426675.
+
+## Nextflow modules
+- [nf-core](https://pubmed.ncbi.nlm.nih.gov/32055031/)
+  > Ewels PA, Peltzer A, Fillinger S, Patel H, Alneberg J, Wilm A, Garcia MU, Di Tommaso P, Nahnsen S. The nf-core framework for community-curated bioinformatics pipelines. Nat Biotechnol. 2020 Mar;38(3):276-278. doi: 10.1038/s41587-020-0439-x. PubMed PMID: 32055031.
+
+- [nf-test](https://doi.org/10.1101/2024.05.25.595877)
+  > Forer, L., & Schönherr, S. (2024). Improving the Reliability and Quality of Nextflow Pipelines with nf-test. bioRxiv. https://doi.org/10.1101/2024.05.25.595877

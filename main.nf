@@ -2,12 +2,6 @@
 
 nextflow.enable.dsl = 2
 
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    CONSTANT PARAMETER VALUES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-params.NO_FILE = "$projectDir/assets/NO_FILE"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -15,7 +9,7 @@ params.NO_FILE = "$projectDir/assets/NO_FILE"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { PVACSEQ                 } from './workflows/pvacseq'
+include { PVACSEQ_PIPELINE        } from './workflows/pvacseq'
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_pvacseq_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_pvacseq_pipeline'
 
@@ -29,7 +23,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_pvac
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
-workflow NFCORE_PVACSEQ {
+workflow NF_PVACSEQ {
 
     take:
     maf_files // channel: directory with maf files read in from --input
@@ -39,7 +33,7 @@ workflow NFCORE_PVACSEQ {
     //
     // WORKFLOW: Run pipeline
     //
-    PVACSEQ (
+    PVACSEQ_PIPELINE (
         maf_files,
         vcf_files,
         params.fasta,
@@ -47,8 +41,9 @@ workflow NFCORE_PVACSEQ {
     )
 
     emit:
-    multiqc_report = PVACSEQ.out.multiqc_report // channel: /path/to/multiqc_report.html
-
+    multiqc_report = PVACSEQ_PIPELINE.out.multiqc_report // channel: /path/to/multiqc_report.html
+    iedb_dir = PVACSEQ_PIPELINE.out.iedb_dir
+    mode = PVACSEQ_PIPELINE.out.mode
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -65,12 +60,9 @@ workflow {
     //
     PIPELINE_INITIALISATION (
         params.version,
-        params.help,
         params.validate_params,
-        params.monochrome_logs,
         args,
-        params.outdir,
-        params.input
+        params.outdir
     )
 
 
@@ -90,14 +82,9 @@ workflow {
         }
 
     //
-    // Combine MAF and VCF channels into one
-    //
-    ch_input_files = ch_maf_files.mix(ch_vcf_files)
-
-    //
     // WORKFLOW: Run main workflow
     //
-    NFCORE_PVACSEQ (
+    NF_PVACSEQ (
         ch_maf_files,
         ch_vcf_files
     )
@@ -106,13 +93,9 @@ workflow {
     // SUBWORKFLOW: Run completion tasks
     //
     PIPELINE_COMPLETION (
-        params.email,
-        params.email_on_fail,
-        params.plaintext_email,
-        params.outdir,
         params.monochrome_logs,
-        params.hook_url,
-        NFCORE_PVACSEQ.out.multiqc_report
+        NF_PVACSEQ.out.iedb_dir,
+        NF_PVACSEQ.out.mode
     )
 }
 
