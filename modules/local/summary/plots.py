@@ -66,7 +66,7 @@ def plot_neoantigen_distribution(df: pd.DataFrame, out_dir: str, top_n: int = 30
         data=counts, x='Gene Name', y='count', order=gene_order, ax=ax,
         color='#3C3C3C', size=3, jitter=0.12, alpha=0.6,
     )
-    ax.set_title(f"Per-Patient Neoantigen Count Distribution — Top {top_n} Genes", fontsize=24, fontweight='normal', pad=20)
+    ax.set_title(f"Per-Patient Neoantigen Count Distribution - Top {top_n} Genes", fontsize=24, fontweight='normal', pad=20)
     ax.set_xlabel("Gene", fontsize=22)
     ax.set_ylabel("No. of neoantigens per patient", fontsize=22)
     ax.tick_params(axis='x', rotation=90, labelsize=13)
@@ -136,12 +136,12 @@ def plot_mutation_vs_hla(
     )
     if annotate:
         ax.set_title(
-            f"Mutation x Top {top_alleles} HLA Alleles — Annotated Frequency",
+            f"Mutation x Top {top_alleles} HLA Alleles - Annotated Frequency",
             fontsize=24, fontweight='normal', pad=20,
         )
     else:
         ax.set_title(
-            f"Mutation x HLA Alleles — Top {top_mutations} Mutations, Top {top_alleles} Alleles",
+            f"Mutation x HLA Alleles - Top {top_mutations} Mutations, Top {top_alleles} Alleles",
             fontsize=24, fontweight='normal', pad=20,
         )
     ax.set_xlabel("HLA allele", fontsize=20)
