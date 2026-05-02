@@ -6,7 +6,7 @@ process CONFIGURE_PVACSEQ {
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container "docker.io/griffithlab/pvactools:5.3.1"
+    container "docker.io/griffithlab/pvactools:6.0.5"
 
     input:
     path iedb_dir

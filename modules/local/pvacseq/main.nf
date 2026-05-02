@@ -2,7 +2,7 @@ process PVACTOOLS_PVACSEQ {
     tag "$meta.id"
     label 'process_medium'
 
-    container "docker.io/griffithlab/pvactools:5.3.1"
+    container "docker.io/griffithlab/pvactools:6.0.5"
     conda "${moduleDir}/environment.yml"
 
     input:
@@ -22,11 +22,11 @@ process PVACTOOLS_PVACSEQ {
     tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.tsv_*")                                         , optional: true, emit: mhc_i_chunks
     tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.fasta")                                         , optional: true, emit: mhc_i_fasta
     tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.net_chop.fa")                                   , optional: true, emit: mhc_i_net_chop_fasta
-    tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.all_epitopes.tsv")                              , optional: true, emit: mhc_i_all_epitopes
-    tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.filtered.tsv")                                  , optional: true, emit: mhc_i_filtered
-    tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.all_epitopes.aggregated.tsv")                   , optional: true, emit: mhc_i_all_epitopes_aggregated
-    tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.all_epitopes.aggregated.tsv.reference_matches") , optional: true, emit: mhc_i_reference_matches
-    tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.all_epitopes.aggregated.metrics.json")          , optional: true, emit: mhc_i_metrics
+    tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.MHC_I.all_epitopes.tsv")                              , optional: true, emit: mhc_i_all_epitopes
+    tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.MHC_I.filtered.tsv")                                  , optional: true, emit: mhc_i_filtered
+    tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.MHC_I.all_epitopes.aggregated.tsv")                   , optional: true, emit: mhc_i_all_epitopes_aggregated
+    tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.MHC_I.all_epitopes.aggregated.tsv.reference_matches") , optional: true, emit: mhc_i_reference_matches
+    tuple val(meta), path("${prefix}/MHC_Class_I/${sample_name}.MHC_I.all_epitopes.aggregated.metrics.json")          , optional: true, emit: mhc_i_metrics
     tuple val(meta), path("${prefix}/MHC_Class_I/*.R")                                                          , optional: true, emit: mhc_i_r_files
     tuple val(meta), path("${prefix}/MHC_Class_I/www")                                                          , optional: true, emit: mhc_i_www
     tuple val(meta), path("${prefix}/MHC_Class_I/log")                                                          , optional: true, emit: mhc_i_log
@@ -35,22 +35,22 @@ process PVACTOOLS_PVACSEQ {
     tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.tsv_*")                                        , optional: true, emit: mhc_ii_chunks
     tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.fasta")                                        , optional: true, emit: mhc_ii_fasta
     tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.net_chop.fa")                                  , optional: true, emit: mhc_ii_net_chop_fasta
-    tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.all_epitopes.tsv")                             , optional: true, emit: mhc_ii_all_epitopes
-    tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.filtered.tsv")                                 , optional: true, emit: mhc_ii_filtered
-    tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.all_epitopes.aggregated.tsv")                  , optional: true, emit: mhc_ii_all_epitopes_aggregated
-    tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.all_epitopes.aggregated.tsv.reference_matches"), optional: true, emit: mhc_ii_reference_matches
-    tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.all_epitopes.aggregated.metrics.json")         , optional: true, emit: mhc_ii_metrics
+    tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.MHC_II.all_epitopes.tsv")                             , optional: true, emit: mhc_ii_all_epitopes
+    tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.MHC_II.filtered.tsv")                                 , optional: true, emit: mhc_ii_filtered
+    tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.MHC_II.all_epitopes.aggregated.tsv")                  , optional: true, emit: mhc_ii_all_epitopes_aggregated
+    tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.MHC_II.all_epitopes.aggregated.tsv.reference_matches"), optional: true, emit: mhc_ii_reference_matches
+    tuple val(meta), path("${prefix}/MHC_Class_II/${sample_name}.MHC_II.all_epitopes.aggregated.metrics.json")         , optional: true, emit: mhc_ii_metrics
     tuple val(meta), path("${prefix}/MHC_Class_II/*.R")                                                         , optional: true, emit: mhc_ii_r_files
     tuple val(meta), path("${prefix}/MHC_Class_II/www")                                                         , optional: true, emit: mhc_ii_www
     tuple val(meta), path("${prefix}/MHC_Class_II/log")                                                         , optional: true, emit: mhc_ii_log
 
     tuple val(meta), path("${prefix}/combined/${sample_name}.fasta")                                            , optional: true, emit: combined_fasta
     tuple val(meta), path("${prefix}/combined/${sample_name}.net_chop.fa")                                      , optional: true, emit: combined_net_chop_fasta
-    tuple val(meta), path("${prefix}/combined/${sample_name}.all_epitopes.tsv")                                 , optional: true, emit: combined_all_epitopes
-    tuple val(meta), path("${prefix}/combined/${sample_name}.filtered.tsv")                                     , optional: true, emit: combined_filtered
-    tuple val(meta), path("${prefix}/combined/${sample_name}.all_epitopes.aggregated.tsv")                      , optional: true, emit: combined_all_epitopes_aggregated
-    tuple val(meta), path("${prefix}/combined/${sample_name}.all_epitopes.aggregated.tsv.reference_matches")    , optional: true, emit: combined_reference_matches
-    tuple val(meta), path("${prefix}/combined/${sample_name}.all_epitopes.aggregated.metrics.json")             , optional: true, emit: combined_metrics
+    tuple val(meta), path("${prefix}/combined/${sample_name}.Combined.all_epitopes.tsv")                                 , optional: true, emit: combined_all_epitopes
+    tuple val(meta), path("${prefix}/combined/${sample_name}.Combined.filtered.tsv")                                     , optional: true, emit: combined_filtered
+    tuple val(meta), path("${prefix}/combined/${sample_name}.Combined.all_epitopes.aggregated.tsv")                      , optional: true, emit: combined_all_epitopes_aggregated
+    tuple val(meta), path("${prefix}/combined/${sample_name}.Combined.all_epitopes.aggregated.tsv.reference_matches")    , optional: true, emit: combined_reference_matches
+    tuple val(meta), path("${prefix}/combined/${sample_name}.Combined.all_epitopes.aggregated.metrics.json")             , optional: true, emit: combined_metrics
     tuple val(meta), path("${prefix}/combined/*.R")                                                             , optional: true, emit: combined_r_files
     tuple val(meta), path("${prefix}/combined/www")                                                             , optional: true, emit: combined_www
 
@@ -112,11 +112,11 @@ process PVACTOOLS_PVACSEQ {
     touch ${prefix}/MHC_Class_I/${sample_name}.tsv_1
     touch ${prefix}/MHC_Class_I/${sample_name}.fasta
     touch ${prefix}/MHC_Class_I/${sample_name}.net_chop.fa
-    touch ${prefix}/MHC_Class_I/${sample_name}.all_epitopes.tsv
-    touch ${prefix}/MHC_Class_I/${sample_name}.filtered.tsv
-    touch ${prefix}/MHC_Class_I/${sample_name}.all_epitopes.aggregated.tsv
-    touch ${prefix}/MHC_Class_I/${sample_name}.all_epitopes.aggregated.tsv.reference_matches
-    touch ${prefix}/MHC_Class_I/${sample_name}.all_epitopes.aggregated.metrics.json
+    touch ${prefix}/MHC_Class_I/${sample_name}.MHC_I.all_epitopes.tsv
+    touch ${prefix}/MHC_Class_I/${sample_name}.MHC_I.filtered.tsv
+    touch ${prefix}/MHC_Class_I/${sample_name}.MHC_I.all_epitopes.aggregated.tsv
+    touch ${prefix}/MHC_Class_I/${sample_name}.MHC_I.all_epitopes.aggregated.tsv.reference_matches
+    touch ${prefix}/MHC_Class_I/${sample_name}.MHC_I.all_epitopes.aggregated.metrics.json
     touch ${prefix}/MHC_Class_I/ui.R
     touch ${prefix}/MHC_Class_I/app.R
     touch ${prefix}/MHC_Class_I/server.R
@@ -134,11 +134,11 @@ process PVACTOOLS_PVACSEQ {
     touch ${prefix}/MHC_Class_II/${sample_name}.tsv_1
     touch ${prefix}/MHC_Class_II/${sample_name}.fasta
     touch ${prefix}/MHC_Class_II/${sample_name}.net_chop.fa
-    touch ${prefix}/MHC_Class_II/${sample_name}.all_epitopes.tsv
-    touch ${prefix}/MHC_Class_II/${sample_name}.filtered.tsv
-    touch ${prefix}/MHC_Class_II/${sample_name}.all_epitopes.aggregated.tsv
-    touch ${prefix}/MHC_Class_II/${sample_name}.all_epitopes.aggregated.tsv.reference_matches
-    touch ${prefix}/MHC_Class_II/${sample_name}.all_epitopes.aggregated.metrics.json
+    touch ${prefix}/MHC_Class_II/${sample_name}.MHC_II.all_epitopes.tsv
+    touch ${prefix}/MHC_Class_II/${sample_name}.MHC_II.filtered.tsv
+    touch ${prefix}/MHC_Class_II/${sample_name}.MHC_II.all_epitopes.aggregated.tsv
+    touch ${prefix}/MHC_Class_II/${sample_name}.MHC_II.all_epitopes.aggregated.tsv.reference_matches
+    touch ${prefix}/MHC_Class_II/${sample_name}.MHC_II.all_epitopes.aggregated.metrics.json
     touch ${prefix}/MHC_Class_II/ui.R
     touch ${prefix}/MHC_Class_II/app.R
     touch ${prefix}/MHC_Class_II/server.R
@@ -154,11 +154,11 @@ process PVACTOOLS_PVACSEQ {
     # Combined outputs
     touch ${prefix}/combined/${sample_name}.fasta
     touch ${prefix}/combined/${sample_name}.net_chop.fa
-    touch ${prefix}/combined/${sample_name}.all_epitopes.tsv
-    touch ${prefix}/combined/${sample_name}.filtered.tsv
-    touch ${prefix}/combined/${sample_name}.all_epitopes.aggregated.tsv
-    touch ${prefix}/combined/${sample_name}.all_epitopes.aggregated.tsv.reference_matches
-    touch ${prefix}/combined/${sample_name}.all_epitopes.aggregated.metrics.json
+    touch ${prefix}/combined/${sample_name}.Combined.all_epitopes.tsv
+    touch ${prefix}/combined/${sample_name}.Combined.filtered.tsv
+    touch ${prefix}/combined/${sample_name}.Combined.all_epitopes.aggregated.tsv
+    touch ${prefix}/combined/${sample_name}.Combined.all_epitopes.aggregated.tsv.reference_matches
+    touch ${prefix}/combined/${sample_name}.Combined.all_epitopes.aggregated.metrics.json
     touch ${prefix}/combined/ui.R
     touch ${prefix}/combined/app.R
     touch ${prefix}/combined/server.R

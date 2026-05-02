@@ -8,7 +8,7 @@ dependencies:
   - conda-forge::setuptools=65.5.1
   - pip:
     - tensorflow==2.15.1
-    - pvactools==5.3.1
+    - pvactools==6.0.5
     - git+https://github.com/griffithlab/bigmhc.git#egg=bigmhc
     - git+https://github.com/griffithlab/deepimmuno.git#egg=deepimmuno
     - mhcflurry==2.0.6
