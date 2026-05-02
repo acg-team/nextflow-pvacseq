@@ -37,7 +37,16 @@ The pipeline performs the following steps:
 
     - Runs [pVACseq](https://pvactools.readthedocs.io/en/latest/tools/pvacseq.html) to predict tumor neoantigens.
 
-6. **MultiQC**
+6. **Summary**
+
+    - Uses the `filtered.tsv` output files (MHC_I, MHC_II, or Combined) to generate neoantigen summary visualisations across all samples:
+      - Per-patient neoantigen count distribution across top genes
+      - Top genes by total neoantigen count
+      - Mutation vs. HLA allele heatmap (unannotated and annotated)
+      - Neoantigen distribution per chromosome
+    - All plots are embedded as HTML into the **Summary** section of the MultiQC report.
+
+7. **MultiQC**
 
     - Aggregates results with [MultiQC](http://multiqc.info/).
 

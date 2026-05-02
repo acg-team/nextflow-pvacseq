@@ -8,6 +8,7 @@ include { MAF2VCF                } from '../modules/local/maf2vcf/main'
 include { ENSEMBLVEP_VEP         } from '../modules/local/vep/main'
 include { PVACTOOLS_PVACSEQ      } from '../modules/local/pvacseq/main'
 include { CONFIGURE_PVACSEQ      } from '../modules/local/configure_pvacseq/main'
+include { PVACSEQ_SUMMARY        } from '../modules/local/summary/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 
 include { paramsSummaryMap       } from 'plugin/nf-schema'
@@ -208,10 +209,32 @@ workflow PVACSEQ_PIPELINE {
         params.ph_proximal_variants_vcf ?: []
     )
 
-    ch_multiqc_files = ch_multiqc_files.mix(PVACTOOLS_PVACSEQ.out.mhc_i_filtered.map { meta,file -> [file]})
-    ch_multiqc_files = ch_multiqc_files.mix(PVACTOOLS_PVACSEQ.out.mhc_ii_filtered.map { meta,file -> [file]})
-
     ch_versions = ch_versions.mix(PVACTOOLS_PVACSEQ.out.versions.first())
+
+    //
+    // MODULE: Summary plots
+    //
+    ch_summary_split = PVACTOOLS_PVACSEQ.out.combined_filtered
+        .join(PVACTOOLS_PVACSEQ.out.mhc_i_filtered, remainder: true)
+        .join(PVACTOOLS_PVACSEQ.out.mhc_ii_filtered, remainder: true)
+        .flatMap { meta, combined, mhc_i, mhc_ii ->
+            if (combined) return [[meta.id, combined]]
+            def pairs = []
+            if (mhc_i)  pairs << [meta.id, mhc_i]
+            if (mhc_ii) pairs << [meta.id, mhc_ii]
+            return pairs
+        }
+        .multiMap { name, file ->
+            files: file
+            names: name
+        }
+
+    PVACSEQ_SUMMARY(
+        ch_summary_split.files.collect(),
+        ch_summary_split.names.collect()
+    )
+
+    ch_multiqc_files = ch_multiqc_files.mix(PVACSEQ_SUMMARY.out.multiqc_files)
 
     //
     // Collate and save software versions
@@ -245,6 +268,7 @@ workflow PVACSEQ_PIPELINE {
 
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
+    figures        = PVACSEQ_SUMMARY.out.figures  // channel: [ path(*.png) ]
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
     iedb_dir       = CONFIGURE_PVACSEQ_IEDB.out.iedb_dir
     mode           = CONFIGURE_PVACSEQ_IEDB.out.mode

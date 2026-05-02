@@ -152,7 +152,7 @@ def methodsDescriptionText(mqc_methods_yaml) {
       Ewels P, Peltzer A, Fillinger S, et&nbsp;al. <em>Nature Biotechnology</em> (2020).
       doi: <a href="https://doi.org/10.1038/s41587-020-0439-x">10.1038/s41587-020-0439-x</a></li>
 </ul>
-""".stripIndent().trim()
+""".stripIndent().trim().replaceAll("\n", " ")
     meta["tool_bibliography"] = """
 <p><strong>pVACseq / pVACtools</strong><br/>
 Hundal J, Kiwala S, McMichael J, Miller CA, Wollam AT, Xia H, Liu CJ, Zhao S, Feng Y-Y, Graubert AP, Wollam AZ, Neichin J, Neveau M, Walker J, Gillanders WE, Mardis ER, Griffith OL, Griffith M.
@@ -182,7 +182,7 @@ Ewels P, Peltzer A, Fillinger S, Patel H, Alneberg J, Wilm A, Garcia MU, Di Tomm
 The nf-core framework for community-curated bioinformatics pipelines. <em>Nature Biotechnology</em>. 2020 Feb 13.
 doi: <a href="https://doi.org/10.1038/s41587-020-0439-x">10.1038/s41587-020-0439-x</a>.
 </p>
-""".stripIndent().trim()
+""".stripIndent().trim().replaceAll("\n", " ")
 
     // meta["tool_citations"] = toolCitationText().replaceAll(", \\.", ".").replaceAll("\\. \\.", ".").replaceAll(", \\.", ".")
     // meta["tool_bibliography"] = toolBibliographyText()
