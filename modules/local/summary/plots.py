@@ -28,17 +28,30 @@ def load_filtered_files(file_paths: list[str], sample_names: list[str]) -> pd.Da
             print(f"Warning: {file_path} not found, skipping.", file=sys.stderr)
             continue
         df = pd.read_csv(file_path, sep='\t', low_memory=False)
-        df['Patient_Short'] = name[:25]
+        df['Sample_ID'] = name
         dfs.append(df)
     if not dfs:
         return pd.DataFrame()
     return pd.concat(dfs, ignore_index=True)
 
+def plot_top_genes(df: pd.DataFrame, out_dir: str, top_n: int = 30):
+    """Bar chart: top N genes by total neoantigen count."""
+    counts = df['Gene Name'].value_counts().head(top_n)
+    fig, ax = plt.subplots(figsize=(20, 8))
+    counts.plot(kind='bar', ax=ax, color=BAR_COLOR, edgecolor='white')
+    ax.set_title(f"Top {top_n} Genes by Neoantigen Count", fontsize=24, fontweight='normal', pad=20)
+    ax.set_xlabel("Gene", fontsize=22)
+    ax.set_ylabel("No. of neoantigens", fontsize=22)
+    ax.tick_params(axis='x', rotation=90, labelsize=14)
+    ax.tick_params(axis='y', labelsize=13)
+    ax.grid(True, axis='both')
+    fig.tight_layout()
+    save_figure(fig, out_dir, "top_genes_by_neoantigen_count.png")
 
 def plot_neoantigen_distribution(df: pd.DataFrame, out_dir: str, top_n: int = 30):
     """Boxplot: per-patient neoantigen count distribution for the top N genes."""
     counts = (
-        df.groupby(['Gene Name', 'Patient_Short'])
+        df.groupby(['Gene Name', 'Sample_ID'])
         .size()
         .reset_index(name='count')
     )
@@ -74,22 +87,6 @@ def plot_neoantigen_distribution(df: pd.DataFrame, out_dir: str, top_n: int = 30
     ax.grid(True, axis='y')
     fig.tight_layout()
     save_figure(fig, out_dir, "per_patient_neoantigen_count_distribution.png")
-
-
-def plot_top_genes(df: pd.DataFrame, out_dir: str, top_n: int = 30):
-    """Bar chart: top N genes by total neoantigen count."""
-    counts = df['Gene Name'].value_counts().head(top_n)
-    fig, ax = plt.subplots(figsize=(20, 8))
-    counts.plot(kind='bar', ax=ax, color=BAR_COLOR, edgecolor='white')
-    ax.set_title(f"Top {top_n} Genes by Neoantigen Count", fontsize=24, fontweight='normal', pad=20)
-    ax.set_xlabel("Gene", fontsize=22)
-    ax.set_ylabel("No. of neoantigens", fontsize=22)
-    ax.tick_params(axis='x', rotation=90, labelsize=14)
-    ax.tick_params(axis='y', labelsize=13)
-    ax.grid(True, axis='both')
-    fig.tight_layout()
-    save_figure(fig, out_dir, "top_genes_by_neoantigen_count.png")
-
 
 def plot_mutation_vs_hla(
     df: pd.DataFrame,
@@ -155,10 +152,10 @@ def plot_mutation_vs_hla(
 
 def plot_chromosome_distribution(df: pd.DataFrame, out_dir: str):
     """Boxplot: per-patient neoantigen count per chromosome."""
-    sub = df[['Chromosome', 'Patient_Short']].dropna()
+    sub = df[['Chromosome', 'Sample_ID']].dropna()
     if sub.empty:
         return
-    counts = sub.groupby(['Patient_Short', 'Chromosome']).size().reset_index(name='count')
+    counts = sub.groupby(['Sample_ID', 'Chromosome']).size().reset_index(name='count')
 
     counts['ChromosomeCore'] = (
         counts['Chromosome']
@@ -200,8 +197,8 @@ def _encode_image(path: str) -> str:
 
 def write_multiqc_yaml(out_dir: str):
     plot_files = [
-        "per_patient_neoantigen_count_distribution.png",
         "top_genes_by_neoantigen_count.png",
+        "per_patient_neoantigen_count_distribution.png",
         "mutation_vs_all_hla_alleles.png",
         "mutation_vs_top_hla_alleles_annotated.png",
         "chromosome_neoantigen_boxplot.png",
@@ -243,8 +240,9 @@ def main():
         print("No data loaded. Exiting.", file=sys.stderr)
         sys.exit(1)
 
-    plot_neoantigen_distribution(df, args.out_dir)
+
     plot_top_genes(df, args.out_dir)
+    plot_neoantigen_distribution(df, args.out_dir)
     plot_mutation_vs_hla(df, args.out_dir, "mutation_vs_all_hla_alleles.png",
                          top_alleles=25, top_mutations=15, annotate=False)
     plot_mutation_vs_hla(df, args.out_dir, "mutation_vs_top_hla_alleles_annotated.png",

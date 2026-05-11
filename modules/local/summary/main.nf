@@ -3,6 +3,9 @@ process PVACSEQ_SUMMARY {
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'docker://jupyter/scipy-notebook:python-3.11.8' :
+        'jupyter/scipy-notebook:python-3.11.8' }"
 
     input:
     path filtered_files
