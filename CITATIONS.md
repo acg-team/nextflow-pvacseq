@@ -10,6 +10,9 @@
 
   > Ewels P, Magnusson M, Lundin S, Käller M. MultiQC: summarize analysis results for multiple tools and samples in a single report. Bioinformatics. 2016 Oct 1;32(19):3047-8. doi: 10.1093/bioinformatics/btw354. Epub 2016 Jun 16. PubMed PMID: 27312411; PubMed Central PMCID: PMC5039924.
 
+- [nextflow summary](https://doi.org/10.1016/j.gpb.2018.06.003)
+  > Wu, J., Zhao, W., Zhou, B., Su, Z., Gu, X., Zhou, Z., & Chen, S. (2018). TSNAdb: A Database for Tumor-Specific Neoantigens from Immunogenomics Data Analysis. Genomics, Proteomics & Bioinformatics, 16(4), 276–282. https://doi.org/10.1016/j.gpb.2018.06.003
+
 - [pVACseq](https://pvactools.readthedocs.io/en/latest/index.html)
 
   > Jasreet Hundal+, Susanna Kiwala+, Joshua McMichael, Christopher A Miller, Alexander T Wollam, Huiming Xia, Connor J Liu, Sidi Zhao, Yang-Yang Feng, Aaron P Graubert, Amber Z Wollam, Jonas Neichin, Megan Neveau, Jason Walker, William E Gillanders, Elaine R Mardis, Obi L Griffith, Malachi Griffith. pVACtools: a computational toolkit to select and visualize cancer neoantigens. Cancer Immunology Research. 2020 Mar;8(3):409-420. DOI: 10.1158/2326-6066.CIR-19-0401. PMID: 31907209. (+) equal contribution.
@@ -19,6 +22,7 @@
   > Jasreet Hundal, Beatriz M. Carreno, Allegra A. Petti, Gerald P. Linette, Obi L. Griffith, Elaine R. Mardis, and Malachi Griffith. pVACseq: A genome-guided in silico approach to identifying tumor neoantigens. Genome Medicine. 2016, 8:11, DOI: 10.1186/s13073-016-0264-5. PMID: 26825632.
 
   > Huiming Xia, My H. Hoang, Evelyn Schmidt, Susanna Kiwala, Joshua McMichael, Zachary L. Skidmore, Bryan Fisk, Jonathan J. Song, Jasreet Hundal, Thomas Mooney, Jason R. Walker, S. Peter Goedegebuure, Christopher A. Miller, William E. Gillanders, Obi L. Griffith, Malachi Griffith. pVACview: an interactive visualization tool for efficient neoantigen prioritization and selection. Genome Medicine. 2024, 16:132, DOI: 10.1186/s13073-024-01384-7. PMID: 39538339.
+
 
 - [VEP](https://www.ensembl.org/info/docs/tools/vep/index.html)
 

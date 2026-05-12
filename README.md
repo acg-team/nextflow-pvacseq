@@ -37,7 +37,24 @@ The pipeline performs the following steps:
 
     - Runs [pVACseq](https://pvactools.readthedocs.io/en/latest/tools/pvacseq.html) to predict tumor neoantigens.
 
-6. **MultiQC**
+6. **Summary**
+
+    - Uses the `filtered.tsv` output files (MHC_I, MHC_II, or Combined) to generate neoantigen summary visualisations across all samples:
+      - Top genes by total neoantigen count:
+          Bar plot of the top genes, ranked by total predicted neoantigen count, across all samples. Each bar represents the total neoantigen count observed for one gene.
+
+      - Per-patient neoantigen count distribution across top genes:
+        Boxplot of per-patient neoantigen counts for the top genes. Counts are calculated per gene and sample. Boxes show variation across patients.
+
+      - Mutation vs. HLA allele heatmap (unannotated and annotated):
+        Heatmap of relative neoantigen frequencies for the most frequent mutation-HLA allele combinations. Mutation labels are built from gene name, amino acid substitution, protein position and the mutation type. Frequencies are calculated as mutation-HLA pair counts divided by the total number of neoantigens. The annotated plot is a zoom in version.
+
+      - Neoantigen distribution per chromosome:
+        Boxplot of neoantigen counts per chromosome and patient. Counts are calculated per sample and chromosome.
+
+    - All plots are embedded as HTML into the **Summary** section of the MultiQC report.
+
+7. **MultiQC**
 
     - Aggregates results with [MultiQC](http://multiqc.info/).
 

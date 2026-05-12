@@ -28,7 +28,7 @@ nextflow_pipeline {
             path("${params.outdir}").eachFileRecurse(groovy.io.FileType.FILES) {
                 outdir_count++
             }
-            def mhc_i_filtered = "$params.outdir/pvactools/TCGA-F5-6814-01A-31D-1924-10/MHC_Class_I/TCGA-F5-6814-01A-31D-1924-10.filtered.tsv"
+            def mhc_i_filtered = "$params.outdir/pvactools/TCGA-F5-6814-01A-31D-1924-10/MHC_Class_I/TCGA-F5-6814-01A-31D-1924-10.MHC_I.filtered.tsv"
             assert workflow.success
             assert file(mhc_i_filtered).exists()
 

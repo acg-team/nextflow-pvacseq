@@ -14,6 +14,7 @@ nextflow_workflow {
                 vep_genome = "GRCh38"
                 vep_species = "homo_sapiens"
                 outdir = "$projectDir/tests/outdir"
+                extra_vep_args = ""
             }
             workflow {
                 """
