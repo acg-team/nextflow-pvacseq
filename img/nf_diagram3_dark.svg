@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.1"
-   width="590"
-   height="366"
-   viewBox="-0.5 -0.5 590 366"
+   width="730.5412"
+   height="351.57208"
+   viewBox="-0.5 -0.5 730.5412 351.57208"
    id="svg192"
-   sodipodi:docname="nf_diagram3.svg"
-   inkscape:export-filename="nf_diagram3_dark.svg"
+   sodipodi:docname="nf_diagram3_dark.svg"
+   inkscape:export-filename="nf_diagram3_dark.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -23,19 +23,11 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="true">
-    <inkscape:page
-       x="0"
-       y="0"
-       width="590"
-       height="366"
-       id="page2"
-       margin="0"
-       bleed="0" />
     <inkscape:grid
        id="grid1"
        units="px"
-       originx="0"
-       originy="0"
+       originx="1.6464003e-07"
+       originy="-4.4278982"
        spacingx="1"
        spacingy="1"
        empcolor="#0099e5"
@@ -101,13 +93,13 @@
 
 </style>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter1"
-       x="-0.0056291373"
-       y="-0.02907263"
-       width="1.0112583"
-       height="1.0581453">
+       x="-0.0060778121"
+       y="-0.029032333"
+       width="1.0121557"
+       height="1.0580647">
       <feColorMatrix
          values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 -0.21 -0.72 -0.07 2 0 "
          result="fbSourceGraphic"
@@ -154,7 +146,7 @@
          result="color2" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter16"
        x="0"
@@ -172,7 +164,7 @@
          id="feColorMatrix16" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter18"
        x="0"
@@ -190,7 +182,7 @@
          id="feColorMatrix18" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter20"
        x="0"
@@ -208,7 +200,7 @@
          id="feColorMatrix20" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter22"
        x="0"
@@ -226,7 +218,7 @@
          id="feColorMatrix22" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter24"
        x="0"
@@ -244,7 +236,7 @@
          id="feColorMatrix24" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter26"
        x="0"
@@ -262,7 +254,7 @@
          id="feColorMatrix26" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter28"
        x="0"
@@ -280,7 +272,7 @@
          id="feColorMatrix28" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter30"
        x="0"
@@ -298,7 +290,7 @@
          id="feColorMatrix30" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter32"
        x="0"
@@ -316,7 +308,7 @@
          id="feColorMatrix32" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter34"
        x="0"
@@ -334,7 +326,7 @@
          id="feColorMatrix34" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter36"
        x="0"
@@ -352,7 +344,7 @@
          id="feColorMatrix36" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter38"
        x="0"
@@ -370,7 +362,7 @@
          id="feColorMatrix38" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter40"
        x="0"
@@ -388,7 +380,7 @@
          id="feColorMatrix40" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter42"
        x="0"
@@ -406,7 +398,7 @@
          id="feColorMatrix42" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter44"
        x="0"
@@ -424,7 +416,7 @@
          id="feColorMatrix44" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter46"
        x="0"
@@ -442,7 +434,7 @@
          id="feColorMatrix46" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter48"
        x="0"
@@ -460,7 +452,7 @@
          id="feColorMatrix48" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter50"
        x="0"
@@ -478,7 +470,7 @@
          id="feColorMatrix50" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter52"
        x="0"
@@ -496,7 +488,7 @@
          id="feColorMatrix52" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter54"
        x="0"
@@ -514,7 +506,7 @@
          id="feColorMatrix54" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter56"
        x="0"
@@ -532,7 +524,7 @@
          id="feColorMatrix56" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter58"
        x="0"
@@ -550,7 +542,7 @@
          id="feColorMatrix58" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter60"
        x="0"
@@ -568,7 +560,7 @@
          id="feColorMatrix60" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter62"
        x="0"
@@ -586,7 +578,7 @@
          id="feColorMatrix62" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter64"
        x="0"
@@ -604,13 +596,13 @@
          id="feColorMatrix64" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter69"
-       x="-0.011782183"
-       y="-0.030864111"
-       width="1.0235644"
-       height="1.0617282">
+       x="-0.012458508"
+       y="-0.031380832"
+       width="1.024917"
+       height="1.0627617">
       <feColorMatrix
          type="hueRotate"
          values="180"
@@ -622,13 +614,13 @@
          id="feColorMatrix69" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter71"
-       x="-0.01962192"
-       y="-0.051440184"
-       width="1.0392438"
-       height="1.1028804">
+       x="-0.021294776"
+       y="-0.052521139"
+       width="1.0425895"
+       height="1.1050423">
       <feColorMatrix
          type="hueRotate"
          values="180"
@@ -640,7 +632,7 @@
          id="feColorMatrix71" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter73"
        x="0"
@@ -658,7 +650,7 @@
          id="feColorMatrix73" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter75"
        x="0"
@@ -676,7 +668,7 @@
          id="feColorMatrix75" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter77"
        x="0"
@@ -694,7 +686,7 @@
          id="feColorMatrix77" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter79"
        x="0"
@@ -712,7 +704,7 @@
          id="feColorMatrix79" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter81"
        x="0"
@@ -730,7 +722,7 @@
          id="feColorMatrix81" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter83"
        x="0"
@@ -748,7 +740,7 @@
          id="feColorMatrix83" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter85"
        x="0"
@@ -766,7 +758,7 @@
          id="feColorMatrix85" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter87"
        x="0"
@@ -784,7 +776,7 @@
          id="feColorMatrix87" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter89"
        x="0"
@@ -802,13 +794,13 @@
          id="feColorMatrix89" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter91"
-       x="-0.0080461179"
-       y="-0.03946567"
-       width="1.0160922"
-       height="1.0789313">
+       x="-0.0086785723"
+       y="-0.038900513"
+       width="1.0173571"
+       height="1.077801">
       <feColorMatrix
          type="hueRotate"
          values="180"
@@ -820,13 +812,13 @@
          id="feColorMatrix91" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter93"
-       x="-0.0096252903"
-       y="-0.042197909"
-       width="1.0192506"
-       height="1.0843958">
+       x="-0.010061741"
+       y="-0.040322684"
+       width="1.0201235"
+       height="1.0806454">
       <feColorMatrix
          type="hueRotate"
          values="180"
@@ -838,7 +830,7 @@
          id="feColorMatrix93" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter95"
        x="-0.24999967"
@@ -886,7 +878,7 @@
          result="color2" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter97"
        x="-0.24999967"
@@ -934,7 +926,7 @@
          result="color2" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter99"
        x="-0.24999967"
@@ -982,7 +974,7 @@
          result="color2" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter101"
        x="-0.24999967"
@@ -1030,7 +1022,7 @@
          result="color2" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter103"
        x="-0.24999967"
@@ -1078,7 +1070,7 @@
          result="color2" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter105"
        x="-0.24999967"
@@ -1126,7 +1118,7 @@
          result="color2" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter107"
        x="-0.24999967"
@@ -1174,11 +1166,11 @@
          result="color2" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter151"
-       x="-0.0062008335"
-       y="-0.017192881"
+       x="-0.0062008337"
+       y="-0.017192882"
        width="1.0124017"
        height="1.0343858">
       <feColorMatrix
@@ -1192,13 +1184,11 @@
          id="feColorMatrix151" />
     </filter>
     <filter
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        inkscape:label="Invert"
        id="filter153"
        x="0"
-       y="-inf"
-       width="1"
-       height="inf">
+       width="1">
       <feColorMatrix
          type="hueRotate"
          values="180"
@@ -1209,6 +1199,72 @@
          result="color2"
          id="feColorMatrix153" />
     </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Invert"
+       id="filter105-3"
+       x="-0.24999967"
+       y="-0.24999979"
+       width="1.4999993"
+       height="1.4999996">
+      <feColorMatrix
+         type="hueRotate"
+         values="180"
+         result="color1"
+         id="feColorMatrix104-5" />
+      <feColorMatrix
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         result="fbSourceGraphic"
+         id="feColorMatrix105-6" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix123-2" />
+      <feColorMatrix
+         id="feColorMatrix124-9"
+         type="hueRotate"
+         values="180"
+         result="color1"
+         in="fbSourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix125-1"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix144-2" />
+      <feColorMatrix
+         id="feColorMatrix145-7"
+         type="hueRotate"
+         values="180"
+         result="color1"
+         in="fbSourceGraphic" />
+      <feColorMatrix
+         id="feColorMatrix146-0"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         result="color2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Invert"
+       id="filter93-9"
+       x="-0.008389283"
+       y="-0.038900513"
+       width="1.0167786"
+       height="1.077801">
+      <feColorMatrix
+         type="hueRotate"
+         values="180"
+         result="color1"
+         id="feColorMatrix92-3" />
+      <feColorMatrix
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 -0.21 -0.72 -0.07 2 0 "
+         result="color2"
+         id="feColorMatrix93-6" />
+    </filter>
   </defs>
   <text
      xml:space="preserve"
@@ -1216,7 +1272,7 @@
      x="545.5918"
      y="-90.796921"
      id="text194-2-3"
-     transform="rotate(30)"><tspan
+     transform="rotate(30,84.079519,280.73876)"><tspan
        id="tspan194-8-6"
        x="545.5918"
        y="-90.796921"
@@ -1228,14 +1284,14 @@
      x="396.4194"
      y="4.7989502"
      id="text194-2"
-     transform="rotate(30)"><tspan
+     transform="rotate(30,8.2625708,-2.2139485)"><tspan
        id="tspan194-8"
        x="396.4194"
        y="4.7989502"
        sodipodi:role="line"
        style="font-size:13.3333px;stroke-width:1;stroke-dasharray:none">pVAC-seq </tspan></text>
   <path
-     d="m 325.44797,303.62112 -0.5063,-135.52685"
+     d="m 325.44797,299.19322 -0.5063,-135.52685"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10.0749"
@@ -1246,9 +1302,9 @@
   <path
      id="path132-2"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953;filter:url(#filter89)"
-     d="m 310.20807,317.50095 h 30 V 307.499 l -14.99805,-15 -15,15 h -0.002 z" />
+     d="m 310.20807,313.07305 h 30 V 303.0711 l -14.99805,-15 -15,15 h -0.002 z" />
   <path
-     d="M 225,316.04593 V 270"
+     d="M 225,311.61803 V 265.5721"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.59645"
@@ -1257,16 +1313,16 @@
      style="stroke:#ecdc86"
      id="path1" />
   <path
-     d="m 33.046003,174.50256 276.954087,0.46488"
+     d="m 33.046003,170.07466 276.954087,0.46488"
      fill="none"
      stroke="#24b064"
      stroke-width="9.89122"
      stroke-miterlimit="10"
      pointer-events="stroke"
-     style="stroke:#24b064"
+     style="stroke:#24b064;stroke-width:10.9;stroke-dasharray:none"
      id="path2" />
   <path
-     d="M 395,43.631882 V 90"
+     d="M 395,39.203984 V 85.572102"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.62997"
@@ -1275,7 +1331,7 @@
      style="stroke:#ecdc86"
      id="path4" />
   <path
-     d="M 503.73337,314.97057 V 160"
+     d="M 655.36728,310.54267 V 155.5721"
      fill="none"
      stroke="#24b064"
      stroke-width="10.1643"
@@ -1286,9 +1342,9 @@
   <path
      id="path2500-5-22-2"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953;filter:url(#filter87)"
-     d="m 32.49902,160.00001 v 30 h 10.001953 l 15,-14.99805 -15,-15 v -0.002 z" />
+     d="m 32.49902,155.57211 v 30 h 10.001953 l 15,-14.99805 -15,-15 v -0.002 z" />
   <path
-     d="m 50,75 h 8.75 C 67.5,75 85,82 85,101.25 V 110"
+     d="m 50,70.572102 h 8.75 c 8.75,0 26.25,7 26.25,26.25 v 8.749998"
      fill="none"
      stroke="#f18046"
      stroke-width="10"
@@ -1297,7 +1353,7 @@
      style="stroke:#24b064"
      id="path11" />
   <path
-     d="m 119.66863,174.6837 h -8.60503 c -8.60502,0 -25.815071,-6.88402 -25.815071,-25.81507 v -8.60503"
+     d="m 119.66863,170.2558 h -8.60503 c -8.60502,0 -25.815071,-6.88402 -25.815071,-25.81507 v -8.60503"
      fill="none"
      stroke="#24b064"
      stroke-width="9.83431"
@@ -1306,7 +1362,7 @@
      style="stroke:#24b064"
      id="path13" />
   <path
-     d="m 85,110 v 30"
+     d="m 85,105.5721 v 30"
      fill="none"
      stroke="#24b064"
      stroke-width="10"
@@ -1317,17 +1373,17 @@
   <path
      id="path17"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953;filter:url(#filter85)"
-     d="M 32.49902,60.000009 V 90.00001 h 10.001953 l 15,-14.998046 -15,-15.000001 v -0.002 z" />
+     d="m 32.49902,55.572111 v 30.000001 h 10.001953 l 15,-14.998046 -15,-15.000001 v -0.002 z" />
   <rect
-     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000;filter:url(#filter95)"
+     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;filter:url(#filter95);stop-color:#000000"
      id="rect918-9-7"
      width="20.000008"
      height="19.999998"
      x="74.999992"
-     y="115"
+     y="110.57211"
      ry="2.9999955" />
   <path
-     d="M 155,316.31349 V 190"
+     d="M 155,311.88559 V 185.5721"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.85719"
@@ -1338,9 +1394,9 @@
   <path
      id="path38"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953;filter:url(#filter83)"
-     d="m 140.00002,317.50096 h 30 v -10.00195 l -14.99805,-15 -15,15 h -0.002 z" />
+     d="m 140.00002,313.07306 h 30 v -10.00195 l -14.99805,-15 -15,15 h -0.002 z" />
   <path
-     d="m 190,225 h -8.75 C 172.5,225 155,218 155,198.75 V 190"
+     d="m 190,220.5721 h -8.75 c -8.75,0 -26.25,-7 -26.25,-26.25 v -8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -1349,7 +1405,7 @@
      style="stroke:#ecdc86"
      id="path42" />
   <path
-     d="m 190,225 h 8.75 c 8.75,0 26.25,7 26.25,26.25 V 260"
+     d="m 190,220.5721 h 8.75 c 8.75,0 26.25,7 26.25,26.25 v 8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -1358,7 +1414,7 @@
      style="stroke:#ecdc86"
      id="path44" />
   <path
-     d="m 222.99,240 1.34,10"
+     d="m 222.99,235.5721 1.34,10"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -1367,7 +1423,7 @@
      style="stroke:#ecdc86"
      id="path46" />
   <path
-     d="m 190,125 h -8.75 C 172.5,125 155,132 155,151.25 V 160"
+     d="m 190,120.5721 h -8.75 c -8.75,0 -26.25,7 -26.25,26.25 v 8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -1376,7 +1432,7 @@
      style="stroke:#ecdc86"
      id="path50" />
   <path
-     d="m 190,125 h 8.75 C 207.5,125 225,118 225,98.75 V 90"
+     d="m 190,120.5721 h 8.75 c 8.75,0 26.25,-7 26.25,-26.249998 v -8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -1385,7 +1441,7 @@
      style="stroke:#ecdc86"
      id="path52" />
   <path
-     d="M 225,100 V 42.982343"
+     d="M 225,95.572102 V 38.554445"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.7483"
@@ -1394,11 +1450,20 @@
      style="stroke:#ecdc86"
      id="path56" />
   <path
+     d="M 285.1465,170.5721 H 641.95452"
+     fill="none"
+     stroke="#24b064"
+     stroke-width="20.4884"
+     stroke-miterlimit="10"
+     pointer-events="stroke"
+     style="stroke:#24b064;stroke-width:10.9;stroke-dasharray:none"
+     id="path117" />
+  <path
      id="path58"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953;filter:url(#filter81)"
-     d="m 239.99997,42.499011 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
+     d="m 239.99997,38.071113 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
   <path
-     d="M 154.03991,170.00078 153.34009,43.64431"
+     d="M 154.03991,165.57288 153.34009,39.216412"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.71973"
@@ -1409,22 +1474,22 @@
   <path
      id="path64"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953;filter:url(#filter79)"
-     d="m 168.32998,42.499007 h -30 v 10.00196 l 14.99804,15 15,-15 h 0.002 z" />
+     d="m 168.32998,38.071109 h -30 v 10.00196 l 14.99804,15 15,-15 h 0.002 z" />
   <rect
-     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000;filter:url(#filter97)"
+     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;filter:url(#filter97);stop-color:#000000"
      id="rect68"
      width="20.000008"
      height="19.999998"
      x="215"
-     y="95"
+     y="90.572105"
      ry="2.9999955" />
   <text
      x="153.22495"
-     y="25.569422"
+     y="21.141523"
      id="text74"
      style="font-weight:bold;font-size:9.94033px;font-family:'Maven Pro';text-anchor:middle;fill:#ffffff;stroke-width:0.903667">cache</text>
   <path
-     d="m 360,125 h -8.75 C 342.5,125 325,132 325,151.25 V 160"
+     d="m 360,120.5721 h -8.75 c -8.75,0 -26.25,7 -26.25,26.25 v 8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -1433,7 +1498,7 @@
      style="stroke:#ecdc86"
      id="path77" />
   <path
-     d="m 360,125 h 8.75 C 377.5,125 395,118 395,98.75 V 90"
+     d="m 360,120.5721 h 8.75 c 8.75,0 26.25,-7 26.25,-26.249998 v -8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -1444,22 +1509,22 @@
   <path
      id="path81"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953;filter:url(#filter77)"
-     d="m 409.99997,42.499011 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
+     d="m 409.99997,38.071113 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
   <text
      x="324.83432"
-     y="24.828428"
+     y="20.40053"
      id="text86"
      style="font-weight:bold;font-size:10px;font-family:'Maven Pro';text-anchor:middle;fill:#ffffff">IEDB</text>
   <rect
-     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000;filter:url(#filter99)"
+     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;filter:url(#filter99);stop-color:#000000"
      id="rect89"
      width="20.000008"
      height="19.999998"
      x="383.67001"
-     y="95"
+     y="90.572105"
      ry="2.9999955" />
   <path
-     d="M 325.51368,170.00049 325.00632,43.162766"
+     d="M 325.51368,165.57259 325.00632,38.734868"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.75675"
@@ -1470,73 +1535,59 @@
   <path
      id="path96"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953;filter:url(#filter75)"
-     d="m 339.99997,42.499011 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
+     d="m 339.99997,38.071113 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
   <rect
-     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000;filter:url(#filter101)"
+     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;filter:url(#filter101);stop-color:#000000"
      id="rect100"
      width="20.000008"
      height="19.999998"
      x="145"
-     y="165"
+     y="160.5721"
      ry="2.9999955" />
   <rect
-     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000;filter:url(#filter103)"
+     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;filter:url(#filter103);stop-color:#000000"
      id="rect105"
      width="20.000008"
      height="19.999998"
      x="315"
-     y="165"
+     y="160.5721"
      ry="2.9999955" />
   <path
-     d="m 340,175 h 89.10482"
+     d="m 340,170.5721 h 89.10482"
      fill="none"
      stroke="#24b064"
      stroke-width="10.8998"
      stroke-miterlimit="10"
      pointer-events="stroke"
-     style="stroke:#24b064"
+     style="stroke:#24b064;stroke-width:10.9;stroke-dasharray:none"
      id="path110" />
   <path
-     d="m 414.99508,175 h 97.11086"
-     fill="none"
-     stroke="#24b064"
-     stroke-width="10.6887"
-     stroke-miterlimit="10"
-     pointer-events="stroke"
-     style="stroke:#24b064"
-     id="path117" />
-  <path
      style="font-family:initial;fill:none;stroke:#000000;stroke-width:9.99999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter153)"
-     d="m 519.6534,312.5 h -30"
+     d="m 519.6534,308.0721 h -30"
      id="path2500-5-22-2-7" />
   <rect
-     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000;filter:url(#filter105)"
+     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;filter:url(#filter105);stop-color:#000000"
      id="rect123"
      width="20.000008"
      height="19.999998"
-     x="493.07062"
-     y="165"
+     x="644.70453"
+     y="160.5721"
      ry="2.9999955" />
-  <text
-     x="503.07062"
-     y="347.15305"
-     id="text129"
-     style="font-weight:bold;font-size:12px;font-family:'Maven Pro';text-anchor:middle;fill:#ffffff">html</text>
   <path
      id="path132"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953;filter:url(#filter73)"
-     d="m 210.00002,317.50096 h 30 v -10.00195 l -14.99805,-15 -15,15 h -0.002 z" />
+     d="m 210.00002,313.07306 h 30 v -10.00195 l -14.99805,-15 -15,15 h -0.002 z" />
   <rect
-     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000;filter:url(#filter107)"
+     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;filter:url(#filter107);stop-color:#000000"
      id="rect136"
      width="20.000008"
      height="19.999998"
      x="215"
-     y="245"
+     y="240.5721"
      ry="2.9999955" />
   <rect
-     x="3.3299999"
-     y="187"
+     x="3.3300004"
+     y="182.5721"
      width="20"
      height="10"
      fill="none"
@@ -1544,8 +1595,8 @@
      pointer-events="all"
      id="rect141" />
   <rect
-     x="3.3299999"
-     y="157"
+     x="3.3300004"
+     y="152.5721"
      width="20"
      height="10"
      fill="none"
@@ -1553,8 +1604,8 @@
      pointer-events="all"
      id="rect145" />
   <rect
-     x="3.3299999"
-     y="52"
+     x="3.3300004"
+     y="47.572102"
      width="20"
      height="10"
      fill="none"
@@ -1562,8 +1613,8 @@
      pointer-events="all"
      id="rect149" />
   <rect
-     x="3.3299999"
-     y="80.5"
+     x="3.3300004"
+     y="76.072105"
      width="20"
      height="10"
      fill="none"
@@ -1572,7 +1623,7 @@
      id="rect153" />
   <rect
      x="15"
-     y="110"
+     y="105.57211"
      width="60"
      height="30"
      fill="none"
@@ -1581,7 +1632,7 @@
      id="rect157" />
   <rect
      x="243.34"
-     y="240"
+     y="235.5721"
      width="70"
      height="30"
      fill="none"
@@ -1590,7 +1641,7 @@
      id="rect161" />
   <rect
      x="250"
-     y="90.5"
+     y="86.072105"
      width="60"
      height="30"
      fill="none"
@@ -1599,7 +1650,7 @@
      id="rect165" />
   <rect
      x="420"
-     y="90.5"
+     y="86.072105"
      width="60"
      height="30"
      fill="none"
@@ -1607,8 +1658,8 @@
      pointer-events="all"
      id="rect169" />
   <rect
-     x="204.81255"
-     y="103.85736"
+     x="203.29811"
+     y="99.696495"
      width="60"
      height="30"
      fill="none"
@@ -1617,8 +1668,8 @@
      pointer-events="all"
      id="rect173" />
   <rect
-     x="363.60324"
-     y="62.557022"
+     x="362.08881"
+     y="58.39616"
      width="60"
      height="30"
      fill="none"
@@ -1627,8 +1678,8 @@
      pointer-events="all"
      id="rect177" />
   <rect
-     x="459.13239"
-     y="27.787254"
+     x="457.61795"
+     y="23.62639"
      width="60"
      height="30"
      fill="none"
@@ -1637,8 +1688,8 @@
      pointer-events="all"
      id="rect181" />
   <rect
-     x="562.17731"
-     y="-15.571024"
+     x="560.6629"
+     y="-19.731888"
      width="60"
      height="30"
      fill="none"
@@ -1652,7 +1703,7 @@
      x="247.51666"
      y="86.000603"
      id="text194"
-     transform="rotate(30)"><tspan
+     transform="rotate(30,8.2625708,-2.2139485)"><tspan
        id="tspan194"
        x="247.51666"
        y="86.000603"
@@ -1662,48 +1713,48 @@
      xml:space="preserve"
      style="font-size:13.3333px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:0.6;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter69)"
      x="313.95071"
-     y="349.09796"
+     y="344.67007"
      id="text195"><tspan
        sodipodi:role="line"
        id="tspan195"
        x="313.95071"
-       y="349.09796"
+       y="344.67007"
        style="fill:#ffffff;stroke:#ffffff;stroke-width:0.6;stroke-dasharray:none;stroke-opacity:1">HLA</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:13.3333px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:0.6;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1)"
      x="12.092115"
-     y="127.40937"
+     y="122.98148"
      id="text196"><tspan
        sodipodi:role="line"
        id="tspan196"
        x="12.092115"
-       y="127.40937"
+       y="122.98148"
        style="fill:#000000;stroke:#000000">maf2vcf</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:12px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke-width:6.66667;stroke-linejoin:bevel;filter:url(#filter64)"
-     x="3.71767"
-     y="60.656212"
+     x="3.7176704"
+     y="56.228313"
      id="text1"><tspan
        sodipodi:role="line"
        id="tspan1"
-       x="3.71767"
-       y="60.656212"
+       x="3.7176704"
+       y="56.228313"
        style="font-size:12px;fill:#ffffff">ref</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:12px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ffffff;stroke-width:6.66667;stroke-linejoin:bevel"
-     x="0.65979987"
-     y="90.792831"
+     x="0.65980023"
+     y="86.364937"
      id="text2"><tspan
        sodipodi:role="line"
        id="tspan2"
-       x="0.65979987"
-       y="90.792831">maf</tspan></text>
+       x="0.65980023"
+       y="86.364937">maf</tspan></text>
   <g
      id="g18488"
-     transform="matrix(1.299848,0,0,1.299848,-169.01986,19.844403)"
+     transform="matrix(1.299848,0,0,1.299848,-169.01986,15.416505)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -1719,10 +1770,10 @@
        d="m 149.48958,97.895832 c 0,-0.264576 -0.26458,-0.529164 -0.52917,-0.793752 l -4.49791,-3.968748 c -0.26458,-0.264588 -0.52917,-0.529164 -0.82788,-0.529164 h -3.40545 -7.93751 c -0.79375,0 -1.32292,0.529164 -1.32292,1.322916 0,7.055556 0,14.111106 0,21.166666 0,0.79375 0.52917,1.32292 1.32292,1.32292 h 7.93751 7.9375 c 0.79374,0 1.32291,-0.52917 1.32291,-1.32292 z m -1.32291,17.197918 H 132.29166 V 93.927084 h 10.58333 v 4.7625 c 0,0.317508 0.20353,0.529164 0.52917,0.529164 h 4.76251 z"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccscsccscscccccssccc"
-       style="stroke-width:0.23167;filter:url(#filter62);fill:#000000" />
+       style="fill:#000000;stroke-width:0.23167;filter:url(#filter62)" />
     <path
        id="rect18347"
-       style="fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter60);fill:#000000"
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter60)"
        d="m 131.01752,101.8646 c 6.14109,0 12.28217,0 18.42326,0 0.75993,0 1.37171,0.49706 1.37171,1.1145 v 2.85422 2.85425 c 0,0.61744 -0.61178,1.1145 -1.37171,1.1145 -6.14109,0 -12.28217,0 -18.42326,0 -0.75992,0 -1.3717,-0.49706 -1.3717,-1.1145 v -2.85425 -2.85422 c 0,-0.61744 0.61178,-1.1145 1.3717,-1.1145 z"
        sodipodi:nodetypes="ccscsccscsc"
        inkscape:export-filename=".\file_single.svg"
@@ -1742,7 +1793,7 @@
   </g>
   <g
      id="g18488-9"
-     transform="matrix(1.299848,0,0,1.299848,-169.01986,-83.422261)"
+     transform="matrix(1.299848,0,0,1.299848,-169.01986,-87.850159)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -1758,10 +1809,10 @@
        d="m 149.48958,97.895832 c 0,-0.264576 -0.26458,-0.529164 -0.52917,-0.793752 l -4.49791,-3.968748 c -0.26458,-0.264588 -0.52917,-0.529164 -0.82788,-0.529164 h -3.40545 -7.93751 c -0.79375,0 -1.32292,0.529164 -1.32292,1.322916 0,7.055556 0,14.111106 0,21.166666 0,0.79375 0.52917,1.32292 1.32292,1.32292 h 7.93751 7.9375 c 0.79374,0 1.32291,-0.52917 1.32291,-1.32292 z m -1.32291,17.197918 H 132.29166 V 93.927084 h 10.58333 v 4.7625 c 0,0.317508 0.20353,0.529164 0.52917,0.529164 h 4.76251 z"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccscsccscscccccssccc"
-       style="stroke-width:0.23167;filter:url(#filter58);fill:#000000" />
+       style="fill:#000000;stroke-width:0.23167;filter:url(#filter58)" />
     <path
        id="rect18347-7"
-       style="fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter56);fill:#000000"
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter56)"
        d="m 131.01752,101.8646 c 6.14109,0 12.28217,0 18.42326,0 0.75993,0 1.37171,0.49706 1.37171,1.1145 v 2.85422 2.85425 c 0,0.61744 -0.61178,1.1145 -1.37171,1.1145 -6.14109,0 -12.28217,0 -18.42326,0 -0.75992,0 -1.3717,-0.49706 -1.3717,-1.1145 v -2.85425 -2.85422 c 0,-0.61744 0.61178,-1.1145 1.3717,-1.1145 z"
        sodipodi:nodetypes="ccscsccscsc"
        inkscape:export-filename=".\file_single.svg"
@@ -1781,7 +1832,7 @@
   </g>
   <g
      id="g18488-9-0"
-     transform="matrix(1.299848,0,0,1.299848,-169.01986,-51.120314)"
+     transform="matrix(1.299848,0,0,1.299848,-169.01986,-55.548212)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -1797,10 +1848,10 @@
        d="m 149.48958,97.895832 c 0,-0.264576 -0.26458,-0.529164 -0.52917,-0.793752 l -4.49791,-3.968748 c -0.26458,-0.264588 -0.52917,-0.529164 -0.82788,-0.529164 h -3.40545 -7.93751 c -0.79375,0 -1.32292,0.529164 -1.32292,1.322916 0,7.055556 0,14.111106 0,21.166666 0,0.79375 0.52917,1.32292 1.32292,1.32292 h 7.93751 7.9375 c 0.79374,0 1.32291,-0.52917 1.32291,-1.32292 z m -1.32291,17.197918 H 132.29166 V 93.927084 h 10.58333 v 4.7625 c 0,0.317508 0.20353,0.529164 0.52917,0.529164 h 4.76251 z"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccscsccscscccccssccc"
-       style="stroke-width:0.23167;filter:url(#filter54);fill:#000000" />
+       style="fill:#000000;stroke-width:0.23167;filter:url(#filter54)" />
     <path
        id="rect18347-7-6"
-       style="fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter52);fill:#000000"
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter52)"
        d="m 131.01752,101.8646 c 6.14109,0 12.28217,0 18.42326,0 0.75993,0 1.37171,0.49706 1.37171,1.1145 v 2.85422 2.85425 c 0,0.61744 -0.61178,1.1145 -1.37171,1.1145 -6.14109,0 -12.28217,0 -18.42326,0 -0.75992,0 -1.3717,-0.49706 -1.3717,-1.1145 v -2.85425 -2.85422 c 0,-0.61744 0.61178,-1.1145 1.3717,-1.1145 z"
        sodipodi:nodetypes="ccscsccscsc"
        inkscape:export-filename=".\file_single.svg"
@@ -1820,7 +1871,7 @@
   </g>
   <g
      id="g18488-9-0-2"
-     transform="matrix(1.299848,0,0,1.299848,-169.01986,52.761971)"
+     transform="matrix(1.299848,0,0,1.299848,-169.01986,48.334073)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -1836,10 +1887,10 @@
        d="m 149.48958,97.895832 c 0,-0.264576 -0.26458,-0.529164 -0.52917,-0.793752 l -4.49791,-3.968748 c -0.26458,-0.264588 -0.52917,-0.529164 -0.82788,-0.529164 h -3.40545 -7.93751 c -0.79375,0 -1.32292,0.529164 -1.32292,1.322916 0,7.055556 0,14.111106 0,21.166666 0,0.79375 0.52917,1.32292 1.32292,1.32292 h 7.93751 7.9375 c 0.79374,0 1.32291,-0.52917 1.32291,-1.32292 z m -1.32291,17.197918 H 132.29166 V 93.927084 h 10.58333 v 4.7625 c 0,0.317508 0.20353,0.529164 0.52917,0.529164 h 4.76251 z"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccscsccscscccccssccc"
-       style="stroke-width:0.23167;filter:url(#filter50);fill:#000000" />
+       style="fill:#000000;stroke-width:0.23167;filter:url(#filter50)" />
     <path
        id="rect18347-7-6-3"
-       style="fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter48);fill:#000000"
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter48)"
        d="m 131.01752,101.8646 c 6.14109,0 12.28217,0 18.42326,0 0.75993,0 1.37171,0.49706 1.37171,1.1145 v 2.85422 2.85425 c 0,0.61744 -0.61178,1.1145 -1.37171,1.1145 -6.14109,0 -12.28217,0 -18.42326,0 -0.75992,0 -1.3717,-0.49706 -1.3717,-1.1145 v -2.85425 -2.85422 c 0,-0.61744 0.61178,-1.1145 1.3717,-1.1145 z"
        sodipodi:nodetypes="ccscsccscsc"
        inkscape:export-filename=".\file_single.svg"
@@ -1859,7 +1910,7 @@
   </g>
   <g
      id="g18488-9-0-2-2"
-     transform="matrix(1.299848,0,0,1.299848,-28.851093,-113.82398)"
+     transform="matrix(1.299848,0,0,1.299848,-28.851093,-118.25188)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -1875,10 +1926,10 @@
        d="m 149.48958,97.895832 c 0,-0.264576 -0.26458,-0.529164 -0.52917,-0.793752 l -4.49791,-3.968748 c -0.26458,-0.264588 -0.52917,-0.529164 -0.82788,-0.529164 h -3.40545 -7.93751 c -0.79375,0 -1.32292,0.529164 -1.32292,1.322916 0,7.055556 0,14.111106 0,21.166666 0,0.79375 0.52917,1.32292 1.32292,1.32292 h 7.93751 7.9375 c 0.79374,0 1.32291,-0.52917 1.32291,-1.32292 z m -1.32291,17.197918 H 132.29166 V 93.927084 h 10.58333 v 4.7625 c 0,0.317508 0.20353,0.529164 0.52917,0.529164 h 4.76251 z"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccscsccscscccccssccc"
-       style="stroke-width:0.23167;filter:url(#filter46);fill:#000000" />
+       style="fill:#000000;stroke-width:0.23167;filter:url(#filter46)" />
     <path
        id="rect18347-7-6-3-7"
-       style="fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter44);fill:#000000"
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter44)"
        d="m 131.01752,101.8646 c 6.14109,0 12.28217,0 18.42326,0 0.75993,0 1.37171,0.49706 1.37171,1.1145 v 2.85422 2.85425 c 0,0.61744 -0.61178,1.1145 -1.37171,1.1145 -6.14109,0 -12.28217,0 -18.42326,0 -0.75992,0 -1.3717,-0.49706 -1.3717,-1.1145 v -2.85425 -2.85422 c 0,-0.61744 0.61178,-1.1145 1.3717,-1.1145 z"
        sodipodi:nodetypes="ccscsccscsc"
        inkscape:export-filename=".\file_single.svg"
@@ -1898,7 +1949,7 @@
   </g>
   <g
      id="g18488-9-0-2-2-9"
-     transform="matrix(1.299848,0,0,1.299848,-29.949234,204.44237)"
+     transform="matrix(1.299848,0,0,1.299848,-29.949234,200.01447)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -1914,10 +1965,10 @@
        d="m 149.48958,97.690927 c 0,-0.264576 -0.26458,-0.529164 -0.52917,-0.793752 l -4.49791,-3.968748 c -0.26458,-0.264588 -0.52917,-0.529164 -0.82788,-0.529164 h -3.40545 -7.93751 c -0.79375,0 -1.32292,0.529164 -1.32292,1.322916 0,7.055551 0,14.111101 0,21.166661 0,0.79375 0.52917,1.32292 1.32292,1.32292 h 7.93751 7.9375 c 0.79374,0 1.32291,-0.52917 1.32291,-1.32292 z m -1.32291,17.197913 H 132.29166 V 93.722179 h 10.58333 v 4.7625 c 0,0.317508 0.20353,0.529164 0.52917,0.529164 h 4.76251 z"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccscsccscscccccssccc"
-       style="stroke-width:0.23167;filter:url(#filter42);fill:#000000" />
+       style="fill:#000000;stroke-width:0.23167;filter:url(#filter42)" />
     <path
        id="rect18347-7-6-3-7-9"
-       style="fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter40);fill:#000000"
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter40)"
        d="m 131.01752,101.8646 c 6.14109,0 12.28217,0 18.42326,0 0.75993,0 1.37171,0.49706 1.37171,1.1145 v 2.85422 2.85425 c 0,0.61744 -0.61178,1.1145 -1.37171,1.1145 -6.14109,0 -12.28217,0 -18.42326,0 -0.75992,0 -1.3717,-0.49706 -1.3717,-1.1145 v -2.85425 -2.85422 c 0,-0.61744 0.61178,-1.1145 1.3717,-1.1145 z"
        sodipodi:nodetypes="ccscsccscsc"
        inkscape:export-filename=".\file_single.svg"
@@ -1937,7 +1988,7 @@
   </g>
   <g
      id="g18488-9-0-2-2-9-3"
-     transform="matrix(1.299848,0,0,1.299848,321.16437,204.17602)"
+     transform="matrix(1.299848,0,0,1.299848,472.79828,199.74812)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -1953,10 +2004,10 @@
        d="m 149.48958,97.895832 c 0,-0.264576 -0.26458,-0.529164 -0.52917,-0.793752 l -4.49791,-3.968748 c -0.26458,-0.264588 -0.52917,-0.529164 -0.82788,-0.529164 h -3.40545 -7.93751 c -0.79375,0 -1.32292,0.529164 -1.32292,1.322916 0,7.055556 0,14.111106 0,21.166666 0,0.79375 0.52917,1.32292 1.32292,1.32292 h 7.93751 7.9375 c 0.79374,0 1.32291,-0.52917 1.32291,-1.32292 z m -1.32291,17.197918 H 132.29166 V 93.927084 h 10.58333 v 4.7625 c 0,0.317508 0.20353,0.529164 0.52917,0.529164 h 4.76251 z"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccscsccscscccccssccc"
-       style="stroke-width:0.23167;filter:url(#filter38);fill:#000000" />
+       style="fill:#000000;stroke-width:0.23167;filter:url(#filter38)" />
     <path
        id="rect18347-7-6-3-7-9-8"
-       style="fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter36);fill:#000000"
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter36)"
        d="m 131.01752,101.8646 c 6.14109,0 12.28217,0 18.42326,0 0.75993,0 1.37171,0.49706 1.37171,1.1145 v 2.85422 2.85425 c 0,0.61744 -0.61178,1.1145 -1.37171,1.1145 -6.14109,0 -12.28217,0 -18.42326,0 -0.75992,0 -1.3717,-0.49706 -1.3717,-1.1145 v -2.85425 -2.85422 c 0,-0.61744 0.61178,-1.1145 1.3717,-1.1145 z"
        sodipodi:nodetypes="ccscsccscsc"
        inkscape:export-filename=".\file_single.svg"
@@ -1976,55 +2027,55 @@
   </g>
   <text
      xml:space="preserve"
-     style="font-weight:bold;font-size:6.87837px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro, Bold';text-align:center;text-orientation:upright;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0.6;stroke-dasharray:none;stroke-dashoffset:2.00001;stroke-opacity:1;paint-order:fill markers stroke;stop-color:#000000;filter:url(#filter34)"
+     style="font-weight:bold;font-size:6.87837px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro, Bold';text-align:center;text-orientation:upright;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0.6;stroke-dasharray:none;stroke-dashoffset:2.00001;stroke-opacity:1;paint-order:fill markers stroke;filter:url(#filter34);stop-color:#000000"
      x="266.2132"
-     y="102.46931"
+     y="98.041412"
      id="text18569-0-1-7-3-4-5"><tspan
        sodipodi:role="line"
        id="tspan18567-9-8-5-6-7-0"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="266.2132"
-       y="102.46931">Download </tspan><tspan
+       y="98.041412">Download </tspan><tspan
        sodipodi:role="line"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="266.2132"
-       y="111.06727"
+       y="106.63937"
        id="tspan4">VEP cache</tspan></text>
   <text
      xml:space="preserve"
-     style="font-weight:bold;font-size:6.87837px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro, Bold';text-align:center;text-orientation:upright;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0.6;stroke-dasharray:none;stroke-dashoffset:2.00001;stroke-opacity:1;paint-order:fill markers stroke;stop-color:#000000;filter:url(#filter32)"
+     style="font-weight:bold;font-size:6.87837px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro, Bold';text-align:center;text-orientation:upright;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0.6;stroke-dasharray:none;stroke-dashoffset:2.00001;stroke-opacity:1;paint-order:fill markers stroke;filter:url(#filter32);stop-color:#000000"
      x="267.08246"
-     y="254.41225"
+     y="249.98434"
      id="text18569-0-1-7-3-4-5-1"><tspan
        sodipodi:role="line"
        id="tspan18567-9-8-5-6-7-0-0"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="267.08246"
-       y="254.41225">Download </tspan><tspan
+       y="249.98434">Download </tspan><tspan
        sodipodi:role="line"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="267.08246"
-       y="263.01022"
+       y="258.58231"
        id="tspan4-6">VEP plugins</tspan></text>
   <text
      xml:space="preserve"
-     style="font-weight:bold;font-size:6.87837px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro, Bold';text-align:center;text-orientation:upright;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0.6;stroke-dasharray:none;stroke-dashoffset:2.00001;stroke-opacity:1;paint-order:fill markers stroke;stop-color:#000000;filter:url(#filter30)"
+     style="font-weight:bold;font-size:6.87837px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro, Bold';text-align:center;text-orientation:upright;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0.6;stroke-dasharray:none;stroke-dashoffset:2.00001;stroke-opacity:1;paint-order:fill markers stroke;filter:url(#filter30);stop-color:#000000"
      x="436.72342"
-     y="101.15738"
+     y="96.729485"
      id="text18569-0-1-7-3-4-5-0"><tspan
        sodipodi:role="line"
        id="tspan18567-9-8-5-6-7-0-6"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="436.72342"
-       y="101.15738">Download </tspan><tspan
+       y="96.729485">Download </tspan><tspan
        sodipodi:role="line"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="436.72342"
-       y="109.75534"
+       y="105.32745"
        id="tspan4-1">IEDB</tspan></text>
   <g
      id="g18488-9-0-2-2-4"
-     transform="matrix(1.299848,0,0,1.299848,143.60757,-113.82398)"
+     transform="matrix(1.299848,0,0,1.299848,143.60757,-118.25188)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -2040,10 +2091,10 @@
        d="m 149.48958,97.895832 c 0,-0.264576 -0.26458,-0.529164 -0.52917,-0.793752 l -4.49791,-3.968748 c -0.26458,-0.264588 -0.52917,-0.529164 -0.82788,-0.529164 h -3.40545 -7.93751 c -0.79375,0 -1.32292,0.529164 -1.32292,1.322916 0,7.055556 0,14.111106 0,21.166666 0,0.79375 0.52917,1.32292 1.32292,1.32292 h 7.93751 7.9375 c 0.79374,0 1.32291,-0.52917 1.32291,-1.32292 z m -1.32291,17.197918 H 132.29166 V 93.927084 h 10.58333 v 4.7625 c 0,0.317508 0.20353,0.529164 0.52917,0.529164 h 4.76251 z"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccscsccscscccccssccc"
-       style="stroke-width:0.23167;filter:url(#filter28);fill:#000000" />
+       style="fill:#000000;stroke-width:0.23167;filter:url(#filter28)" />
     <path
        id="rect18347-7-6-3-7-5"
-       style="fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter26);fill:#000000"
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter26)"
        d="m 131.01752,101.8646 c 6.14109,0 12.28217,0 18.42326,0 0.75993,0 1.37171,0.49706 1.37171,1.1145 v 2.85422 2.85425 c 0,0.61744 -0.61178,1.1145 -1.37171,1.1145 -6.14109,0 -12.28217,0 -18.42326,0 -0.75992,0 -1.3717,-0.49706 -1.3717,-1.1145 v -2.85425 -2.85422 c 0,-0.61744 0.61178,-1.1145 1.3717,-1.1145 z"
        sodipodi:nodetypes="ccscsccscsc"
        inkscape:export-filename=".\file_single.svg"
@@ -2063,7 +2114,7 @@
   </g>
   <g
      id="g18488-9-0-2-2-4-4"
-     transform="matrix(1.299848,0,0,1.299848,142.63111,204.17602)"
+     transform="matrix(1.299848,0,0,1.299848,142.63111,199.74812)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -2079,10 +2130,10 @@
        d="m 149.48958,97.895832 c 0,-0.264576 -0.26458,-0.529164 -0.52917,-0.793752 l -4.49791,-3.968748 c -0.26458,-0.264588 -0.52917,-0.529164 -0.82788,-0.529164 h -3.40545 -7.93751 c -0.79375,0 -1.32292,0.529164 -1.32292,1.322916 0,7.055556 0,14.111106 0,21.166666 0,0.79375 0.52917,1.32292 1.32292,1.32292 h 7.93751 7.9375 c 0.79374,0 1.32291,-0.52917 1.32291,-1.32292 z m -1.32291,17.197918 H 132.29166 V 93.927084 h 10.58333 v 4.7625 c 0,0.317508 0.20353,0.529164 0.52917,0.529164 h 4.76251 z"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccscsccscscccccssccc"
-       style="stroke-width:0.23167;filter:url(#filter24);fill:#000000" />
+       style="fill:#000000;stroke-width:0.23167;filter:url(#filter24)" />
     <path
        id="rect18347-7-6-3-7-5-5"
-       style="fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter22);fill:#000000"
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.122027;paint-order:fill markers stroke;filter:url(#filter22)"
        d="m 131.01752,101.8646 c 6.14109,0 12.28217,0 18.42326,0 0.75993,0 1.37171,0.49706 1.37171,1.1145 v 2.85422 2.85425 c 0,0.61744 -0.61178,1.1145 -1.37171,1.1145 -6.14109,0 -12.28217,0 -18.42326,0 -0.75992,0 -1.3717,-0.49706 -1.3717,-1.1145 v -2.85425 -2.85422 c 0,-0.61744 0.61178,-1.1145 1.3717,-1.1145 z"
        sodipodi:nodetypes="ccscsccscsc"
        inkscape:export-filename=".\file_single.svg"
@@ -2101,39 +2152,39 @@
          y="107.2118">HLA</tspan></text>
   </g>
   <rect
-     style="display:inline;fill:#ffffff;stroke:#000000;stroke-width:2.01804;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill;stop-color:#000000;filter:url(#filter151)"
+     style="display:inline;fill:#ffffff;stroke:#000000;stroke-width:2.01804;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill;filter:url(#filter151);stop-color:#000000"
      id="rect59928"
      width="162.72328"
      height="58.688244"
-     x="421.94812"
-     y="4.9369183"
+     x="566.3089"
+     y="0.50902003"
      inkscape:export-filename=".\rect59928.svg"
      inkscape:export-xdpi="200"
      inkscape:export-ydpi="200" />
   <text
      xml:space="preserve"
      style="font-size:16px;line-height:1.25;font-family:Commissioner;-inkscape-font-specification:Commissioner;letter-spacing:0px;display:inline;stroke-width:0.999999;filter:url(#filter20)"
-     x="424.89789"
-     y="20.487741"
+     x="569.25867"
+     y="16.059843"
      id="text61425"><tspan
        sodipodi:role="line"
        id="tspan61423"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Bold';stroke-width:0.999999"
-       x="424.89789"
-       y="20.487741">Notes</tspan></text>
+       x="569.25867"
+       y="16.059843">Notes</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:8px;line-height:1.25;font-family:Commissioner;-inkscape-font-specification:Commissioner;letter-spacing:0px;display:inline;stroke-width:0.999999;filter:url(#filter18)"
-     x="462.88101"
-     y="34.81707"
+     x="607.24176"
+     y="30.389172"
      id="text61425-2"><tspan
        sodipodi:role="line"
        id="tspan61423-6"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Bold';stroke-width:0.999999"
-       x="462.88101"
-       y="34.81707"> - main workflow</tspan></text>
+       x="607.24176"
+       y="30.389172"> - main workflow</tspan></text>
   <path
-     d="m 426.5,31.944222 h 30.09678"
+     d="m 570.86076,27.516324 h 30.09678"
      fill="none"
      stroke="#24b064"
      stroke-width="5.95047"
@@ -2144,16 +2195,16 @@
   <text
      xml:space="preserve"
      style="font-size:8px;line-height:1.25;font-family:Commissioner;-inkscape-font-specification:Commissioner;letter-spacing:0px;display:inline;stroke-width:0.999999;filter:url(#filter16)"
-     x="462.8808"
-     y="46.176075"
+     x="607.24158"
+     y="41.748177"
      id="text61425-2-1"><tspan
        sodipodi:role="line"
        id="tspan61423-6-7"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Bold';stroke-width:0.999999"
-       x="462.8808"
-       y="46.176075"> - setup workflow</tspan></text>
+       x="607.24158"
+       y="41.748177"> - setup workflow</tspan></text>
   <path
-     d="m 426.5,43.303228 h 30.09678"
+     d="m 570.86076,38.87533 h 30.09678"
      fill="none"
      stroke="#24b064"
      stroke-width="5.95047"
@@ -2161,4 +2212,24 @@
      pointer-events="stroke"
      style="stroke:#ecdc86"
      id="path117-2-7" />
+  <text
+     xml:space="preserve"
+     style="font-size:13.3333px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter93-9)"
+     x="545.5918"
+     y="-90.796921"
+     id="text194-2-3-0"
+     transform="rotate(30,-1.5188892,-36.325226)"><tspan
+       id="tspan194-8-6-6"
+       x="545.5918"
+       y="-90.796921"
+       sodipodi:role="line"
+       style="font-size:13.3333px;stroke-width:1;stroke-dasharray:none">Summary</tspan></text>
+  <rect
+     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;filter:url(#filter105-3);stop-color:#000000"
+     id="rect123-2"
+     width="20.000008"
+     height="19.999998"
+     x="474.70456"
+     y="160.89278"
+     ry="2.9999955" />
 </svg>

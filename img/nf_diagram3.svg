@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    version="1.1"
-   width="590"
-   height="366"
-   viewBox="-0.5 -0.5 590 366"
+   width="731.07831"
+   height="351.57208"
+   viewBox="-0.5 -0.5 731.07831 351.57208"
    id="svg192"
-   sodipodi:docname="nf_diagram2.svg"
+   sodipodi:docname="nf_diagram3.svg"
    inkscape:export-filename="nf_diagram3.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
@@ -21,16 +21,8 @@
      inkscape:showpageshadow="2"
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1">
-    <inkscape:page
-       x="0"
-       y="0"
-       width="590"
-       height="366"
-       id="page2"
-       margin="0"
-       bleed="0" />
-  </sodipodi:namedview>
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false" />
   <defs
      id="defs1">
     <style
@@ -89,29 +81,29 @@
   <text
      xml:space="preserve"
      style="font-size:13.3333px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
-     x="545.5918"
-     y="-90.796921"
+     x="684.83423"
+     y="-176.30147"
      id="text194-2-3"
      transform="rotate(30)"><tspan
        id="tspan194-8-6"
-       x="545.5918"
-       y="-90.796921"
+       x="684.83423"
+       y="-176.30147"
        sodipodi:role="line"
        style="font-size:13.3333px;stroke-width:1;stroke-dasharray:none">multiQC</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:13.3333px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
-     x="396.4194"
-     y="4.7989502"
+     x="394.20544"
+     y="0.96427763"
      id="text194-2"
      transform="rotate(30)"><tspan
        id="tspan194-8"
-       x="396.4194"
-       y="4.7989502"
+       x="394.20544"
+       y="0.96427763"
        sodipodi:role="line"
        style="font-size:13.3333px;stroke-width:1;stroke-dasharray:none">pVAC-seq </tspan></text>
   <path
-     d="m 325.44797,303.62112 -0.5063,-135.52685"
+     d="m 325.44797,299.19322 -0.5063,-135.52685"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10.0749"
@@ -122,9 +114,9 @@
   <path
      id="path132-2"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953"
-     d="m 310.20807,317.50095 h 30 V 307.499 l -14.99805,-15 -15,15 h -0.002 z" />
+     d="m 310.20807,313.07305 h 30 V 303.0711 l -14.99805,-15 -15,15 h -0.002 z" />
   <path
-     d="M 225,316.04593 V 270"
+     d="M 225,311.61803 V 265.5721"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.59645"
@@ -133,7 +125,7 @@
      style="stroke:#ecdc86"
      id="path1" />
   <path
-     d="m 33.046003,174.50256 276.954087,0.46488"
+     d="m 33.046003,170.07466 276.954087,0.46488"
      fill="none"
      stroke="#24b064"
      stroke-width="9.89122"
@@ -142,7 +134,7 @@
      style="stroke:#24b064"
      id="path2" />
   <path
-     d="M 395,43.631882 V 90"
+     d="M 395,39.203984 V 85.572102"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.62997"
@@ -151,7 +143,7 @@
      style="stroke:#ecdc86"
      id="path4" />
   <path
-     d="M 503.73337,314.97057 V 160"
+     d="M 665.76422,310.54267 V 155.5721"
      fill="none"
      stroke="#24b064"
      stroke-width="10.1643"
@@ -162,9 +154,9 @@
   <path
      id="path2500-5-22-2"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953"
-     d="m 32.49902,160.00001 v 30 h 10.001953 l 15,-14.99805 -15,-15 v -0.002 z" />
+     d="m 32.49902,155.57211 v 30 h 10.001953 l 15,-14.99805 -15,-15 v -0.002 z" />
   <path
-     d="m 50,75 h 8.75 C 67.5,75 85,82 85,101.25 V 110"
+     d="m 50,70.572102 h 8.75 c 8.75,0 26.25,7 26.25,26.25 v 8.749998"
      fill="none"
      stroke="#f18046"
      stroke-width="10"
@@ -173,7 +165,7 @@
      style="stroke:#24b064"
      id="path11" />
   <path
-     d="m 119.66863,174.6837 h -8.60503 c -8.60502,0 -25.815071,-6.88402 -25.815071,-25.81507 v -8.60503"
+     d="m 119.66863,170.2558 h -8.60503 c -8.60502,0 -25.815071,-6.88402 -25.815071,-25.81507 v -8.60503"
      fill="none"
      stroke="#24b064"
      stroke-width="9.83431"
@@ -182,7 +174,7 @@
      style="stroke:#24b064"
      id="path13" />
   <path
-     d="m 85,110 v 30"
+     d="m 85,105.5721 v 30"
      fill="none"
      stroke="#24b064"
      stroke-width="10"
@@ -193,17 +185,17 @@
   <path
      id="path17"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953"
-     d="M 32.49902,60.000009 V 90.00001 h 10.001953 l 15,-14.998046 -15,-15.000001 v -0.002 z" />
+     d="m 32.49902,55.572111 v 30.000001 h 10.001953 l 15,-14.998046 -15,-15.000001 v -0.002 z" />
   <rect
      style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000"
      id="rect918-9-7"
      width="20.000008"
      height="19.999998"
      x="74.999992"
-     y="115"
+     y="110.57211"
      ry="2.9999955" />
   <path
-     d="M 155,316.31349 V 190"
+     d="M 155,311.88559 V 185.5721"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.85719"
@@ -213,15 +205,15 @@
      id="path32" />
   <text
      x="154.1212"
-     y="347.32986"
+     y="342.90198"
      id="text35"
      style="font-weight:bold;font-size:9.47151px;font-family:'Maven Pro';text-anchor:middle;fill:#ffffff;stroke-width:0.861047">plugins</text>
   <path
      id="path38"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953"
-     d="m 140.00002,317.50096 h 30 v -10.00195 l -14.99805,-15 -15,15 h -0.002 z" />
+     d="m 140.00002,313.07306 h 30 v -10.00195 l -14.99805,-15 -15,15 h -0.002 z" />
   <path
-     d="m 190,225 h -8.75 C 172.5,225 155,218 155,198.75 V 190"
+     d="m 190,220.5721 h -8.75 c -8.75,0 -26.25,-7 -26.25,-26.25 v -8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -230,7 +222,7 @@
      style="stroke:#ecdc86"
      id="path42" />
   <path
-     d="m 190,225 h 8.75 c 8.75,0 26.25,7 26.25,26.25 V 260"
+     d="m 190,220.5721 h 8.75 c 8.75,0 26.25,7 26.25,26.25 v 8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -239,7 +231,7 @@
      style="stroke:#ecdc86"
      id="path44" />
   <path
-     d="m 222.99,240 1.34,10"
+     d="m 222.99,235.5721 1.34,10"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -248,7 +240,7 @@
      style="stroke:#ecdc86"
      id="path46" />
   <path
-     d="m 190,125 h -8.75 C 172.5,125 155,132 155,151.25 V 160"
+     d="m 190,120.5721 h -8.75 c -8.75,0 -26.25,7 -26.25,26.25 v 8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -257,7 +249,7 @@
      style="stroke:#ecdc86"
      id="path50" />
   <path
-     d="m 190,125 h 8.75 C 207.5,125 225,118 225,98.75 V 90"
+     d="m 190,120.5721 h 8.75 c 8.75,0 26.25,-7 26.25,-26.249998 v -8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -266,7 +258,7 @@
      style="stroke:#ecdc86"
      id="path52" />
   <path
-     d="M 225,100 V 42.982343"
+     d="M 225,95.572102 V 38.554445"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.7483"
@@ -277,9 +269,9 @@
   <path
      id="path58"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953"
-     d="m 239.99997,42.499011 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
+     d="m 239.99997,38.071113 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
   <path
-     d="M 154.03991,170.00078 153.34009,43.64431"
+     d="M 154.03991,165.57288 153.34009,39.216412"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.71973"
@@ -290,22 +282,22 @@
   <path
      id="path64"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953"
-     d="m 168.32998,42.499007 h -30 v 10.00196 l 14.99804,15 15,-15 h 0.002 z" />
+     d="m 168.32998,38.071109 h -30 v 10.00196 l 14.99804,15 15,-15 h 0.002 z" />
   <rect
      style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000"
      id="rect68"
      width="20.000008"
      height="19.999998"
      x="215"
-     y="95"
+     y="90.572105"
      ry="2.9999955" />
   <text
      x="153.22495"
-     y="25.569422"
+     y="21.141523"
      id="text74"
      style="font-weight:bold;font-size:9.94033px;font-family:'Maven Pro';text-anchor:middle;fill:#ffffff;stroke-width:0.903667">cache</text>
   <path
-     d="m 360,125 h -8.75 C 342.5,125 325,132 325,151.25 V 160"
+     d="m 360,120.5721 h -8.75 c -8.75,0 -26.25,7 -26.25,26.25 v 8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -314,7 +306,7 @@
      style="stroke:#ecdc86"
      id="path77" />
   <path
-     d="m 360,125 h 8.75 C 377.5,125 395,118 395,98.75 V 90"
+     d="m 360,120.5721 h 8.75 c 8.75,0 26.25,-7 26.25,-26.249998 v -8.75"
      fill="none"
      stroke="#ecdc86"
      stroke-width="10"
@@ -325,10 +317,10 @@
   <path
      id="path81"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953"
-     d="m 409.99997,42.499011 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
+     d="m 409.99997,38.071113 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
   <text
      x="324.83432"
-     y="24.828428"
+     y="20.40053"
      id="text86"
      style="font-weight:bold;font-size:10px;font-family:'Maven Pro';text-anchor:middle;fill:#ffffff">IEDB</text>
   <rect
@@ -337,10 +329,10 @@
      width="20.000008"
      height="19.999998"
      x="383.67001"
-     y="95"
+     y="90.572105"
      ry="2.9999955" />
   <path
-     d="M 325.51368,170.00049 325.00632,43.162766"
+     d="M 325.51368,165.57259 325.00632,38.734868"
      fill="none"
      stroke="#ecdc86"
      stroke-width="9.75675"
@@ -351,14 +343,14 @@
   <path
      id="path96"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953"
-     d="m 339.99997,42.499011 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
+     d="m 339.99997,38.071113 h -30 v 10.00195 l 14.99805,15 15,-15 h 0.002 z" />
   <rect
      style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000"
      id="rect100"
      width="20.000008"
      height="19.999998"
      x="145"
-     y="165"
+     y="160.5721"
      ry="2.9999955" />
   <rect
      style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000"
@@ -366,58 +358,58 @@
      width="20.000008"
      height="19.999998"
      x="315"
-     y="165"
+     y="160.5721"
      ry="2.9999955" />
   <path
-     d="m 340,175 h 89.10482"
+     d="m 340,170.5721 h 89.10482"
      fill="none"
      stroke="#24b064"
      stroke-width="10.8998"
      stroke-miterlimit="10"
      pointer-events="stroke"
-     style="stroke:#24b064"
+     style="stroke:#24b064;stroke-width:10.9;stroke-dasharray:none"
      id="path110" />
   <path
-     d="m 414.99508,175 h 97.11086"
+     d="M 414.99508,170.5721 H 652.21092"
      fill="none"
      stroke="#24b064"
-     stroke-width="10.6887"
+     stroke-width="16.7056"
      stroke-miterlimit="10"
      pointer-events="stroke"
-     style="stroke:#24b064"
+     style="stroke:#24b064;stroke-width:10.9;stroke-dasharray:none"
      id="path117" />
   <path
      style="font-family:initial;fill:none;stroke:#000000;stroke-width:9.99999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="m 519.6534,312.5 h -30"
+     d="m 681.68425,308.0721 h -30"
      id="path2500-5-22-2-7" />
   <rect
      style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000"
      id="rect123"
      width="20.000008"
      height="19.999998"
-     x="493.07062"
-     y="165"
+     x="655.05719"
+     y="160.5721"
      ry="2.9999955" />
   <text
-     x="503.07062"
-     y="347.15305"
+     x="665.1015"
+     y="342.72516"
      id="text129"
      style="font-weight:bold;font-size:12px;font-family:'Maven Pro';text-anchor:middle;fill:#ffffff">html</text>
   <path
      id="path132"
      style="color:#000000;font-family:initial;fill:#000000;stroke-width:3.77953"
-     d="m 210.00002,317.50096 h 30 v -10.00195 l -14.99805,-15 -15,15 h -0.002 z" />
+     d="m 210.00002,313.07306 h 30 v -10.00195 l -14.99805,-15 -15,15 h -0.002 z" />
   <rect
      style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000"
      id="rect136"
      width="20.000008"
      height="19.999998"
      x="215"
-     y="245"
+     y="240.5721"
      ry="2.9999955" />
   <rect
-     x="3.3299999"
-     y="187"
+     x="3.3300004"
+     y="182.5721"
      width="20"
      height="10"
      fill="none"
@@ -425,8 +417,8 @@
      pointer-events="all"
      id="rect141" />
   <rect
-     x="3.3299999"
-     y="157"
+     x="3.3300004"
+     y="152.5721"
      width="20"
      height="10"
      fill="none"
@@ -434,8 +426,8 @@
      pointer-events="all"
      id="rect145" />
   <rect
-     x="3.3299999"
-     y="52"
+     x="3.3300004"
+     y="47.572102"
      width="20"
      height="10"
      fill="none"
@@ -443,8 +435,8 @@
      pointer-events="all"
      id="rect149" />
   <rect
-     x="3.3299999"
-     y="80.5"
+     x="3.3300004"
+     y="76.072105"
      width="20"
      height="10"
      fill="none"
@@ -453,7 +445,7 @@
      id="rect153" />
   <rect
      x="15"
-     y="110"
+     y="105.57211"
      width="60"
      height="30"
      fill="none"
@@ -462,7 +454,7 @@
      id="rect157" />
   <rect
      x="243.34"
-     y="240"
+     y="235.5721"
      width="70"
      height="30"
      fill="none"
@@ -471,7 +463,7 @@
      id="rect161" />
   <rect
      x="250"
-     y="90.5"
+     y="86.072105"
      width="60"
      height="30"
      fill="none"
@@ -480,7 +472,7 @@
      id="rect165" />
   <rect
      x="420"
-     y="90.5"
+     y="86.072105"
      width="60"
      height="30"
      fill="none"
@@ -488,8 +480,8 @@
      pointer-events="all"
      id="rect169" />
   <rect
-     x="204.81255"
-     y="103.85736"
+     x="203.29811"
+     y="99.696495"
      width="60"
      height="30"
      fill="none"
@@ -498,8 +490,8 @@
      pointer-events="all"
      id="rect173" />
   <rect
-     x="363.60324"
-     y="62.557022"
+     x="362.08881"
+     y="58.39616"
      width="60"
      height="30"
      fill="none"
@@ -508,8 +500,8 @@
      pointer-events="all"
      id="rect177" />
   <rect
-     x="459.13239"
-     y="27.787254"
+     x="457.61795"
+     y="23.62639"
      width="60"
      height="30"
      fill="none"
@@ -518,8 +510,8 @@
      pointer-events="all"
      id="rect181" />
   <rect
-     x="562.17731"
-     y="-15.571024"
+     x="560.6629"
+     y="-19.731888"
      width="60"
      height="30"
      fill="none"
@@ -530,61 +522,61 @@
   <text
      xml:space="preserve"
      style="font-size:13.3333px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
-     x="247.51666"
-     y="86.000603"
+     x="245.30272"
+     y="82.165932"
      id="text194"
      transform="rotate(30)"><tspan
        id="tspan194"
-       x="247.51666"
-       y="86.000603"
+       x="245.30272"
+       y="82.165932"
        sodipodi:role="line"
        style="font-size:13.3333px;stroke-width:1;stroke-dasharray:none">VEP </tspan></text>
   <text
      xml:space="preserve"
      style="font-size:13.3333px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:0.6;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
      x="313.95071"
-     y="349.09796"
+     y="344.67007"
      id="text195"><tspan
        sodipodi:role="line"
        id="tspan195"
        x="313.95071"
-       y="349.09796"
+       y="344.67007"
        style="fill:#ffffff;stroke:#ffffff;stroke-width:0.6;stroke-dasharray:none;stroke-opacity:1">HLA</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:13.3333px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:0.6;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
      x="12.092115"
-     y="127.40937"
+     y="122.98148"
      id="text196"><tspan
        sodipodi:role="line"
        id="tspan196"
        x="12.092115"
-       y="127.40937"
+       y="122.98148"
        style="fill:#000000;stroke:#000000">maf2vcf</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:12px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke-width:6.66667;stroke-linejoin:bevel"
-     x="3.71767"
-     y="60.656212"
+     x="3.7176704"
+     y="56.228313"
      id="text1"><tspan
        sodipodi:role="line"
        id="tspan1"
-       x="3.71767"
-       y="60.656212"
+       x="3.7176704"
+       y="56.228313"
        style="font-size:12px;fill:#ffffff">ref</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:12px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ffffff;stroke-width:6.66667;stroke-linejoin:bevel"
-     x="0.65979987"
-     y="90.792831"
+     x="0.65980023"
+     y="86.364937"
      id="text2"><tspan
        sodipodi:role="line"
        id="tspan2"
-       x="0.65979987"
-       y="90.792831">maf</tspan></text>
+       x="0.65980023"
+       y="86.364937">maf</tspan></text>
   <g
      id="g18488"
-     transform="matrix(1.299848,0,0,1.299848,-169.01986,19.844403)"
+     transform="matrix(1.299848,0,0,1.299848,-169.01986,15.416505)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -623,7 +615,7 @@
   </g>
   <g
      id="g18488-9"
-     transform="matrix(1.299848,0,0,1.299848,-169.01986,-83.422261)"
+     transform="matrix(1.299848,0,0,1.299848,-169.01986,-87.850159)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -662,7 +654,7 @@
   </g>
   <g
      id="g18488-9-0"
-     transform="matrix(1.299848,0,0,1.299848,-169.01986,-51.120314)"
+     transform="matrix(1.299848,0,0,1.299848,-169.01986,-55.548212)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -701,7 +693,7 @@
   </g>
   <g
      id="g18488-9-0-2"
-     transform="matrix(1.299848,0,0,1.299848,-169.01986,52.761971)"
+     transform="matrix(1.299848,0,0,1.299848,-169.01986,48.334073)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -740,7 +732,7 @@
   </g>
   <g
      id="g18488-9-0-2-2"
-     transform="matrix(1.299848,0,0,1.299848,-28.851093,-113.82398)"
+     transform="matrix(1.299848,0,0,1.299848,-28.851093,-118.25188)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -779,7 +771,7 @@
   </g>
   <g
      id="g18488-9-0-2-2-9"
-     transform="matrix(1.299848,0,0,1.299848,-29.949234,204.44237)"
+     transform="matrix(1.299848,0,0,1.299848,-29.949234,200.01447)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -818,7 +810,7 @@
   </g>
   <g
      id="g18488-9-0-2-2-9-3"
-     transform="matrix(1.299848,0,0,1.299848,321.16437,204.17602)"
+     transform="matrix(1.299848,0,0,1.299848,483.19522,199.74812)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -859,53 +851,53 @@
      xml:space="preserve"
      style="font-weight:bold;font-size:6.87837px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro, Bold';text-align:center;text-orientation:upright;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0.6;stroke-dasharray:none;stroke-dashoffset:2.00001;stroke-opacity:1;paint-order:fill markers stroke;stop-color:#000000"
      x="266.2132"
-     y="102.46931"
+     y="98.041412"
      id="text18569-0-1-7-3-4-5"><tspan
        sodipodi:role="line"
        id="tspan18567-9-8-5-6-7-0"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="266.2132"
-       y="102.46931">Download </tspan><tspan
+       y="98.041412">Download </tspan><tspan
        sodipodi:role="line"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="266.2132"
-       y="111.06727"
+       y="106.63937"
        id="tspan4">VEP cache</tspan></text>
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:6.87837px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro, Bold';text-align:center;text-orientation:upright;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0.6;stroke-dasharray:none;stroke-dashoffset:2.00001;stroke-opacity:1;paint-order:fill markers stroke;stop-color:#000000"
      x="267.08246"
-     y="254.41225"
+     y="249.98434"
      id="text18569-0-1-7-3-4-5-1"><tspan
        sodipodi:role="line"
        id="tspan18567-9-8-5-6-7-0-0"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="267.08246"
-       y="254.41225">Download </tspan><tspan
+       y="249.98434">Download </tspan><tspan
        sodipodi:role="line"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="267.08246"
-       y="263.01022"
+       y="258.58231"
        id="tspan4-6">VEP plugins</tspan></text>
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:6.87837px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro, Bold';text-align:center;text-orientation:upright;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0.6;stroke-dasharray:none;stroke-dashoffset:2.00001;stroke-opacity:1;paint-order:fill markers stroke;stop-color:#000000"
      x="436.72342"
-     y="101.15738"
+     y="96.729485"
      id="text18569-0-1-7-3-4-5-0"><tspan
        sodipodi:role="line"
        id="tspan18567-9-8-5-6-7-0-6"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="436.72342"
-       y="101.15738">Download </tspan><tspan
+       y="96.729485">Download </tspan><tspan
        sodipodi:role="line"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296302"
        x="436.72342"
-       y="109.75534"
+       y="105.32745"
        id="tspan4-1">IEDB</tspan></text>
   <g
      id="g18488-9-0-2-2-4"
-     transform="matrix(1.299848,0,0,1.299848,143.60757,-113.82398)"
+     transform="matrix(1.299848,0,0,1.299848,143.60757,-118.25188)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -944,7 +936,7 @@
   </g>
   <g
      id="g18488-9-0-2-2-4-4"
-     transform="matrix(1.299848,0,0,1.299848,142.63111,204.17602)"
+     transform="matrix(1.299848,0,0,1.299848,142.63111,199.74812)"
      inkscape:label="Simple"
      inkscape:export-filename="file_simple.svg"
      inkscape:export-xdpi="200"
@@ -986,35 +978,35 @@
      id="rect59928"
      width="162.72328"
      height="58.688244"
-     x="421.94812"
-     y="4.9369183"
+     x="564.31836"
+     y="0.50901997"
      inkscape:export-filename=".\rect59928.svg"
      inkscape:export-xdpi="200"
      inkscape:export-ydpi="200" />
   <text
      xml:space="preserve"
      style="font-size:16px;line-height:1.25;font-family:Commissioner;-inkscape-font-specification:Commissioner;letter-spacing:0px;display:inline;stroke-width:0.999999"
-     x="424.89789"
-     y="20.487741"
+     x="575.38727"
+     y="16.059843"
      id="text61425"><tspan
        sodipodi:role="line"
        id="tspan61423"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Bold';stroke-width:0.999999"
-       x="424.89789"
-       y="20.487741">Notes</tspan></text>
+       x="575.38727"
+       y="16.059843">Notes</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:8px;line-height:1.25;font-family:Commissioner;-inkscape-font-specification:Commissioner;letter-spacing:0px;display:inline;stroke-width:0.999999"
-     x="462.88101"
-     y="34.81707"
+     x="613.37036"
+     y="30.389172"
      id="text61425-2"><tspan
        sodipodi:role="line"
        id="tspan61423-6"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Bold';stroke-width:0.999999"
-       x="462.88101"
-       y="34.81707"> - main workflow</tspan></text>
+       x="613.37036"
+       y="30.389172"> - main workflow</tspan></text>
   <path
-     d="m 426.5,31.944222 h 30.09678"
+     d="m 576.98936,27.516324 h 30.09678"
      fill="none"
      stroke="#24b064"
      stroke-width="5.95047"
@@ -1025,16 +1017,16 @@
   <text
      xml:space="preserve"
      style="font-size:8px;line-height:1.25;font-family:Commissioner;-inkscape-font-specification:Commissioner;letter-spacing:0px;display:inline;stroke-width:0.999999"
-     x="462.8808"
-     y="46.176075"
+     x="613.37018"
+     y="41.748177"
      id="text61425-2-1"><tspan
        sodipodi:role="line"
        id="tspan61423-6-7"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8px;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Bold';stroke-width:0.999999"
-       x="462.8808"
-       y="46.176075"> - setup workflow</tspan></text>
+       x="613.37018"
+       y="41.748177"> - setup workflow</tspan></text>
   <path
-     d="m 426.5,43.303228 h 30.09678"
+     d="m 576.98936,38.87533 h 30.09678"
      fill="none"
      stroke="#24b064"
      stroke-width="5.95047"
@@ -1042,4 +1034,24 @@
      pointer-events="stroke"
      style="stroke:#ecdc86"
      id="path117-2-7" />
+  <text
+     xml:space="preserve"
+     style="font-size:13.3333px;line-height:0px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke:#000000;stroke-width:1;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+     x="540.13147"
+     y="-83.239563"
+     id="text194-2-36"
+     transform="rotate(30)"><tspan
+       id="tspan194-8-7"
+       x="540.13147"
+       y="-83.239563"
+       sodipodi:role="line"
+       style="font-size:13.3333px;stroke-width:1;stroke-dasharray:none">Summary</tspan></text>
+  <rect
+     style="font-family:initial;fill:#ffffff;stroke:#000000;stroke-width:9.99999;stroke-linecap:round;paint-order:stroke markers fill;stop-color:#000000"
+     id="rect105-5"
+     width="20.000008"
+     height="19.999998"
+     x="484.5"
+     y="160.61244"
+     ry="2.9999955" />
 </svg>
